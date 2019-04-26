@@ -1,0 +1,4 @@
+<div *ngIf="service.showLoad" class="load">
+    <img src="../../assets/images/loader.svg" alt="">
+    <span *ngIf="service.load>-1">{{service.load}}%</span>
+</div>
