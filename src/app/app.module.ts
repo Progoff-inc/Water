@@ -20,13 +20,39 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { LoadService } from './services/load.service';
 import { LoadComponent } from './load/load.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { FullInfoComponent } from './full-info/full-info.component';
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { ClientsComponent } from './clients/clients.component';
+import { ClientRatesComponent } from './client-rates/client-rates.component';
+import { InfoComponent } from './info/info.component';
+import { BusinessComponent } from './business/business.component';
+import { ReferenceBookComponent } from './reference-book/reference-book.component';
+import { BuisenessRatesComponent } from './buiseness-rates/buiseness-rates.component';
+import { ClientsServicesComponent } from './clients-services/clients-services.component';
+import { BusinessServicesComponent } from './business-services/business-services.component';
+import { WaterServicesComponent } from './water-services/water-services.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainMenuComponent,
     ModalComponent,
-    LoadComponent
+    LoadComponent,
+    ContactsComponent,
+    FullInfoComponent,
+    AboutComponent,
+    HomeComponent,
+    ClientsComponent,
+    ClientRatesComponent,
+    InfoComponent,
+    BusinessComponent,
+    ReferenceBookComponent,
+    BuisenessRatesComponent,
+    ClientsServicesComponent,
+    BusinessServicesComponent,
+    WaterServicesComponent
   ],
   imports: [
     BrowserModule,
