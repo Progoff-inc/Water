@@ -1,3 +1,22 @@
-<p>
-  clients works!
-</p>
+<div class="container">
+  <h3 class="page-head">Частным лицам</h3>
+  <div class="d-flex align-items-start clients">
+    <div class="menu">
+      <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients"]' [routerLinkActiveOptions]='{ exact: true }' >
+        Услуги
+      </div>
+      <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients/clients-rates"]' >
+        Тарифы
+      </div>
+      <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients/clients-info"]' >
+        Информация
+      </div>
+      <div class="menu-item" [routerLink]='["/ref-book"]'>
+        Справочник<br>абонента
+      </div>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+
+.clients{
+    .menu{
+        min-width: 200px;
+        margin-right: 30px;
+        background-color: rgb(18, 53, 100);
+        color: white;
+        .menu-item{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover, &.active{
+                background-color: rgb(7, 20, 37) !important;
+            }
+            &:focus{
+                outline: none;
+            }
+            &:not(:last-child){
+                border-bottom: 1px solid rgb(38, 66, 104);
+            }
+        }
+
+    }
+}

@@ -14,42 +14,37 @@ import { InfoComponent } from './info/info.component';
 import { ReferenceBookComponent } from './reference-book/reference-book.component';
 import { WaterServicesComponent } from './water-services/water-services.component';
 
-// const clientsRoutes: Routes = [
-//   {path:'services', component:ServicesComponent},
-//   {path:'clients-rates', component:ClientRatesComponent},
-//   {path:'clients-info', component:InfoComponent},
-//   {path:'ref-book', component:ReferenceBookComponent}
-// ];
+const clientsRoutes: Routes = [
+  {path:'', component:ClientsServicesComponent},
+  {path:'clients-rates', component:ClientRatesComponent},
+  {path:'clients-info', component:InfoComponent}
+];
 
 const servicesRoutes: Routes = [
   {path:'clients-services', component:ClientsServicesComponent},
-  {path:'business-services', component: BusinessServicesComponent}
+  {path:'business-services', component: BusinessServicesComponent},
+  {path:'', redirectTo:'clients-services', pathMatch:'full'},
 ];
 
-// const businessRoutes: Routes = [
-//   {path:'services', component:ServicesComponent},
-//   {path:'business-rates', component: BuisenessRatesComponent},
-//   {path:'ref-book', component:ReferenceBookComponent}
-// ];
+const businessRoutes: Routes = [
+  {path:'', component:BusinessServicesComponent},
+  {path:'business-rates', component: BuisenessRatesComponent}
+];
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch:'full'},
   {path:'about', component: AboutComponent},
-  {path:'business', component: BusinessComponent},
-  //{path:'business-services', component: BusinessServicesComponent},
-  {path:'business-rates', component: BuisenessRatesComponent},
-  {path:'clients', component:ClientsComponent},
-  //{path:'clients-services', component:ClientsServicesComponent},
-  {path:'clients-rates', component:ClientRatesComponent},
+  {path:'business', component: BusinessComponent, children:businessRoutes},
+  {path:'clients', component:ClientsComponent, children:clientsRoutes},
   {path:'contacts', component:ContactsComponent},
   {path:'full-info', component:FullInfoComponent},
-  {path:'clients-info', component:InfoComponent},
   {path:'ref-book', component:ReferenceBookComponent},
-  {path:'water-services', component:WaterServicesComponent, children: servicesRoutes}
+  {path:'services', component:WaterServicesComponent, children: servicesRoutes},
+  {path:'**', redirectTo:''}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

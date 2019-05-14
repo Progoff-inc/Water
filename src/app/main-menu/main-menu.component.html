@@ -11,11 +11,12 @@
         
       </div>
       <div class="items">
-        <div class="item">О компании</div>
-        <div class="item">Частным лицам</div>
-        <div class="item">Организациям</div>
-        <div class="item">Информация</div>
-        <div class="item">Контакты</div>
+        <div class="item" routerLink="/about" style="cursor:pointer" [routerLinkActive]='["text-primary"]'>О компании</div>
+        <div class="item" routerLink="/clients" [routerLinkActive]='["text-primary"]'>Частным лицам</div>
+        <div class="item" routerLink="/business" [routerLinkActive]='["text-primary"]'>Организациям</div>
+        <div class="item" routerLink="/full-info" [routerLinkActive]='["text-primary"]'>Информация</div>
+        <div class="item" routerLink="/contacts" [routerLinkActive]='["text-primary"]'>Контакты</div>
+        <div class="item" routerLink="/services" [routerLinkActive]='["text-primary"]'>Услуги</div>
       </div>
       
     </div>

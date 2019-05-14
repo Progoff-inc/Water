@@ -1,3 +1,16 @@
-<p>
-  water-services works!
-</p>
+<div class="container">
+  <h3 class="page-head">Услуги</h3>
+  <div class="d-flex align-items-start clients">
+    <div class="menu">
+      <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/services/clients-services"]' [routerLinkActiveOptions]='{ exact: true }' >
+        Частным лицам
+      </div>
+      <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/services/business-services"]' >
+        Организациям
+      </div>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
