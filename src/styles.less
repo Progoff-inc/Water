@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./colors.less";
 *, *::after, *::before{
     box-sizing: border-box;
     &:focus{
@@ -8,6 +9,7 @@
 }
 body{
     margin: 0;
+    overflow-x: hidden;
 }
 
 .btn{
@@ -18,6 +20,115 @@ body{
 }
 
 .page-head{
+    text-transform: uppercase;
     margin-top: 50px;
     margin-bottom: 40px;
+}
+
+.page-min-head{
+    color:@dark-blue;
+    margin-bottom: 25px;
+}
+
+.squared-list{
+    list-style-type: square;
+    li{
+        color:@dark-blue;
+
+        span{
+            color: #000;
+        }
+    }
+}
+.image-list-num{
+    padding-left: 0 !important;
+    
+    div{
+        display: flex;
+        i{
+            min-height: 25px;
+            min-width: 25px;
+            margin-right: 10px;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        &:nth-child(1){
+            i{
+                background-image: url("./assets/images/dot1.png");
+            }
+        }
+        &:nth-child(2){
+            i{
+                background-image: url("./assets/images/dot2.png");
+            }
+        }
+        &:nth-child(3){
+            i{
+                background-image: url("./assets/images/dot3.png");
+            }
+        }
+    }
+}
+
+.image-list{
+    padding-left: 0 !important;
+    div{
+        display: flex;
+        i{
+            min-height: 25px;
+            min-width: 25px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url("./assets/images/dot.png");
+        }
+    }
+}
+
+.text-primary{
+    color:@dark-blue !important;
+}
+.text-danger{
+    color:@red !important;
+}
+
+.header-danger{
+    color:@red;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1.6px;
+    font-size: 20px;
+}
+
+.full-width{
+    padding: 20px 10px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    *{
+        position: relative;
+        z-index: 5;
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        z-index: 0;
+        left:0;
+        display: block;
+        min-height: 120px;
+        width: 100vw;
+        background-color: @white-blue;
+    }
+}
+
+p{
+    margin: 1rem 0;
+}
+
+ul.space-li, .image-list-num, .image-list{
+    li, div{
+        margin: 15px 0;
+    }
 }
