@@ -1,5 +1,5 @@
 
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ModalService } from './modal.service';
@@ -9,44 +9,59 @@ import { LoadService } from './load.service';
 @Injectable()
 export class UserService{
     public user;
-    baseUrl:string='http://client.nomokoiw.beget.tech/water/';
+    loading = false;
+    baseUrl:string='http://client.nomokoiw.beget.tech/water/WaterController.php?';
 
     constructor(private router:Router, private http: HttpClient, private ls:LoadService){
         // sessionStorage.removeItem('userWaterNar');
         // localStorage.removeItem('userWaterNar');
         if(sessionStorage.getItem('userWaterNar')){
+            this.loading = true;
             let u = JSON.parse(sessionStorage.getItem('userWaterNar'));
-            this.signIn(u.Email, u.Password).subscribe(data => {
+            this.signIn(u.Login, u.Password).subscribe(data => {
                 if(data){
-                    data.Password=u.Password;
-                    data.IsAdmin=Boolean(Number(data.IsAdmin));
-                    this.User = data;
+                    this.User = {Login:u.Login, Password:u.Password};
                     this.save();
                 }else{
+                    if(this.router.url=='/admin'){
+                        console.log(2);
+                        this.router.navigate(['/sign-in']);
+                    }
                     sessionStorage.removeItem('userWaterNar');
-                    this.router.navigate(['sign']);
                 }
+                this.loading=false;
                 
             })
             
         }
         else if(localStorage.getItem('userWaterNar')){
+            this.loading = true;
             let u = JSON.parse(localStorage.getItem('userWaterNar'));
-            this.signIn(u.Email, u.Password).subscribe(data => {
+            this.signIn(u.Login, u.Password).subscribe(data => {
                 if(data){
-                    data.Password=u.Password;
-                    data.IsAdmin=Boolean(Number(data.IsAdmin));
-                    this.User = data;
+                    this.User = {Login:u.Login, Password:u.Password};
                     this.save();
                 }else{
+                    if(this.router.url=='/admin'){
+                        console.log(1);
+                        this.router.navigate(['/sign-in']);
+                    }
                     localStorage.removeItem('userWaterNar');
-                    this.router.navigate(['sign']);
                 }
+                this.loading=false;
             })
             
-        }else{
-            this.router.navigate(['sign']);
         }
+        
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            if(this.router.url=='/admin' && !this.loading && !this.user){
+                console.log(3);
+                this.router.navigate(['/sign-in']);
+            }
+        });
     }
 
     set User(User){
@@ -55,19 +70,11 @@ export class UserService{
 
     /**
      * Авторизация пользователя
-     * @param email Email пользовтеля
+     * @param login Login пользовтеля
      * @param password Пароль пользователя
      */
-    public signIn(email:string, password:string){
-        return this.http.get<any>(this.baseUrl + 'UserController.php?Key=get-user&Email='+email+'&Password='+password);
-    }
-
-    /**
-     * Регистрация пользователя
-     * @param user Новый пользователь
-     */
-    public signUp(user:any){
-        return this.http.post<any>(this.baseUrl + 'UserController.php?Key=add-user', user);
+    public signIn(login:string, password:string){
+        return this.http.get<any>(this.baseUrl + 'Key=enter-admin&Login='+encodeURIComponent(login)+'&Password='+encodeURIComponent(password));
     }
 
     /**
@@ -85,7 +92,7 @@ export class UserService{
         this.user=null;
         localStorage.removeItem('userWaterNar');
         sessionStorage.removeItem('userWaterNar');
-        this.router.navigate(['sign']);
+        this.router.navigate(['/']);
     }
     
     /**

@@ -13,6 +13,8 @@ import { FullInfoComponent } from './full-info/full-info.component';
 import { InfoComponent } from './info/info.component';
 import { ReferenceBookComponent } from './reference-book/reference-book.component';
 import { WaterServicesComponent } from './water-services/water-services.component';
+import { AdminComponent } from './admin/admin.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -40,6 +42,8 @@ const routes: Routes = [
   {path:'full-info', component:FullInfoComponent},
   {path:'ref-book', component:ReferenceBookComponent},
   {path:'services', component:WaterServicesComponent, children: servicesRoutes},
+  {path:'sign-in', component:SignInComponent},
+  {path:'admin', component:AdminComponent},
   {path:'**', redirectTo:''}
 ];
 

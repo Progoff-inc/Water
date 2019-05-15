@@ -33,6 +33,10 @@ import { BuisenessRatesComponent } from './buiseness-rates/buiseness-rates.compo
 import { ClientsServicesComponent } from './clients-services/clients-services.component';
 import { BusinessServicesComponent } from './business-services/business-services.component';
 import { WaterServicesComponent } from './water-services/water-services.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { WaterService } from './services/water.service';
+import { UserService } from './services/user.service';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,9 @@ import { WaterServicesComponent } from './water-services/water-services.componen
     BuisenessRatesComponent,
     ClientsServicesComponent,
     BusinessServicesComponent,
-    WaterServicesComponent
+    WaterServicesComponent,
+    SignInComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,7 @@ import { WaterServicesComponent } from './water-services/water-services.componen
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [FormBuilder, HttpClient, ModalService, BsModalService, LoadService],
+  providers: [FormBuilder, HttpClient, ModalService, BsModalService, LoadService, WaterService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

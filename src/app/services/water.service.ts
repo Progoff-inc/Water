@@ -5,7 +5,7 @@ import { LoadService } from './load.service';
 
 
 @Injectable()
-export class ClientService{
+export class WaterService{
     
     baseUrl:string='http://client.nomokoiw.beget.tech/water/WaterController.php?';
     constructor(private http: HttpClient, private ls:LoadService ){
