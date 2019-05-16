@@ -3,13 +3,13 @@
 .section{
     margin-top: 25px;
     .section-header{
-        height: 36px;
+        min-height: 36px;
         width: 100%;
         background-color: @light-blue;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 8px 0 15px;
+        padding: 3px 8px 3px 15px;
         color: white;
         letter-spacing: 0.9px;
         font-weight: bold;
@@ -17,6 +17,9 @@
 
         &:hover{
             background-color: @darker-blue;
+        }
+        &:active{
+            background-color: @light-blue;
         }
     }
 }

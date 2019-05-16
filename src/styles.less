@@ -42,7 +42,10 @@ body{
 }
 .image-list-num{
     padding-left: 0 !important;
-    
+    &>small{
+        display: block;
+        margin-left: 35px;
+    }
     div{
         display: flex;
         i{
@@ -52,17 +55,17 @@ body{
             background-repeat: no-repeat;
             background-size: contain;
         }
-        &:nth-child(1){
+        &:nth-of-type(1){
             i{
                 background-image: url("./assets/images/dot1.png");
             }
         }
-        &:nth-child(2){
+        &:nth-of-type(2){
             i{
                 background-image: url("./assets/images/dot2.png");
             }
         }
-        &:nth-child(3){
+        &:nth-of-type(3){
             i{
                 background-image: url("./assets/images/dot3.png");
             }
@@ -85,6 +88,30 @@ body{
     }
 }
 
+.attention{
+    position: relative;
+    display: block;
+    .attention-content{
+        margin-left: 35px;
+        text-transform: uppercase;
+        font-size: 18px;
+        color:@red;
+        font-weight: 500;
+    }
+    &::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top:0;
+        height: 40px;
+        width: 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(./assets/images/attention.png);
+        background-size: contain;
+    }
+}
+
 .text-primary{
     color:@dark-blue !important;
 }
@@ -103,12 +130,19 @@ body{
 .full-width{
     padding: 20px 10px;
     min-height: 120px;
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     *{
         position: relative;
         z-index: 5;
+    }
+
+    &.h-200{
+        &::before{
+            min-height: 200px;
+        } 
     }
 
     &::before{
@@ -123,7 +157,7 @@ body{
     }
 }
 
-p{
+p, small{
     margin: 1rem 0;
 }
 

@@ -1,5 +1,7 @@
 <main-menu *ngIf="router.url!='/sign-in'"></main-menu>
+<div class="mb-5">
+    <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
 <app-modal></app-modal>
 <app-load></app-load>
