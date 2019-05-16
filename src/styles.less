@@ -157,6 +157,17 @@ body{
     }
 }
 
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    &:not(.left)>*{
+        margin: 5px;
+    }
+    &.left>*{
+        margin: 0 10px 10px 0;
+    }
+}
+
 p, small{
     margin: 1rem 0;
 }

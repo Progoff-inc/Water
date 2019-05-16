@@ -1,0 +1,30 @@
+@import "../../colors.less";
+
+.item{
+    max-width: 250px;
+    
+    .image{
+        background-color: @dark-blue;
+        padding: 15px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        height: 345px;
+        cursor: pointer;
+        transition: 0.3s;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        &:hover{
+            padding: 8px;
+        }
+    }
+    h5{
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+    
+}

@@ -20,8 +20,8 @@ export class Doc{
     Id:number;
     Name:string;
     Image:string;
-    Type:DocTypes;
-    Document:string;
+    Type?:DocTypes;
+    Document?:string;
 }
 
 export class Prop{
