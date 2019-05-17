@@ -1,37 +1,82 @@
-.menu{
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    img{
-        width: 20%
-    }
-    fieldset{
-        position: relative;
-        input{
-            max-width: 300px;
-            padding-right: 40px;
-        }
-        button{
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 100%;
-            padding: 0;
-            width: 40px;
-        }
-    }
-    
-    a{
-        white-space: nowrap;
-        margin-right: 10px;
-    }
-    .items{
+@import "../../colors.less";
+.tube{
+    display: flex;
+    padding: 0;
+    margin: 25px 0;
+    &>div{
         display: flex;
-        margin-top: 20px;
-        .item{
-            text-align: center;
-            padding: 0 5px;
+        align-items: center;
+        height: 100px;
+        position: relative;
+        &:nth-child(1){
+            width: 15%;
+            background: @tube-blue;
+            &::after{
+                background: @tube-blue;
+                display: block;
+                position: absolute;
+                content: "";
+                right: 0;
+                height: 150px;
+                width: 35px;
+            }
+        }
+        &:nth-child(2){
+            padding: 0 35px;
+            width: 70%;
+            margin: 0 10px;
+            background: @tube-blue;
+            &::before{
+                background: @tube-blue;
+                display: block;
+                position: absolute;
+                content: "";
+                left: 0;
+                height: 150px;
+                width: 35px;
+            }
+            &::after{
+                background: @tube-blue;
+                display: block;
+                position: absolute;
+                content: "";
+                right: 0;
+                height: 150px;
+                width: 35px;
+            }
+            display: flex;
+            justify-content: center;
+            .item{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                justify-content: center;
+                color: white;
+                height: 100%;
+                width: 130px;
+                padding-bottom: 10px;
+                &.active, &:hover{
+                    cursor: pointer;
+                    background-color: @darker-blue;
+                }
+                i{
+                    font-size: 30px;
+                }
+            }
+        }
+        &:nth-child(3){
+            width: 15%;
+            background: @tube-blue;
+            &::before{
+                background: @tube-blue;
+                display: block;
+                position: absolute;
+                content: "";
+                left: 0;
+                height: 150px;
+                width: 35px;
+            }
         }
     }
-    
 }

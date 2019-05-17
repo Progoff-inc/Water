@@ -1,25 +1,11 @@
-<div class="container-fluid">
-  <div class="container d-flex menu">
-    <img src="../../assets/images/logo-new.png" alt="">
-    <div class="h-100 d-flex flex-column justify-content-between">
-      <div class="d-flex align-items-center justify-content-between ">
-        <a href="tel:+74963436689">+7(496)343-66-89</a>
-        <fieldset class="d-flex">
-            <input type="text" class="form-control" placeholder="Поиск по сайту">
-            <button class="btn"><i class="fas fa-search" aria-hidden="true"></i></button>
-        </fieldset>
-        
-      </div>
-      <div class="items">
-        <div class="item" routerLink="/about" style="cursor:pointer" [routerLinkActive]='["text-primary"]'>О компании</div>
-        <div class="item" routerLink="/clients" [routerLinkActive]='["text-primary"]'>Частным лицам</div>
-        <div class="item" routerLink="/business" [routerLinkActive]='["text-primary"]'>Организациям</div>
-        <div class="item" routerLink="/full-info" [routerLinkActive]='["text-primary"]'>Информация</div>
-        <div class="item" routerLink="/contacts" [routerLinkActive]='["text-primary"]'>Контакты</div>
-        <div class="item" routerLink="/services" [routerLinkActive]='["text-primary"]'>Услуги</div>
-      </div>
-      
-    </div>
-    
+<div class="container-fluid tube">
+  <div></div>
+  <div>
+    <div class="item" routerLink="" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{exact:true}'><i class="fas fa-home"></i>Главная</div>
+    <div class="item" routerLink="/about" [routerLinkActive]='["active"]'><i class="fas fa-users"></i>О нас</div>
+    <div class="item" routerLink="/services" [routerLinkActive]='["active"]'><i class="fas fa-info-circle"></i>Услуги</div>
+    <div class="item" routerLink="/full-info" [routerLinkActive]='["active"]'><i class="fas fa-file-alt"></i>Информация</div>
+    <div class="item" routerLink="/contacts" [routerLinkActive]='["active"]'><i class="fas fa-address-book"></i>Контакты</div>
   </div>
+  <div></div>
 </div>
