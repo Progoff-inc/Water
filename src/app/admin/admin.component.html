@@ -27,12 +27,12 @@
             <div class="section-body pt-3" *ngIf="shows[new.Id+'new']">
                 <div class="form-group">
                     <label for="head">Заголовок</label>
-                    <input class="form-control" type="text" [(ngModel)]="new.Name">
+                    <input class="form-control" type="text" [(ngModel)]="new.Name" (keydown)="checkChange()">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Изображение</label>
                     <div class="d-flex align-items-start my-2">
-                        <img *ngIf="!!new.Image" class="w-25" src="{{new.Image}}"><i *ngIf="!!new.Image" class="fa fa-times ml-1" aria-hidden="true" (click)="unloadLink(new)"></i>
+                        <img *ngIf="!!new.Image" class="w-25" src="{{new.Image}}"><i *ngIf="!!new.Image" class="fa fa-times ml-1" aria-hidden="true" (click)="unloadLink(new) && checkChange()"></i>
                     </div>    
                     <p class="img-text" *ngIf="image"><span>{{image.name}}</span> <i class="fa fa-times ml-1" aria-hidden="true" (click)="unload()"></i> </p>
                     <input  type="file" (change)="putFile($event)"  style="display:none" #fileload>
