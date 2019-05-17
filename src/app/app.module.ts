@@ -37,6 +37,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { WaterService } from './services/water.service';
 import { UserService } from './services/user.service';
 import { AdminComponent } from './admin/admin.component';
+import { MainHeaderComponent } from './main-header/main-header.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AdminComponent } from './admin/admin.component';
     BusinessServicesComponent,
     WaterServicesComponent,
     SignInComponent,
-    AdminComponent
+    AdminComponent,
+    MainHeaderComponent
   ],
   imports: [
     BrowserModule,
