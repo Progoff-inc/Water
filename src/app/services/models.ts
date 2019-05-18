@@ -34,3 +34,7 @@ export enum DocTypes{
   Regular = 'regular',
   Important = 'important'
 }
+
+export enum UploadTypes{
+    News = "new"
+}
