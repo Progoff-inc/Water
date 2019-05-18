@@ -3,8 +3,8 @@
     <div class="but d-flex flex-column">
       <div class="cli" routerLink="/services/clients-services">Частным лицам</div>
       <div class="buss" routerLink="/services/business-services">Организациям</div>
-      <div class="inf">Справочник абонента</div>
-      <div class="lk">Личный кабинет</div>
+      <div class="inf" routerLink="/ref-book">Справочник абонента</div>
+      <div class="lk" (click)='openNewWin("http://uk-gkh.org/vodokanal_narof/Account/Login.aspx")'>Личный кабинет</div>
     </div>
     <div class="slider">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

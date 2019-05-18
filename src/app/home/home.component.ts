@@ -9,14 +9,18 @@ import { News } from '../services/models';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-  news:News[]
+  news:News[];
+  public myWin;
   constructor(private ls:LoadService, private ws: WaterService) { }
 
   ngOnInit() {
     this.ws.getNews().subscribe(data => {
       this.news = data;
-      console.log(data);
     })
+  }
+
+  openNewWin(url) {
+    this.myWin = open(url);
   }
 
 }
