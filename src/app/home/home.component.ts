@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { WaterService } from '../services/water.service';
+import { LoadService } from '../services/load.service';
+import { News } from '../services/models';
 
 @Component({
   selector: '',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  news:News[]
+  constructor(private ls:LoadService, private ws: WaterService) { }
 
   ngOnInit() {
+    this.ws.getNews().subscribe(data => {
+      this.news = data;
+      console.log(data);
+    })
   }
 
 }

@@ -13,6 +13,7 @@ export class App extends BaseEntity{
     
 export class News extends BaseEntity{
     Image:string;
+    Name: string;
     CreateDate:Date;
 }
     

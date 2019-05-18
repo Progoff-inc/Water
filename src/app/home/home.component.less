@@ -1,0 +1,85 @@
+.news-container{
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 30px;
+    .but{
+        width: 30%;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-right: 40px;
+        div{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            padding: 10px;
+            width: 180px;
+            height: 70px;
+            color: white;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .cli{
+            background-color: rgb(1, 127, 201)
+        }
+        .buss{
+            background-color: rgb(251, 149, 59)
+        }
+        .inf{
+            background-color: rgb(193, 39, 45)
+        }
+        .lk{
+            background-color: rgb(0, 29, 69)
+        }
+    }
+    .slider{
+        position: relative;
+        display: flex;
+        width: 40%;
+        align-items: center;
+        .s-img{
+            display: flex;
+            align-items: center;
+        }
+        .carousel-indicators{
+            position: absolute;
+            top: 100%;
+            margin-top: 20px;
+            li{
+                width: 15px;
+                height: 15px;
+                border-radius: 100%;
+                background-color: rgb(179, 179, 179);
+                &.active{
+                    background-color: rgb(1, 127, 201)
+                }
+            }
+        }
+    }
+    .news-titles{
+        width: 30%;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-left: 40px;
+        div{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            width: 180px;
+            height: 70px;
+        }
+    }
+}
+.welcome{
+    background-color: rgb(218, 229, 234);
+    :nth-child(1){
+        :nth-child(1){
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        :nth-child(2){
+            padding-bottom: 20px;
+        }
+    }
+}
