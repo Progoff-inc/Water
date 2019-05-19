@@ -113,13 +113,24 @@ body{
 }
 
 .text-primary, .btn-link{
-    color:@dark-blue !important;
+    color:@light-blue !important;
 }
 .border-primary{
-    border-color: @dark-blue !important;
+    border-color: @light-blue !important;
 }
 .text-danger{
     color:@red !important;
+}
+
+.btn-primary{
+    background-color: @light-blue;
+    border: none;
+    &:active{
+        background-color: @light-blue !important;
+    }
+    &:not(:disabled):hover{
+        background-color: @dark-blue;
+    }
 }
 
 .header-danger{

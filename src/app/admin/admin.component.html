@@ -23,11 +23,12 @@
     </div> -->
     <div class="news">
         <div class="section" *ngFor="let new of news">
-            <div class="section-header" (click)="show(new.Id+'new')"><span>{{new.Name}}</span><span>{{new.CreateDate | date:"dd.MM.yyy"}}<i class="fas fa-caret-down ml-1"></i></span></div>
+            <div class="section-header" (click)="show(new.Id+'new')"><span>{{new.Name}}</span><span>{{new.CreateDate | date:"dd.MM.yyy"}}<i class="fas ml-1" [ngClass]="{'fa-caret-down':!shows[new.Id+'new'], 'fa-caret-up':shows[new.Id+'new']}"></i></span></div>
             <div class="section-body pt-3" *ngIf="shows[new.Id+'new']">
                 <div class="form-group">
-                    <label for="head">Заголовок</label>
-                    <input class="form-control" type="text" [(ngModel)]="new.Name" (keydown)="checkChange()">
+                    <label for="head" [ngClass]="{'text-danger':new.Name == ''}">Заголовок</label>
+                    <input [ngClass]="{'border-danger':new.Name == ''}" class="form-control" type="text" [(ngModel)]="new.Name" (keydown)="checkChange()">
+                    <small class="text-danger" *ngIf="new.Name == ''">Введите заголовок</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Изображение</label>
@@ -41,11 +42,12 @@
                     <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите изображение .jpg</small>
                 </div>
                 <div class="form-group">
-                    <label for="head">Описание</label>
-                    <textarea class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
+                    <label for="head" [ngClass]="{'text-danger':new.Description == ''}">Описание</label>
+                    <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
+                    <small class="text-danger" *ngIf="new.Description == ''">Введите описание</small>
                 </div>
 
-                <button *ngIf="showBtn" class="btn-primary">Сохранить</button>
+                <button *ngIf="showBtn" class="btn btn-primary" [disabled]="!checkNew(new)" (click)="save(new)">Сохранить</button>
             </div>
         </div>
     </div>
