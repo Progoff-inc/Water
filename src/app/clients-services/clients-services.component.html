@@ -13,9 +13,11 @@
     <p><i>Вам необходимо обратиться в <b class="text-primary" style="font-style: normal;">ПТО</b>(производственно-технический отдел) МУП «Водоканал»</i></p>
   </div>
 </div>
-<div class="full-width" *ngIf="this.shows.first">
-  <h4 class="header-danger">ЗАКЛЮЧЕНИЕ ДОГОВОРА НА ПОСТАВКУ РЕСУРСА</h4>
-  <p class="mt-0 mb-1">Для заключения договора на поставку ресурса Вам необходимо обратиться в <b class="text-danger">АО</b>(абонентский отдел) МУП «Водоканал»</p>
+<div class="section">
+  <div class="section-header" (click)="show('getRes')"><span>Заключение договра на поставку ресурса</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows.getRes">
+    <p><i>Для заключения договора на поставку ресурса Вам необходимо обратиться в <b class="text-danger">АО</b>(абонентский отдел) МУП «Водоканал»</i></p>
+  </div>
 </div>
 <div class="section" >
   <div class="section-header" (click)="show('second')"><span>Отключение/подключение холодной воды при выполнении ремонтных работ</span><i class="fas fa-caret-down"></i></div>
@@ -29,13 +31,14 @@
     
   </div>
 </div>
-<div class="full-width h-200" *ngIf="this.shows.second">
-  <h4 class="header-danger">Для подготовки ПРОЕКТОВ на наружные и внутренние сети водоснабжения и водоотведения</h4>
-  <p class="mt-0">Вам необходимо обратиться в <b class="text-danger"> ПТО</b> (производственно-технический отдел) МУП «Водоканал»</p>
-  <ul class="image-list mb-0" >
-    
-    <div><i style="background-image: url(../../assets/images/pdf.png)"></i><span>ЗДЕСЬ МОЖНО СКАЧАТЬ И РАСПЕЧАТАТЬ <b class="text-primary">СТОИМОСТЬ ПРОЕКТНЫХ РАБОТ</b></span></div>
-  </ul>
+<div class="section" >
+  <div class="section-header" (click)="show('sideWeb')"><span>Для подготовки ПРОЕКТОВ на наружные и внутренние сети водоснабжения и водоотведения</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows.sideWeb">
+    <p><i>Вам необходимо обратиться в <b class="text-danger"> ПТО</b> (производственно-технический отдел) МУП «Водоканал»</i></p>
+    <ul class="image-list mb-0" >
+      <div><i style="background-image: url(../../assets/images/pdf.png)"></i><span>ЗДЕСЬ МОЖНО СКАЧАТЬ И РАСПЕЧАТАТЬ <b class="text-primary">СТОИМОСТЬ ПРОЕКТНЫХ РАБОТ</b></span></div>
+    </ul>
+  </div>
 </div>
 <div class="section">
   <div class="section-header" (click)="show('third')"><span>Для согласования проектно-технической документации и топографических съемок Вам необходимо:  </span><i class="fas fa-caret-down"></i></div>
