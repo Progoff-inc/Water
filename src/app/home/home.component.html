@@ -1,12 +1,15 @@
-<div class="container-fluid p-0">
-  <div class="news-container d-flex">
+<div>
+  <div class="news-container container d-flex">
     <div class="but d-flex flex-column">
       <div class="cli" routerLink="/services/clients-services">Частным лицам</div>
       <div class="buss" routerLink="/services/business-services">Организациям</div>
       <div class="inf" routerLink="/ref-book">Справочник абонента</div>
-      <div class="lk" (click)='openNewWin("http://uk-gkh.org/vodokanal_narof/Account/Login.aspx")'>Личный кабинет</div>
+      <a class="lk" href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx">Личный кабинет</a>
     </div>
-    <news-main></news-main>
+    <div style="width:65%;">
+      <news-main></news-main>
+    </div>
+    
   </div>
   <div class="container-fluid d-flex flex-column welcome">
     <div class="d-flex flex-column align-items-center" style="width: 70%; margin: auto">
