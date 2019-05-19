@@ -10,7 +10,6 @@ import { News } from '../services/models';
 })
 export class HomeComponent implements OnInit {
   news:News[];
-  public myWin;
   constructor(private ls:LoadService, private ws: WaterService) { }
 
   ngOnInit() {
@@ -18,9 +17,4 @@ export class HomeComponent implements OnInit {
       this.news = data;
     })
   }
-
-  openNewWin(url) {
-    this.myWin = open(url);
-  }
-
 }
