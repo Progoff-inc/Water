@@ -1,26 +1,12 @@
 <div class="container-fluid p-0">
-  <div class="container-fluid news-container d-flex">
+  <div class="news-container d-flex">
     <div class="but d-flex flex-column">
       <div class="cli" routerLink="/services/clients-services">Частным лицам</div>
       <div class="buss" routerLink="/services/business-services">Организациям</div>
       <div class="inf" routerLink="/ref-book">Справочник абонента</div>
       <div class="lk" (click)='openNewWin("http://uk-gkh.org/vodokanal_narof/Account/Login.aspx")'>Личный кабинет</div>
     </div>
-    <div class="slider">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" *ngFor="let new of news; let i = index;" [attr.data-slide-to]="i" [ngClass]="{'active':i==0}"></li>
-          </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item" [ngClass]="{'active':i==0}" *ngFor="let new of news; let i = index">
-            <img src="{{new.Image}}" class="w-100">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="news-titles d-flex flex-column">
-      <div *ngFor="let new of news; let i = index">{{new.CreateDate}}<a href="#">{{new.Name}}</a></div>
-    </div>
+    <news-main></news-main>
   </div>
   <div class="container-fluid d-flex flex-column welcome">
     <div class="d-flex flex-column align-items-center" style="width: 70%; margin: auto">
