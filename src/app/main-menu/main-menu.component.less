@@ -56,9 +56,10 @@
                 height: 100%;
                 min-width: 100px;
                 width: 130px;
-                &.active, &:hover{
+                &.active, &:hover, &:focus{
                     cursor: pointer;
                     background-color: @darker-blue;
+                    outline: none;
                 }
                 i{
                     font-size: 30px;
@@ -83,8 +84,9 @@
                     height: 100%;
                     min-width: 100px;
                     width: 130px;
-                    &.active{
+                    &.active, &:focus{
                         background-color: @darker-blue;
+                        outline: none;
                     }
                 }
                 .list{
@@ -109,9 +111,10 @@
                         height: 50%;
                         width: 100%;
                         padding: 5px 5px;
-                        &:hover, &.active{
+                        &:hover, &.active, &:focus{
                             cursor: pointer;
                             background-color: @darker-blue;
+                            outline: none;
                         }
                     }
                 }
