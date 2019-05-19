@@ -1,22 +1,20 @@
-<div class="container-fluid p-0">
-  <div class="news-container d-flex">
-    <div class="but d-flex flex-column">
-      <div class="cli" routerLink="/services/clients-services">Частным лицам</div>
-      <div class="buss" routerLink="/services/business-services">Организациям</div>
-      <div class="inf" routerLink="/ref-book">Справочник абонента</div>
-      <div class="lk" (click)='openNewWin("http://uk-gkh.org/vodokanal_narof/Account/Login.aspx")'>Личный кабинет</div>
-    </div>
-    <news-main></news-main>
+<div class="news-container d-flex justify-content-center">
+  <div class="but d-flex flex-column align-items-end justify-content-between">
+    <div routerLink="/services/clients-services">Частным лицам</div>
+    <div routerLink="/services/business-services">Организациям</div>
+    <div routerLink="/ref-book">Справочник абонента</div>
+    <a href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx" target="_blank">Личный кабинет</a>
   </div>
-  <div class="container-fluid d-flex flex-column welcome">
-    <div class="d-flex flex-column align-items-center" style="width: 70%; margin: auto">
-      <div class="d-flex w-100">
-        <i><b>Добро пожаловать в</b>&nbsp;<a href="#">МУП Водоканал го. Наро-Фоминск!</a></i>
-      </div>
-      <div class="d-flex w-100">
-        МУП «Водоканал» Наро-Фоминского городского округа образовано в 1992 году в результате реорганизации 
-        ПТО ГХ города Наро-Фоминск. Посмотрите информацию о нас.
-      </div>
+  <news-main></news-main>
+</div>
+<div class="container-fluid d-flex flex-column welcome">
+  <div class="d-flex flex-column align-items-center" style="width: 70%; margin: auto">
+    <div class="d-flex w-100">
+      <i><b>Добро пожаловать в</b>&nbsp;<a href="#">МУП Водоканал го. Наро-Фоминск!</a></i>
+    </div>
+    <div class="d-flex w-100">
+      МУП «Водоканал» Наро-Фоминского городского округа образовано в 1992 году в результате реорганизации 
+      ПТО ГХ города Наро-Фоминск. Посмотрите информацию о нас.
     </div>
   </div>
 </div>
