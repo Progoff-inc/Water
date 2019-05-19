@@ -48,7 +48,7 @@ export class WaterService{
     }
 
     addNews(news){
-      return this.http.post<number>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
+      return this.http.post<News>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
     }
 
     updateNews(news){

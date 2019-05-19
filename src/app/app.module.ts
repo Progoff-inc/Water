@@ -39,6 +39,7 @@ import { UserService } from './services/user.service';
 import { AdminComponent } from './admin/admin.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { NewsMainComponent } from './news-main/news-main.component';
+import { AddNewsComponent } from './add-news/add-news.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { NewsMainComponent } from './news-main/news-main.component';
     SignInComponent,
     AdminComponent,
     MainHeaderComponent,
-    NewsMainComponent
+    NewsMainComponent,
+    AddNewsComponent
   ],
   imports: [
     BrowserModule,

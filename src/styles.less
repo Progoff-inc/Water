@@ -115,6 +115,10 @@ body{
 .text-primary, .btn-link{
     color:@light-blue !important;
 }
+
+.text-primary-dark{
+    color: @dark-blue;
+}
 .border-primary{
     border-color: @light-blue !important;
 }
@@ -189,5 +193,26 @@ p, small{
 ul.space-li, .image-list-num, .image-list{
     li, div{
         margin: 15px 0;
+    }
+}
+
+ol.counter-list{
+    list-style-type: none; /* Убираем исходные маркеры */
+    counter-reset: num; /* Задаём имя счетчика */
+    li{
+        padding: 10px 10px 0 30px;
+        position: relative;
+        
+        &::before {
+            position: absolute;
+            
+            top: 0;
+            left: 0;
+            content: counter(num); /* Выводим число */
+            counter-increment: num; /* Увеличиваем значение счётчика */
+            color: @dark-blue;
+            font-weight: bold;
+            font-size: 30px;
+        }
     }
 }

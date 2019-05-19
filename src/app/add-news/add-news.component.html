@@ -1,0 +1,25 @@
+<form [formGroup]="newForm">
+  <h5  style="font-weight:400">Добавление новости</h5>
+  <div class="form-group">
+    <label  [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Заголовок</label>
+    <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" class="form-control"  placeholder="Заголовок">
+    <small  class="form-text text-danger" *ngIf="submitted && f.Name.errors && f.Name.errors.required">Введите заголовок</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Изображение</label>
+    <p class="img-text" *ngIf="image"><span>{{image.name}}</span> <i class="fa fa-times" aria-hidden="true" (click)="unload()"></i> </p>
+    <input type="file" (change)="putFile($event)"  style="display:none" #fileload>
+    <button *ngIf="!image" class="btn btn-link border-primary" (click)="fileload.click()">Загрузить картинку</button>
+    <small  class="form-text text-danger" *ngIf="submitted && !image">Добавьте изображение</small>
+    <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите изображение .jpg</small>
+  </div>
+  <div class="form-group">
+    <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
+    <textarea formControlName="Description" [ngClass]="{'border-danger':(submitted && f.Description.errors)}" class="form-control"  placeholder="Описание" rows="3"></textarea>
+    <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
+  </div>
+  
+  
+
+  <button type="submit" class="btn btn-primary" (click)="add()">Добавить</button>
+</form>

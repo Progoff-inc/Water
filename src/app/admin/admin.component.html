@@ -21,6 +21,10 @@
             <router-outlet></router-outlet>
         </div>
     </div> -->
+    <div class="border border-primary p-5">
+        <add-news [news]="news"></add-news>
+    </div>
+    
     <div class="news">
         <div class="section" *ngFor="let new of news">
             <div class="section-header" (click)="show(new.Id+'new')"><span>{{new.Name}}</span><span>{{new.CreateDate | date:"dd.MM.yyy"}}<i class="fas ml-1" [ngClass]="{'fa-caret-down':!shows[new.Id+'new'], 'fa-caret-up':shows[new.Id+'new']}"></i></span></div>
