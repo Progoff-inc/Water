@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Doc } from '../services/models';
+import { Doc, DocTypes } from '../services/models';
+import { WaterService } from '../services/water.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ref-book',
@@ -29,9 +31,17 @@ export class ReferenceBookComponent implements OnInit {
       Image:"../../assets/images/doc.png"
     }
   ]
-  constructor() { }
+  constructor(private ws:WaterService, private router:Router) { }
 
   ngOnInit() {
+    this.ws.getTypeDocs(DocTypes.RefBook).subscribe(docs => {
+      this.docs = docs;
+    })
+  }
+
+  getDoc(url){
+    console.log(url);
+    this.router.navigateByUrl(url);
   }
 
 }

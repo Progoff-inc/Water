@@ -1,4 +1,4 @@
-import { News, Doc, Prop, UploadTypes } from './models';
+import { News, Doc, Prop, UploadTypes, DocTypes } from './models';
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoadService } from './load.service';
@@ -26,7 +26,7 @@ export class WaterService{
       return this.http.get<Prop[]>(this.baseUrl + 'Key=get-props');
     }
 
-    getTypeDocs(type:string){
+    getTypeDocs(type:DocTypes){
       return this.http.get<Doc[]>(this.baseUrl + 'Key=get-type-docs&Type='+type);
     }
 

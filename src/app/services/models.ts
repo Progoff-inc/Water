@@ -33,7 +33,7 @@ export class Prop{
 }
 
 export enum DocTypes{
-  Regular = 'regular',
+  RefBook = 'ref-book',
   Important = 'important'
 }
 

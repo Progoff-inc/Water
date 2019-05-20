@@ -44,7 +44,7 @@ const routes: Routes = [
   {path:'services', component:WaterServicesComponent, children: servicesRoutes},
   {path:'sign-in', component:SignInComponent},
   {path:'admin', component:AdminComponent},
-  {path:'**', redirectTo:''}
+  // {path:'**', redirectTo:''}
 ];
 
 @NgModule({

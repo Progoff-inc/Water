@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS docs (
     Name varchar(255) NOT NULL,
     Image varchar(255) NOT NULL,
     Type varchar(255) NOT NULL,
+    IsImportant bit DEFAULT false,
     Document varchar(255) NOT NULL
 );
 
