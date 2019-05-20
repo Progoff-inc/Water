@@ -21,6 +21,7 @@ export class Doc{
     Id:number;
     Name:string;
     Image:string;
+    Description?:string;
     Type?:DocTypes;
     Document?:string;
 }
