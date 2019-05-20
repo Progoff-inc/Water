@@ -6,7 +6,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item" [ngClass]="{'active':i==0}" *ngFor="let new of news; let i = index">
-          <img src="{{new.Image}}" class="w-100">
+          <div class="img" [ngStyle]="{'background-image':'url('+new.Image+')'}"></div>
         </div>
       </div>
     </div>
