@@ -21,9 +21,9 @@ export class NewsMainComponent implements OnInit {
       if(this.news.length>0){
         for (var i = this.news.length-1; i >= this.news.length-4; i--) {
           this.newsMain.push(this.news[i]);
-          this.ls.showLoad = false;
         }
       }
+      this.ls.showLoad = false;
     })
   }
 }
