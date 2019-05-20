@@ -15,7 +15,7 @@ export class NewsMainComponent implements OnInit {
 
   ngOnInit() {
     this.ls.showLoad = true;
-    this.ws.getLimitNews(4).subscribe(data => {
+    this.ws.getLimitNews(3).subscribe(data => {
       this.news = data;
       this.ls.showLoad = false;
     })
