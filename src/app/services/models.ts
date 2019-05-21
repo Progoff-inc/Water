@@ -34,6 +34,7 @@ export class Prop{
 
 export enum DocTypes{
   RefBook = 'ref-book',
+  ClientRates = "client-rates",
   Important = 'important'
 }
 

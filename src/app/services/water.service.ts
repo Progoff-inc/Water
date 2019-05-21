@@ -26,8 +26,8 @@ export class WaterService{
       return this.http.get<Prop[]>(this.baseUrl + 'Key=get-props');
     }
 
-    getTypeDocs(type:DocTypes){
-      return this.http.get<Doc[]>(this.baseUrl + 'Key=get-type-docs&Type='+type);
+    getTypeDocs(types:DocTypes[]){
+      return this.http.post<Doc[]>(this.baseUrl + 'Key=get-type-docs',types);
     }
 
     getProp(name:string){
