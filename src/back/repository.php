@@ -87,7 +87,7 @@ class DataBase {
             
         }
         $res[0]=rtrim($res[0],', ');
-        $res[0]=$res[0].' WHERE '.rtrim($t,'s').'Id = '.$id;
+        $res[0]=$res[0].' WHERE Id = '.$id;
         
         return $res;
         
@@ -95,12 +95,21 @@ class DataBase {
     
     private function removeFile($filelink){
         $path = explode('water/',$filelink);
-        unlink($path[1]);
+        if($path[1]){
+            unlink($path[1]);
+        }else{
+            $path[0] = ltrim($path[0],'../');
+            unlink($path[0]);
+        }
         
     }
     
-    public function getNews(){
-        $sth = $this->db->query("SELECT * FROM news");
+    public function getNews($l){
+        if($l == null){
+            $l = 10;
+        }
+        
+        $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");
         $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
         return $sth->fetchAll();
     }
@@ -121,8 +130,9 @@ class DataBase {
         return $sth->fetchAll();
     }
 
-    public function getTypeDocs($type){
-        $sth = $this->db->prepare("SELECT * FROM docs WHERE Type=?");
+    public function getTypeDocs($types){
+        $types = "('".implode("','",$types)."')";
+        $sth = $this->db->prepare("SELECT * FROM docs WHERE Type IN ".$types);
         $sth->execute(array($type));
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
         return $sth->fetchAll();
@@ -157,10 +167,16 @@ class DataBase {
             if($res[1][0]!=null){
                 $s->execute($res[1]);
             }
-            return $this->db->lastInsertId();
+            return $this->getNewsById($this->db->lastInsertId());
         }else{
             return null;
         }
+    }
+    
+    public function getNewsById($id){
+        $s = $this->db->prepare("SELECT * FROM news WHERE Id=?");
+        $s->execute(array($id));
+        return $s->fetch();
     }
 
     public function updateProp($l, $p, $id, $v){
@@ -188,10 +204,12 @@ class DataBase {
     }
 
     public function enterAdmin($l, $p){
+        
         return $this->checkAdmin($l, $p);
     }
 
     private function checkAdmin($l, $p){
+        
         $access = file("user.php"); 
         $login = trim($access[1]); 
         $passw = trim($access[2]); 

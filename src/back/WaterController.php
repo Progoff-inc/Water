@@ -10,7 +10,7 @@ if(isset($_GET['Key']))
     
     switch ($_GET['Key']) {
         case 'get-news':
-            echo json_encode($ctxt->getNews());
+            echo json_encode($ctxt->getNews($_GET['Limit']));
             break;
         case 'get-docs':
             echo json_encode($ctxt->getDocs());
@@ -19,7 +19,8 @@ if(isset($_GET['Key']))
             echo json_encode($ctxt->getApps($_GET['Login'], $_GET['Password']));
             break;
         case 'get-type-docs':
-            echo json_encode($ctxt->getTypeDocs($_GET['Type']));
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->getTypeDocs($b));
             break;
         case 'get-prop':
             echo json_encode($ctxt->getProp($_GET['Name']));
