@@ -41,6 +41,7 @@ import { MainHeaderComponent } from './main-header/main-header.component';
 import { NewsMainComponent } from './news-main/news-main.component';
 import { AddNewsComponent } from './add-news/add-news.component';
 import { DocsMainComponent } from './docs-main/docs-main.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { DocsMainComponent } from './docs-main/docs-main.component';
     MainHeaderComponent,
     NewsMainComponent,
     AddNewsComponent,
-    DocsMainComponent
+    DocsMainComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

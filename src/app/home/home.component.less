@@ -46,6 +46,9 @@
         }
     }
 }
+.welcon{
+    padding: 0 30px;
+}
 .ovdText{
     padding: 30px;
     color: rgb(193, 39, 45);
@@ -83,8 +86,12 @@
     padding: 30px;
     font-size: 20pt;
 }
+.conspon{
+    padding: 30px;
+}
 .spons{
-    div{
+    a{
+        color: black;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -92,12 +99,16 @@
         img{
             max-height: 100px;
         }
+        &:hover{
+            text-decoration: none;
+        }
     }
-    :nth-child(1){
-        div{
-            font-size: 9pt;
-            width: 50%;
-            padding: 5px;
+    .anf{
+        font-size: 9pt;
+        width: 50%;
+        padding: 5px;
+        img{
+            max-height: 80px;
         }
     }
 }
