@@ -62,12 +62,6 @@ export class DocsMainComponent implements OnInit {
         Document:'',
       },
     ];
-    for (let i = 0; i < 4; i++) {
-      this.docs1.push(this.docs[i]);
-    }
-    for (let i = 4; i < this.docs.length; i++) {
-      this.docs2.push(this.docs[i]);
-    }
   }
 
 }
