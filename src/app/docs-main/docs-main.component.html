@@ -2,6 +2,6 @@
 <div class="docs flex-container  justify-content-center">
   <div *ngFor="let doc of docs, let i=index">
     <img src="{{doc.Document.indexOf('pdf')>-1?'../../assets/images/pdf.png':'../../assets/images/docx.png'}}">
-    <a>{{doc.Name}}</a>
+    <a href="{{doc.Document}}">{{doc.Name}}</a>
   </div>
 </div>

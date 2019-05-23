@@ -19,18 +19,30 @@
                 cursor: pointer;
                 text-decoration: none;
             }
-        }
-        :nth-child(1){
-            background-color: rgb(1, 127, 201)
-        }
-        :nth-child(2){
-            background-color: rgb(251, 149, 59)
-        }
-        :nth-child(3){
-            background-color: rgb(193, 39, 45)
-        }
-        :nth-child(4){
-            background-color: rgb(0, 29, 69)
+            &:nth-child(1){
+                background-color: rgb(1, 127, 201);
+                &:hover{
+                    background-color: rgb(2, 111, 173);
+                }
+            }
+            &:nth-child(2){
+                background-color: rgb(251, 149, 59);
+                &:hover{
+                    background-color: rgb(226, 134, 53);
+                }
+            }
+            &:nth-child(3){
+                background-color: rgb(193, 39, 45);
+                &:hover{
+                    background-color: rgb(170, 32, 37);
+                }
+            }
+            &:nth-child(4){
+                background-color: rgb(0, 29, 69);
+                &:hover{
+                    background-color: rgb(1, 44, 105);
+                }
+            }
         }
     }
 }
