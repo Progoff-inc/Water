@@ -1,15 +1,7 @@
 <div class="docsText"><b>ЧАСТО ИСПОЛЬЗУЕМЫЕ ДОКУМЕНТЫ:</b></div>
-<div class="d-flex flex-column align-items-center justify-content-center">
-  <div class="docs">
-    <div *ngFor="let doc of docs1, let i=index">
-      <img src="{{doc.Image}}">
-      <a>{{doc.Name}}</a>
-    </div>
-  </div>
-  <div class="docs">
-    <div *ngFor="let doc of docs2, let i=index">
-      <img src="{{doc.Image}}">
-      <a>{{doc.Name}}</a>
-    </div>
+<div class="docs flex-container  justify-content-center">
+  <div *ngFor="let doc of docs, let i=index">
+    <img src="{{doc.Document.indexOf('pdf')>-1?'../../assets/images/pdf.png':'../../assets/images/docx.png'}}">
+    <a>{{doc.Name}}</a>
   </div>
 </div>

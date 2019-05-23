@@ -35,6 +35,11 @@ export class Prop{
 export enum DocTypes{
   RefBook = 'ref-book',
   ClientRates = "client-rates",
+  Props = "props",
+  Constituent = "constituent",
+  Bookkeeping = "bookkeping",
+  Allowing = "allowing",
+  Evaluation = "Evaluation",
   Important = 'important'
 }
 

@@ -1,8 +1,11 @@
-<main-header *ngIf="router.url!='/sign-in'"></main-header>
-<div class="mb-5">
-    <router-outlet></router-outlet>
+<div class="d-flex flex-column" style="min-height: 100vh">
+    <main-header *ngIf="router.url!='/sign-in'"></main-header>
+    <div class="mb-5" style="flex: 1;">
+        <router-outlet></router-outlet>
+    </div>
+    <footer></footer>
 </div>
-<footer></footer>
+
 
 <app-modal></app-modal>
 <app-load></app-load>
