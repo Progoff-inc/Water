@@ -30,6 +30,10 @@ export class WaterService{
       return this.http.post<Doc[]>(this.baseUrl + 'Key=get-type-docs',types);
     }
 
+    getImportantDocs(){
+      return this.http.get<Doc[]>(this.baseUrl + 'Key=get-important-docs');
+    }
+
     getProp(name:string){
       return this.http.get<Prop>(this.baseUrl + 'Key=get-prop&Name='+name);
     }
