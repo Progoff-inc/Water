@@ -1,26 +1,42 @@
 <div class="container">
-  <h3 class="page-head">Раскрытие информации</h3>
-  <div class="docs" *ngIf="docs">
-    <div *ngFor="let type of docTypes">
-        <h4 class="page-head">{{types[type]}}</h4>
-        <div class="flex-container">
-          <div class="item" *ngFor="let doc of getDocs(type)">
-            <div class="image" >
-              <a target="blanc" href="{{doc.Document}}"></a>
-              <img src="{{doc.Image}}" alt="{{doc.Name}}">
-            </div>
-            <h5 ><a href="{{doc.Document}}">{{doc.Name}}</a></h5>
-          </div>
+    <h3 class="page-head">Раскрытие информации</h3>
+    <div class="d-flex">
+        <div class="d-flex align-items-start clients">
+            <nav id="navbar-example2" class="menu">
+              <div class="menu-item" [ngClass]="{'active': type==curType}" *ngFor="let type of docTypes" (click)="go(type)">
+                {{types[type]}}
+              </div>
+              <div class="menu-item" [ngClass]="{'active': 'sales'==curType}" (click)="go('sales')">
+                Закупки
+              </div>
+
+          </nav>
         </div>
-    </div>
-    <h4 class="page-head">Закупки</h4>
-    <div class="item">
-      <div class="image" >
-        <a target="blanc" href="http://www.zakupki.gov.ru/epz/order/quicksearch/search_eis.html?searchString=5030015500&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&fz223=on&ppRf615=on&af=on&ca=on&pc=on&pa=on&currencyId=-1&regionDeleted=false&sortBy=UPDATE_DATE"></a>
-        <img src="../../assets/images/buyings.png" alt="Закупки и конкурсные процедуры">
-      </div>
-      <h5 ><a href="http://www.zakupki.gov.ru/epz/order/quicksearch/search_eis.html?searchString=5030015500&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&fz223=on&ppRf615=on&af=on&ca=on&pc=on&pa=on&currencyId=-1&regionDeleted=false&sortBy=UPDATE_DATE">Закупки и конкурсные процедуры</a></h5>
+        <div data-spy="scroll" data-target="#navbar-example2" class="docs" *ngIf="docs" data-offset="0">
+          <div >
+            <div *ngFor="let type of docTypes" id="{{type}}">
+                <h4 class="page-min-head" >{{types[type]}}</h4>
+                <div class="flex-container">
+                  <div class="item" *ngFor="let doc of getDocs(type)">
+                    <div class="image" >
+                      <a target="blanc" href="{{doc.Document}}"></a>
+                      <img src="{{doc.Image}}" alt="{{doc.Name}}">
+                    </div>
+                    <h5 ><a href="{{doc.Document}}">{{doc.Name}}</a></h5>
+                  </div>
+                </div>
+            </div>
+            <h4 class="page-min-head" id="sales">Закупки</h4>
+            <div class="item">
+              <div class="image" >
+                <a target="blanc" href="http://www.zakupki.gov.ru/epz/order/quicksearch/search_eis.html?searchString=5030015500&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&fz223=on&ppRf615=on&af=on&ca=on&pc=on&pa=on&currencyId=-1&regionDeleted=false&sortBy=UPDATE_DATE"></a>
+                <img src="../../assets/images/buyings.png" alt="Закупки и конкурсные процедуры">
+              </div>
+              <h5 ><a href="http://www.zakupki.gov.ru/epz/order/quicksearch/search_eis.html?searchString=5030015500&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&fz223=on&ppRf615=on&af=on&ca=on&pc=on&pa=on&currencyId=-1&regionDeleted=false&sortBy=UPDATE_DATE">Закупки и конкурсные процедуры</a></h5>
+            </div>
+            
+          </div>
+        
     </div>
     
-  </div>
 </div>
