@@ -1,35 +1,148 @@
-import { Component, OnInit } from '@angular/core';
-import { Doc } from '../services/models';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Doc, DocTypes, RateTypes } from '../services/models';
+import { WaterService } from '../services/water.service';
 
 @Component({
   selector: 'client-rates',
   templateUrl: './client-rates.component.html',
   styleUrls: ['./client-rates.component.less']
 })
+
 export class ClientRatesComponent implements OnInit {
-  docs:Doc[] = [
+  docs:Doc[];
+  shows = {};
+  years = [2018, 2019, 2020];
+  curYears = {};
+  rateTypes = {};
+
+  rates = [
     {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png",
-      Description:"об установлении тарифов на подключение (тех. присоединение) к системе водоснабзения на 2019 год."
+      Name:RateTypes.GetWater,
+      Prices: [
+        {
+          DateStart: new Date(2018, 0),
+          DateFinish: new Date(2018, 5, 30),
+          Price: 26.46
+        },
+        {
+          DateStart: new Date(2018, 6),
+          DateFinish: new Date(2018, 11, 31),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 0),
+          DateFinish: new Date(2019, 5, 30),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 6),
+          DateFinish: new Date(2019, 11, 31),
+          Price: 28.77
+        },
+        {
+          DateStart: new Date(2020, 0),
+          DateFinish: new Date(2020, 5, 30),
+          Price: 28.01
+        },
+        {
+          DateStart: new Date(2020, 6),
+          DateFinish: new Date(2020, 11, 31),
+          Price: 28.96
+        }
+      ]
     },
     {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png",
-      Description:"об установлении тарифов на подключение (тех. присоединение) к системе водоснабзения на 2019 год."
+      Name:RateTypes.GiveWater,
+      Prices: [
+        {
+          DateStart: new Date(2018, 0),
+          DateFinish: new Date(2018, 5, 30),
+          Price: 26.46
+        },
+        {
+          DateStart: new Date(2018, 6),
+          DateFinish: new Date(2018, 11, 31),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 0),
+          DateFinish: new Date(2019, 5, 30),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 6),
+          DateFinish: new Date(2019, 11, 31),
+          Price: 28.77
+        },
+        {
+          DateStart: new Date(2020, 0),
+          DateFinish: new Date(2020, 5, 30),
+          Price: 28.01
+        },
+        {
+          DateStart: new Date(2020, 6),
+          DateFinish: new Date(2020, 11, 31),
+          Price: 28.96
+        }
+      ]
     },
     {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png",
-      Description:"об установлении тарифов на подключение (тех. присоединение) к системе водоснабзения на 2019 год."
+      Name:RateTypes.DrinkWater,
+      Prices: [
+        {
+          DateStart: new Date(2018, 0),
+          DateFinish: new Date(2018, 5, 30),
+          Price: 26.46
+        },
+        {
+          DateStart: new Date(2018, 6),
+          DateFinish: new Date(2018, 11, 31),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 0),
+          DateFinish: new Date(2019, 5, 30),
+          Price: 27.34
+        },
+        {
+          DateStart: new Date(2019, 6),
+          DateFinish: new Date(2019, 11, 31),
+          Price: 28.77
+        },
+        {
+          DateStart: new Date(2020, 0),
+          DateFinish: new Date(2020, 5, 30),
+          Price: 28.01
+        },
+        {
+          DateStart: new Date(2020, 6),
+          DateFinish: new Date(2020, 11, 31),
+          Price: 28.96
+        }
+      ]
     }
   ]
-  constructor() { }
+  constructor( public ws:WaterService) { }
 
   ngOnInit() {
+    this.rateTypes[RateTypes.GetWater] = "Водоснабжение",
+    this.rateTypes[RateTypes.GiveWater] = "Водоотведение",
+    this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
+    this.ws.getTypeDocs([DocTypes.ClientRates]).subscribe(docs => {
+      this.docs = docs;
+    })
+  }
+  show(s){
+    if(this.shows[s]!=undefined){
+      this.shows[s]=!this.shows[s];
+      return;
+    }
+    this.curYears[s] = new Date().getFullYear();
+    this.shows[s]=true;
+  }
+
+  getRate(r){
+    return r.Prices.filter(x => x.DateStart.getFullYear()==Number(this.curYears[r.Name]));
   }
 
 }

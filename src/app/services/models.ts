@@ -46,3 +46,14 @@ export enum DocTypes{
 export enum UploadTypes{
     News = "new"
 }
+
+export enum RateTypes{
+    GetWater = "get-water",
+    GiveWater = "give-water",
+    DrinkWater = "drink-water"
+}
+
+export enum ClientTypes{
+    Client = "client",
+    Business = "business"
+}

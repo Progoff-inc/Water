@@ -5,7 +5,13 @@
     &:focus{
         outline: none !important;
         box-shadow: none !important;
+        
+       
     }
+}
+select:focus{
+    border-color: @light-blue !important;
+    box-shadow: 0 0 5px @light-blue !important;
 }
 body{
     margin: 0;
@@ -198,6 +204,29 @@ ul.space-li, .image-list-num, .image-list{
     li, div{
         margin: 15px 0;
     }
+}
+
+table{
+    border-spacing: 0;
+    td{
+        text-align: center;
+        padding: 8px;
+        border: 1px solid white;
+    }
+    thead{
+        background-color: @blue;
+        td{
+            color: white;
+            
+        }
+    }
+    tbody{
+        td{
+            background-color: @lighter-blue;
+            color: white;
+        }
+    }
+    
 }
 
 ol.counter-list{
