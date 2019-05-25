@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Doc, DocTypes, RateTypes } from '../services/models';
+import { Doc, DocTypes, RateTypes, ClientTypes } from '../services/models';
 import { WaterService } from '../services/water.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'client-rates',
@@ -15,7 +16,7 @@ export class ClientRatesComponent implements OnInit {
   curYears = {};
   rateTypes = {};
 
-  rates = [
+  rates:any = [
     {
       Name:RateTypes.GetWater,
       Prices: [
@@ -137,9 +138,13 @@ export class ClientRatesComponent implements OnInit {
     this.rateTypes[RateTypes.GetWater] = "Водоснабжение",
     this.rateTypes[RateTypes.GiveWater] = "Водоотведение",
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
-    this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]).subscribe(docs => {
-      console.log(docs);
+    forkJoin(this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]),this.ws.getRates(ClientTypes.Client))
+    .subscribe(([docs, rates]) => {
+      console.log([docs, rates]);
       this.docs = docs;
+      if(rates.length<0){
+        this.rates = rates;
+      }
     })
   }
   show(s){

@@ -34,7 +34,7 @@ export class ReferenceBookComponent implements OnInit {
   constructor(private ws:WaterService, private router:Router) { }
 
   ngOnInit() {
-    this.ws.getTypeDocs([DocTypes.RefBook, DocTypes.ClientRates]).subscribe(docs => {
+    this.ws.getTypeDocs([DocTypes.RefBook]).subscribe(docs => {
       console.log(docs);
       this.docs = docs;
     })

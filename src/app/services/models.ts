@@ -32,6 +32,20 @@ export class Prop{
     Value:string;
 }
 
+export class Rate{
+    Id:number;
+    Name:RateTypes;
+    Type:ClientTypes;
+    Prices:Price[];
+}
+export class Price{
+    Id:number;
+    RateId:number;
+    DateStart:string;
+    DateFinish:string;
+    Price:number;
+}
+
 export enum DocTypes{
   RefBook = 'ref-book',
   RatesPay = "rates-pay",
