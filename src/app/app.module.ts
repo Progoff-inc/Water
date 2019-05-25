@@ -43,6 +43,7 @@ import { AddNewsComponent } from './add-news/add-news.component';
 import { DocsMainComponent } from './docs-main/docs-main.component';
 import { FooterComponent } from './footer/footer.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     AddNewsComponent,
     DocsMainComponent,
     FooterComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,

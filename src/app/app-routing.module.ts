@@ -15,6 +15,7 @@ import { ReferenceBookComponent } from './reference-book/reference-book.componen
 import { WaterServicesComponent } from './water-services/water-services.component';
 import { AdminComponent } from './admin/admin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { NewsComponent } from './news/news.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -36,6 +37,7 @@ const businessRoutes: Routes = [
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch:'full'},
   {path:'about', component: AboutComponent},
+  {path:'news/:id', component: NewsComponent},
   {path:'business', component: BusinessComponent, children:businessRoutes},
   {path:'clients', component:ClientsComponent, children:clientsRoutes},
   {path:'contacts', component:ContactsComponent},

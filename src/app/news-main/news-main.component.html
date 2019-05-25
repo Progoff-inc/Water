@@ -12,6 +12,6 @@
     </div>
   </div>
   <div class="news-titles d-flex flex-column ">
-    <div *ngFor="let new of news; let i = index">{{new.CreateDate | date: 'dd.MM'}}<a href="#">{{new.Name}}</a></div>
+    <div *ngFor="let new of news; let i = index">{{new.CreateDate | date: 'dd.MM'}}<a routerLink="/news/{{new.Id}}">{{new.Name}}</a></div>
   </div>
 </div>
