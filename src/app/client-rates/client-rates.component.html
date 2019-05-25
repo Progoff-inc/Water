@@ -1,4 +1,5 @@
 <h4 class="page-min-head">Тарифы для частных лиц</h4>
+<h5 class="page-min-head">Абонентская плата</h5>
 <div class="section" *ngFor="let rate of rates">
   <div class="section-header" (click)="show(rate.Name)"><span>{{rateTypes[rate.Name]}}</span><i class="fas " [ngClass]="{'fa-caret-down':!shows[rate.Name], 'fa-caret-up':shows[rate.Name]}"></i></div>
   <div class="section-body" *ngIf="shows[rate.Name]">
@@ -14,21 +15,37 @@
       </thead>
       <tbody>
         <tr>
-          <td *ngFor="let p of getRate(rate)">{{p.Price}}</td>
+          <td *ngFor="let p of getRate(rate)">{{p.Price}} руб./куб.м.</td>
         </tr>
       </tbody>
     </table>
     
   </div>
 </div>
-<h4 class="page-min-head mt-3">Документация</h4>
 <div class="flex-container my-3">
-  <div class="item" *ngFor="let doc of docs">
+  <div class="item" *ngFor="let doc of getDocs('rates-pay')">
     <div class="image">
       <a target="blanc" href="{{doc.Document}}"></a>
       <img src="{{doc.Image}}" alt="{{doc.Name}}">
     </div>
     <h5>{{doc.Name}}</h5>
     <small>{{doc.Description}}</small>
+  </div>
+</div>
+<h5 class="page-min-head mt-3">Подключение</h5>
+<div class="flex-container my-3">
+  <div class="item" *ngFor="let doc of getDocs('rates-connect')">
+    <div class="image">
+      <a target="blanc" href="{{doc.Document}}"></a>
+      <img src="{{doc.Image}}" alt="{{doc.Name}}">
+    </div>
+    <h5>{{doc.Name}}</h5>
+    <small>{{doc.Description}}</small>
+  </div>
+</div>
+<h5 class="page-min-head mt-3">Архив</h5>
+<div class="flex-container my-3">
+  <div class="item" *ngFor="let arch of archs">
+    <span>{{arch.Year}}</span>
   </div>
 </div>

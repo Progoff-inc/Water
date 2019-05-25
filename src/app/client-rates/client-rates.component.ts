@@ -122,13 +122,23 @@ export class ClientRatesComponent implements OnInit {
       ]
     }
   ]
+
+  archs = [
+    {Year:2012},
+    {Year:2013},
+    {Year:2014},
+    {Year:2015},
+    {Year:2016},
+    {Year:2017}
+  ]
   constructor( public ws:WaterService) { }
 
   ngOnInit() {
     this.rateTypes[RateTypes.GetWater] = "Водоснабжение",
     this.rateTypes[RateTypes.GiveWater] = "Водоотведение",
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
-    this.ws.getTypeDocs([DocTypes.ClientRates]).subscribe(docs => {
+    this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]).subscribe(docs => {
+      console.log(docs);
       this.docs = docs;
     })
   }
@@ -143,6 +153,15 @@ export class ClientRatesComponent implements OnInit {
 
   getRate(r){
     return r.Prices.filter(x => x.DateStart.getFullYear()==Number(this.curYears[r.Name]));
+  }
+
+  getDocs(type){
+    if(this.docs){
+      return this.docs.filter(x => x.Type == type);
+    }else{
+      return [];
+    }
+    
   }
 
 }

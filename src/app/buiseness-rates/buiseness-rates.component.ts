@@ -127,7 +127,7 @@ export class BuisenessRatesComponent implements OnInit {
     this.rateTypes[RateTypes.GetWater] = "Водоснабжение",
     this.rateTypes[RateTypes.GiveWater] = "Водоотведение",
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
-    this.ws.getTypeDocs([DocTypes.ClientRates]).subscribe(docs => {
+    this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]).subscribe(docs => {
       this.docs = docs;
     })
   }

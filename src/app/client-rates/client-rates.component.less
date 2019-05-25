@@ -1,2 +1,27 @@
 @import "../reference-book/reference-book.component.less";
 @import "../clients-services/clients-services.component.less";
+@import "../../colors.less";
+.item{
+    span{
+        text-transform: uppercase;
+        font-weight: 500;
+        color: @dark-blue;
+        position: relative;
+        cursor: pointer;
+        &::before{
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -5px;
+            height: 2px;
+            left: 0;
+            background-color: @dark-blue;
+            width: 0;
+            transition: 0.3s;
+        }
+
+        &:hover::before{
+            width: 100%;
+        }
+    }
+}

@@ -65,8 +65,6 @@
                     font-size: 30px;
                     margin-bottom: 5px;
                 }
-            }
-            :nth-child(3){
                 position: relative;
                 &:hover{
                     .list{
@@ -94,15 +92,16 @@
                         display: flex;
                         flex-direction: column;
                     }
+                    border-top:1px solid @darker-blue;
                     position: absolute;
                     display: none;
                     background-color: @blue;
                     color: white;
                     align-items: center;
                     justify-content: center;
-                    width: 130px;
-                    height: 100px;
+                    min-width: 130px;
                     top: 100%;
+                    left: 0;
                     div{
                         display: flex;
                         flex-direction: column;
@@ -116,6 +115,10 @@
                             background-color: @darker-blue;
                             outline: none;
                         }
+                    }
+                    a{
+                        color: white;
+                        text-decoration: none;
                     }
                 }
             }

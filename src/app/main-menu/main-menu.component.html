@@ -1,7 +1,16 @@
 <div class="container-fluid tube">
   <div></div>
   <div>
-    <div class="item" routerLink="" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{exact:true}'><i class="fas fa-home"></i>Главная</div>
+    <div class="item">
+        <div class="servb" routerLink="" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{exact:true}'><i class="fas fa-home"></i>Главная</div>
+        <div class="list" style="width: 200px;">
+          <div routerLink="/clients" [routerLinkActive]='["active"]'>Частным лицам</div>
+          <div routerLink="/business" [routerLinkActive]='["active"]'>Организациям</div>
+          <div routerLink="/ref-book" [routerLinkActive]='["active"]'>Справочник абонента</div>
+          <div ><a href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx" target="_blank">Личный кабинет</a></div>
+        </div>
+    </div>
+    
     <div class="item" routerLink="/about" [routerLinkActive]='["active"]'><i class="fas fa-users"></i>О нас</div>
     <div class="item">
       <div class="servb" routerLink="/services" [routerLinkActive]='["active"]'><i class="fas fa-info-circle"></i>Услуги</div>
