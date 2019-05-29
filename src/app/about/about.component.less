@@ -1,0 +1,66 @@
+@import "../home/home.component.less";
+@import "../../colors.less";
+.user-card{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    .rounded-circle{
+        width: 80px;
+        height: 80px;
+        display: flex;justify-content: center;
+        align-items: center;
+        
+
+        background-color: @dark-blue;
+        
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        margin-right: 10px;
+        
+    }
+    &:first-of-type .rounded-circle{
+        
+        background-color: @red;
+    }
+    
+}
+
+.services{
+    &>div{
+        .service{
+            height: 120px;
+            width: 120px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        width: 200px;
+    }
+    
+}
+
+.includes{
+    &>div{
+        &:nth-child(2){
+            div{
+                min-width: 300px;
+            }
+        }
+        img{
+            width: 80px;
+            height: 80px;
+        }
+        .item{
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+    }
+}
