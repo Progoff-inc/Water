@@ -1,4 +1,24 @@
 <div class="container">
   <h3 class="page-head">Контакты</h3>
   <feedback></feedback>
+  <div class="flex-container">
+    <div *ngFor="let con of contacts, let i=index" class="item">
+      <div class="image">
+        <div class="con">
+          <div *ngIf='con.Head' class="head">{{con.Head}}</div>
+          <div *ngIf='con.Tel'><i class="fas fa-phone"></i><div *ngFor="let tel of con.Tel, let i=index">{{tel.i}}</div></div>
+          <div *ngIf='con.Email'><i class="fas fa-envelope"></i>{{con.Email}}</div>
+          <div *ngIf='con.Adress'><i class="fas fa-map-marker-alt"></i>{{con.Adress}}</div>
+          <div *ngIf='con.Tel_1'><i class="fas fa-phone"></i>{{con.Tel_1}}</div>
+          <div *ngIf='con.Email_1'><i class="fas fa-envelope"></i>{{con.Email_1}}</div>
+          <div *ngIf='con.Adress_1'><i class="fas fa-map-marker-alt"></i>{{con.Adress_1}}</div>
+          <div *ngIf='con.Time' class="time">({{con.Time}})</div>
+          <div *ngIf='con.Boss'>{{con.Boss}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa33ca3cf2370445c1193fd0e32e1a7cc255def6c2054b8a05536e830b9b15ff8&amp;source=constructor" width="807" height="506" frameborder="0"></iframe>
+  </div>
 </div>

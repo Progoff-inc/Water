@@ -23,7 +23,15 @@ export class FeedbackComponent implements OnInit {
     if(this.contactForm.invalid){
       return;
     }
-    this.ws.addApp(this.contactForm.value).subscribe(data =>{
+    let app = {
+      App: {
+        Name:this.contactForm.value.Name,
+        Phone:this.contactForm.value.Phone,
+        Email:this.contactForm.value.Email,
+        Description:this.contactForm.value.Description
+      }
+    }
+    this.ws.addApp(app).subscribe(data =>{
       this.submitted = false;
       this.success = true;
       this.setForm();
@@ -39,7 +47,8 @@ export class FeedbackComponent implements OnInit {
       Name: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       Phone: ['', Validators.pattern("^((\\+?7|8)[ \\-] ?)?((\\(\\d{3}\\))|(\\d{3}))?([ \\-])?(\\d{3}[\\- ]?\\d{2}[\\- ]?\\d{2})$")],
-      Description: ['', Validators.required]
+      Description: ['', Validators.required],
+      Policy: ['', Validators.requiredTrue]
     });
   };
   get f() { return this.contactForm.controls; };

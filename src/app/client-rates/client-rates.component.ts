@@ -140,9 +140,8 @@ export class ClientRatesComponent implements OnInit {
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
     forkJoin(this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]),this.ws.getRates(ClientTypes.Client))
     .subscribe(([docs, rates]) => {
-      console.log([docs, rates]);
       this.docs = docs;
-      if(rates.length<0){
+      if(rates.length>0){
         this.rates = rates;
       }
     })
@@ -157,7 +156,7 @@ export class ClientRatesComponent implements OnInit {
   }
 
   getRate(r){
-    return r.Prices.filter(x => x.DateStart.getFullYear()==Number(this.curYears[r.Name]));
+    return r.Prices.filter(x => new Date(x.DateStart).getFullYear()==Number(this.curYears[r.Name]));
   }
 
   getDocs(type){
