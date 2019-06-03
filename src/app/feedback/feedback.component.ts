@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WaterService } from '../services/water.service';
 import { LoadService } from '../services/load.service';
+import { nlBeLocale } from 'ngx-bootstrap';
 
 @Component({
   selector: 'feedback',
@@ -10,6 +11,7 @@ import { LoadService } from '../services/load.service';
 })
 export class FeedbackComponent implements OnInit {
   contactForm:FormGroup;
+  flag = [];
   submitted = false;
   success = false;
   constructor(private fb:FormBuilder, private ws:WaterService, private ls:LoadService) { }
@@ -17,6 +19,20 @@ export class FeedbackComponent implements OnInit {
   ngOnInit() {
     this.setForm();
   }
+
+  topics = [
+    "Оплата услуг",
+    "Восстановление благоустройства",
+    "Письмо директору",
+    "Выдача технических условий",
+    "Аварийная ситуация",
+    "Сообщи, где воруют воду?!",
+    "Тарифы и услуги",
+    "Коррупционная составляющая, вымогательство",
+    "Некачественная вода",
+    "Прочее",
+    "ВОПРОСЫ БЕЗОПАСНОСТИ",
+  ]
 
   send(){
     this.submitted=true;

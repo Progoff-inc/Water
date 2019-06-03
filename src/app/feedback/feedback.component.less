@@ -1,15 +1,25 @@
 @import "../../colors.less";
 .form{
-    width: 400px;
-    border: 5px solid @light-blue;
+    width: 300px;
+    border: 5px solid @dark-blue;
     margin: 0 5px;
-    input{
-        border-radius: 50px;
+    input, textarea, select{
+        border-radius: 10px;
+        background-color: @form-gray;
+        &:focus{
+            &::placeholder{
+                color: @form-gray;
+            }
+        }
+        &::placeholder{
+            color: @form-text;
+        }
     }
-    textarea{
-        border-radius: 30px;
+    select{
+        color: @form-text;
     }
     .btn{
         width: 100%;
+        background-color: rgb(198, 35, 20);
     }
 }

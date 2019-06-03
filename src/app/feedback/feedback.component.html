@@ -1,7 +1,7 @@
 <form class="form my-3 py-3 px-3" [formGroup]="contactForm" (click)="sucChange()">
   <div *ngIf="success" class="alert alert-success">Ваше сообщение отправлено!</div>
   <div class="form-group">
-    <!-- <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Имя</label> -->
+    <!-- <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}" id="NL">Имя</label> -->
     <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Ваше имя">
     <small  class="form-text text-danger" *ngIf="submitted && f.Name.errors && f.Name.errors.required">Введите Ваше имя</small>
   </div>
@@ -15,6 +15,13 @@
     <input type="email" [ngClass]="{'border-danger':(submitted && f.Email.errors)}" formControlName="Email" class="form-control" id="InputEmail" placeholder="Ваш Email">
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.required">Введите Ваш Email</small>
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.email">Некорректный Email</small>
+  </div>
+  <div class="form-group">
+    <!-- <label for="exampleFormControlSelect1">Тема сообщения</label> -->
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option disabled="disabled" value="">Тема сообщения</option>
+      <option *ngFor="let t of topics, let i=index" value="{{i+1}}">{{t}}</option>
+    </select>
   </div>
   <div class="form-group">
     <!-- <label for="InputMessage" [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Сообщение</label> -->
