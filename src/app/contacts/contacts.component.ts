@@ -23,7 +23,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Касса",
-      Tel:"+7(496)343-77-59",
+      Tel:["+7(496)343-77-59"],
       Email:"",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-202",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, БЕЗ ОБЕДА",
@@ -31,7 +31,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Абонентский отдел (АО)",
-      Tel:"+7(496)343-34-74",
+      Tel:["+7(496)343-34-74"],
       Email:"abonent.boss@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-205",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, БЕЗ ОБЕДА",
@@ -47,7 +47,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Приемная",
-      Tel:"+7(496)343-06-51",
+      Tel:["+7(496)343-06-51"],
       Email:"reception@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-206",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -55,7 +55,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Заместитель директора по безопасности",
-      Tel:"+7(926)208-81-77",
+      Tel:["+7(926)208-81-77"],
       Email:"s.zam@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-207",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -63,7 +63,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Производственно-технический отдел (ПТО)",
-      Tel:"+7(496)343-96-20",
+      Tel:["+7(496)343-96-20"],
       Email:"pto.boss@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-201",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -71,7 +71,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Отдел кадров",
-      Tel:["+7(496)343-87-82,+7(929)900-25-03"],
+      Tel:["+7(496)343-87-82","+7(929)900-25-03"],
       Email:"personal.zam@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-209",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -79,7 +79,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Водопроводно-канализационный участок г. Наро-Фоминск",
-      Tel:"+7(929)512-23-51",
+      Tel:["+7(929)512-23-51"],
       Email:"voda@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -103,7 +103,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Водопроводно-канализационный участок Алабино",
-      Tel:"+7(929)508-65-03",
+      Tel:["+7(929)508-65-03"],
       Email:"alabino@vdknf.ru",
       Adress:"",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -111,7 +111,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Водопроводно-канализационный участок Таширово и Головково",
-      Tel:"+7(929)512-26-59",
+      Tel:["+7(929)512-26-59"],
       Email:"golovkovo@vdknf.ru",
       Adress:"",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -119,7 +119,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Водопроводно-канализационный участок Атепцево",
-      Tel:"+7(916)374-71-63",
+      Tel:["+7(916)374-71-63"],
       Email:"ateptsevo@vdknf.ru",
       Adress:"",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -127,7 +127,7 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Испытательная лаборатория (вода, стоки)",
-      Tel:"+7(929)512-24-96",
+      Tel:["+7(929)512-24-96"],
       Email:"laboratory@vdknf.ru",
       Adress:"г. Наро-Фоминск, улица Профсоюзная (АБК очистных сооружений)",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, обед 12:00-12:45",
@@ -135,12 +135,12 @@ export class ContactsComponent implements OnInit {
     },
     {
       Head:"Передача показаний приборов учета",
-      Tel:"+7(496)343-34-73",
+      Tel:["+7(496)343-34-73"],
       Email:"abonent.boss@vdknf.ru",
       Adress:"г. Наро-Фоминск, ул. Московская, 11-205",
       Time:"пн-чт с 8:00 до 17:00, пт с 8:00 до 15:45, БЕЗ ОБЕДА",
       Boss:"",
-      Tel_1:"+7(496)343-71-50",
+      Tel_1:["+7(496)343-71-50"],
       Email_1:"inspection.boss@vdknf.ru",
       Adress_1:"г. Наро-Фоминск, ул. Московская, 11-101",
     },
