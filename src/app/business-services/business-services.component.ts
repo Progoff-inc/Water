@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-services.component.less']
 })
 export class BusinessServicesComponent implements OnInit {
-  shows = {first:true};
-  constructor() { }
+  shows:any;
+  constructor() {
+    this.shows={first:true};
+   }
 
   ngOnInit() {
   }

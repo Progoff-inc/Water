@@ -30,14 +30,13 @@ export class AddNewsComponent implements OnInit {
     })
   }
 
-  add(news){
+  add(){
     this.submitted=true;
     if(this.newForm.invalid || !this.image){
       return;
     }
     this.ls.showLoad = true;
     this.ls.load = 0;
-    console.log(news);
     this.ws.addNews(this.newForm.value).subscribe(news => {
       if(this.image){
         var formData = new FormData();
