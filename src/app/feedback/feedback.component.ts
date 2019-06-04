@@ -11,7 +11,6 @@ import { nlBeLocale } from 'ngx-bootstrap';
 })
 export class FeedbackComponent implements OnInit {
   contactForm:FormGroup;
-  flag = [];
   submitted = false;
   success = false;
   constructor(private fb:FormBuilder, private ws:WaterService, private ls:LoadService) { }
@@ -44,6 +43,7 @@ export class FeedbackComponent implements OnInit {
         Name:this.contactForm.value.Name,
         Phone:this.contactForm.value.Phone,
         Email:this.contactForm.value.Email,
+        Topic:this.contactForm.value.Topic,
         Description:this.contactForm.value.Description
       }
     }
@@ -63,6 +63,7 @@ export class FeedbackComponent implements OnInit {
       Name: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       Phone: ['', Validators.pattern("^((\\+?7|8)[ \\-] ?)?((\\(\\d{3}\\))|(\\d{3}))?([ \\-])?(\\d{3}[\\- ]?\\d{2}[\\- ]?\\d{2})$")],
+      Topic: [''],
       Description: ['', Validators.required],
       Policy: ['', Validators.requiredTrue]
     });

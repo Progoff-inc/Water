@@ -3,20 +3,77 @@
     width: 300px;
     border: 5px solid @dark-blue;
     margin: 0 5px;
-    input, textarea, select{
-        border-radius: 10px;
+    
+    .nl{
         background-color: @form-gray;
-        &:focus{
-            &::placeholder{
-                color: @form-gray;
+        border-radius: 10px;
+        position: relative;
+        &:focus-within{
+            height: calc(2.25rem + 20px);
+            input, textarea, select{
+                margin-top: 15px;
+                outline: none;
+                border: 0;
+                &~label{
+                    display: block;
+                }
+                &:focus{
+                    &::placeholder{
+                        color: @form-gray;
+                    }
+                }
+            }
+            .ls{
+                display: none;
             }
         }
-        &::placeholder{
-            color: @form-text;
+        input, textarea, select{
+            background-color: @form-gray;
+            border: 0;
+            outline: none;
+            width: 100%;
+            resize: none;
+            &::placeholder{
+                color: @form-text;
+            }
+        }
+        label{
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            display: none;
+            height: 10px;
+            font-size: 9pt;
         }
     }
-    select{
+
+    .foc{
+        height: calc(2.25rem + 20px);
+        input, textarea, select{
+            margin-top: 15px;
+            &~label{
+                display: block;
+            }
+            &:focus{
+                &::placeholder{
+                    color: @form-gray;
+                }
+            }
+        }
+        .ls{
+            display: none;
+        }
+    }
+    
+    .ls{
+        position: absolute;
+        top: 5px;
+        left: 10px;
         color: @form-text;
+    }
+
+    select{
+        margin-left: -5px;
     }
     .btn{
         width: 100%;

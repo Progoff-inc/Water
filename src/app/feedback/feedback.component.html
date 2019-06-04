@@ -1,37 +1,50 @@
 <form class="form my-3 py-3 px-3" [formGroup]="contactForm" (click)="sucChange()">
   <div *ngIf="success" class="alert alert-success">Ваше сообщение отправлено!</div>
   <div class="form-group">
-    <!-- <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}" id="NL">Имя</label> -->
-    <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Ваше имя">
+    <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Name), 'border-danger':(submitted && f.Name.errors)}">
+      <input formControlName="Name" type="text" id="InputName" placeholder="Ваше имя">
+      <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Имя</label>
+    </div>
     <small  class="form-text text-danger" *ngIf="submitted && f.Name.errors && f.Name.errors.required">Введите Ваше имя</small>
   </div>
   <div class="form-group">
-    <!-- <label for="InputPhone" [ngClass]="{'text-danger':(submitted && f.Phone.errors)}">Телефон</label> -->
-    <input type="tel" [ngClass]="{'border-danger':(submitted && f.Phone.errors)}" formControlName="Phone" class="form-control" id="InputPhone" placeholder="Ваш телефон">
+    <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Phone), 'border-danger':(submitted && f.Phone.errors)}">
+      <input type="tel" formControlName="Phone" id="InputPhone" placeholder="Ваш телефон">
+      <label for="InputPhone" [ngClass]="{'text-danger':(submitted && f.Phone.errors)}">Телефон</label>
+    </div>
     <small class="form-text text-danger" *ngIf="submitted && f.Phone.errors && f.Phone.errors.pattern">Некорректный телефон</small>
   </div>
   <div class="form-group">
-    <!-- <label for="InputEmail" [ngClass]="{'text-danger':(submitted && f.Email.errors)}">Email</label> -->
-    <input type="email" [ngClass]="{'border-danger':(submitted && f.Email.errors)}" formControlName="Email" class="form-control" id="InputEmail" placeholder="Ваш Email">
+    <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Email), 'border-danger':(submitted && f.Email.errors)}">
+      <input type="email" formControlName="Email" id="InputEmail" placeholder="Ваш Email">
+      <label for="InputEmail" [ngClass]="{'text-danger':(submitted && f.Email.errors)}">Email</label>
+    </div>
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.required">Введите Ваш Email</small>
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.email">Некорректный Email</small>
   </div>
   <div class="form-group">
-    <!-- <label for="exampleFormControlSelect1">Тема сообщения</label> -->
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option disabled="disabled" value="">Тема сообщения</option>
-      <option *ngFor="let t of topics, let i=index" value="{{i+1}}">{{t}}</option>
-    </select>
+      <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Topic!=''), 'border-danger':(submitted && this.contactForm.value.Topic=='')}">
+        <select id="exampleFormControlSelect1" formControlName="Topic">
+          <option *ngFor="let t of topics, let i=index" value="{{i+1}}">{{t}}</option>
+        </select>
+        <label for="exampleFormControlSelect1">Тема сообщения</label>
+        <div class="ls">Тема сообщения</div>
+      </div>
+      <small class="form-text text-danger" *ngIf="submitted && this.contactForm.value.Topic==''">Выберите тему сообщения</small>
   </div>
   <div class="form-group">
-    <!-- <label for="InputMessage" [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Сообщение</label> -->
-    <textarea rows="5" [ngClass]="{'border-danger':(submitted && f.Description.errors)}" formControlName="Description" class="form-control" id="InputMessage" placeholder="Ваше сообщение"></textarea>
+    <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Description), 'border-danger':(submitted && f.Description.errors)}" style="height: 150px">
+      <textarea rows="5" formControlName="Description" id="InputMessage" placeholder="Ваше сообщение"></textarea>
+      <label for="InputMessage" [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Сообщение</label>
+    </div>
     <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors && f.Description.errors.required">Введите сообщение</small>
   </div>
   <div class="form-group form-check">
-    <input type="checkbox" [ngClass]="{'border-danger':(submitted && f.Policy.errors)}" formControlName="Policy" class="form-check-input" value="" id="defaultCheck1">
-    <label for="defaultCheck1" [ngClass]="{'text-danger':(submitted && f.Policy.errors)}" class="form-check-label">Я согласен(-на) с политикой конфиденциальности</label>
+    <input type="checkbox" formControlName="Policy" class="form-check-input" value="" id="defaultCheck1">
+    <label for="defaultCheck1" class="form-check-label">Я согласен(-на) с политикой конфиденциальности</label>
     <small class="form-text text-danger" *ngIf="submitted && f.Policy.errors">Вы должны согласиться с политикой конфиденциальности</small>
   </div>
   <button type="submit" class="btn btn-primary" (click)="send()">Отправить</button>
 </form>
+
+<!-- [ngClass]="{'border-danger':(submitted && f.Name.errors)}" -->
