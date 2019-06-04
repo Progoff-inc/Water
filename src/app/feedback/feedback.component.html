@@ -24,11 +24,11 @@
   </div>
   <div class="form-group">
       <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Topic!=''), 'border-danger':(submitted && this.contactForm.value.Topic=='')}">
-        <select id="exampleFormControlSelect1" formControlName="Topic">
+        <div class="ls" (click)="topic.focus()">Тема сообщения</div>
+        <select id="exampleFormControlSelect1" formControlName="Topic" #topic>
           <option *ngFor="let t of topics, let i=index" value="{{i+1}}">{{t}}</option>
         </select>
         <label for="exampleFormControlSelect1">Тема сообщения</label>
-        <div class="ls">Тема сообщения</div>
       </div>
       <small class="form-text text-danger" *ngIf="submitted && this.contactForm.value.Topic==''">Выберите тему сообщения</small>
   </div>

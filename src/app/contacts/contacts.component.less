@@ -3,6 +3,7 @@
 .image{
     height: 500px !important;
 }
+
 .con{
     background-color: white;
     &>div{
@@ -42,4 +43,19 @@
 }
 iframe{
     margin: 50px 0;
+}
+
+@media(max-width:768px){
+    .flex-container{
+        justify-content: center;
+    }
+    .item{
+        width: 300px !important;
+        max-width: 300px;
+        .image{
+            
+            height: auto !important;
+        }
+    }
+    
 }
