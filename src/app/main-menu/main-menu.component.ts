@@ -16,7 +16,10 @@ export class MainMenuComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
-      this.show();
+      if(this.showMenu){
+        this.show();
+      }
+      
      });
   }
 
