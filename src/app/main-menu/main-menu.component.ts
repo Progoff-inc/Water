@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
+  showMenu = false;
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  show(){
+    this.showMenu = !this.showMenu;
   }
 
 }

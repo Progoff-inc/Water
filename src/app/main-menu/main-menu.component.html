@@ -1,26 +1,48 @@
 <div class="container-fluid tube">
   <div></div>
   <div>
-    <div class="item">
-        <div class="servb" routerLink="" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{exact:true}'><i class="fas fa-home"></i>Главная</div>
-        <div class="list" style="width: 200px;">
-          <div routerLink="/clients" [routerLinkActive]='["active"]'>Частным лицам</div>
-          <div routerLink="/business" [routerLinkActive]='["active"]'>Организациям</div>
-          <div routerLink="/ref-book" [routerLinkActive]='["active"]'>Справочник абонента</div>
-          <div ><a href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx" target="_blank">Личный кабинет</a></div>
+    <div class="menu-top">
+        <div class="d-flex align-items-center justify-content-between">
+            <fieldset class="d-flex">
+                <input type="text" class="form-control" placeholder="Поиск по сайту">
+                <button class="btn"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </fieldset>
         </div>
-    </div>
-    
-    <div class="item" routerLink="/about" [routerLinkActive]='["active"]'><i class="fas fa-users"></i>О нас</div>
-    <div class="item">
-      <div class="servb" routerLink="/services" [routerLinkActive]='["active"]'><i class="fas fa-info-circle"></i>Услуги</div>
-      <div class="list">
-        <div routerLink="/services/clients-services" [routerLinkActive]='["active"]'>Частным лицам</div>
-        <div routerLink="/services/business-services" [routerLinkActive]='["active"]'>Организациям</div>
+      <div class="menu-btn" (click)="show()">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
-    <div class="item" routerLink="/full-info" [routerLinkActive]='["active"]'><i class="fas fa-file-alt"></i>Информация</div>
-    <div class="item" routerLink="/contacts" [routerLinkActive]='["active"]'><i class="fas fa-address-book"></i>Контакты</div>
+    <div class="menu" [ngClass]="{'show':showMenu}">
+      <div class="item list-item">
+          <div class="servb" routerLink="" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{exact:true}'><i class="fas fa-home"></i>Главная</div>
+          <div class="list" >
+            <div routerLink="/clients" [routerLinkActive]='["active"]'>Частным лицам</div>
+            <div routerLink="/business" [routerLinkActive]='["active"]'>Организациям</div>
+            <div routerLink="/ref-book" [routerLinkActive]='["active"]'>Справочник абонента</div>
+            <div ><a href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx" target="_blank">Личный кабинет</a></div>
+          </div>
+      </div>
+      
+      <div class="item" >
+        <div class="servb" routerLink="/about" [routerLinkActive]='["active"]'><i class="fas fa-users"></i>О нас</div>
+      </div>
+      <div class="item list-item">
+        <div class="servb" routerLink="/services" [routerLinkActive]='["active"]'><i class="fas fa-info-circle"></i>Услуги</div>
+        <div class="list">
+          <div routerLink="/services/clients-services" [routerLinkActive]='["active"]'>Частным лицам</div>
+          <div routerLink="/services/business-services" [routerLinkActive]='["active"]'>Организациям</div>
+        </div>
+      </div>
+      <div class="item" >
+        <div class="servb" routerLink="/full-info" [routerLinkActive]='["active"]'><i class="fas fa-file-alt"></i>Информация</div>
+      </div>
+      <div class="item">
+        <div class="servb" routerLink="/contacts" [routerLinkActive]='["active"]'><i class="fas fa-address-book"></i>Контакты</div>
+      </div>
+    </div>
+    
   </div>
   <div></div>
 </div>
