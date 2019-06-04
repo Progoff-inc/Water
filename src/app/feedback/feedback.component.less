@@ -68,12 +68,23 @@
     .ls{
         position: absolute;
         top: 5px;
+        
         left: 10px;
         color: @form-text;
     }
 
     select{
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+        background-color: transparent !important;
         margin-left: -5px;
+        background: none;
+        &:focus{
+            outline: none;
+            border: none;
+            box-shadow: none !important;
+        }
     }
     .btn{
         width: 100%;
