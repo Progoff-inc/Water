@@ -160,6 +160,7 @@
 
 @media(max-width:768px){
     .tube{
+        margin: 0;
         &>div{
             &:nth-child(2){
                 width: 100%;
@@ -247,6 +248,10 @@
                         }
                         .servb{
                             padding: 20px;
+                            &.active~.list{
+                                display: flex;
+                                flex-direction: column;
+                            }
                         }
                         &.list-item{
                             flex-direction: column;
@@ -256,11 +261,15 @@
                                 position: unset;
                                 padding-left: 30px;
                                 width: 100%;
+                                margin-top: 10px;
+                                border-top: none;
                                 height: auto;
                                 div{
                                     align-items: flex-start;
                                     padding: 10px 0;
                                     padding-left: 10px;
+                                    background-color: transparent;
+                                    border-left: 5px solid @darker-blue;
                                     &:hover, &.active{
                                         text-decoration: underline;
                                     }

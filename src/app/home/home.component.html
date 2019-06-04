@@ -5,7 +5,7 @@
     <div routerLink="/ref-book">Справочник абонента</div>
     <a href="http://uk-gkh.org/vodokanal_narof/Account/Login.aspx" target="_blank">Личный кабинет</a>
   </div>
-  <div style="width:65%">
+  <div class="news" >
     <news-main></news-main>
   </div>
 </div>
@@ -22,17 +22,26 @@
 </div>
 <div class="container">
   <div class="ovdText"><b>ОСНОВНЫЕ ВИДЫ ДЕЯТЕЛЬНОСТИ</b></div>
-  <div class="ovd d-flex flex-column align-items-center justify-content-center">
-    <div>
-      <div><img src="../../assets/images/main-page/cran.png"></div>
-      <div><img src="../../assets/images/main-page/tube.png"></div>
-      <div><img src="../../assets/images/main-page/kist.png"></div>
-    </div>
-    <div>
-      <div>ВОДОСНАБЖЕНИЕ ПИТЬЕВОЙ И ТЕХНИЧЕСКОЙ ВОДОЙ</div>
-      <div>ВОДООТВЕДЕНИЕ</div>
-      <div>ОЧИСТКА СТОКОВ ЖИЛОГО СЕКТОРА</div>
-    </div>
+  <div class="ovd flex-container justify-content-center">
+      <div class="d-flex align-items-center flex-column mx-sm-5" >
+        <div class="rounded-circle  service">
+          <img src="../../assets/images/main-page/cran.png" alt="">
+        </div>
+        <p class="text-center">ВОДОСНАБЖЕНИЕ ПИТЬЕВОЙ И ТЕХНИЧЕСКОЙ ВОДОЙ</p>
+      </div>
+      <div class="d-flex align-items-center flex-column mx-sm-5">
+        <div class="rounded-circle  service">
+          <img src="../../assets/images/main-page/tube.png" alt="">
+        </div>
+        <p class="text-center">ВОДООТВЕДЕНИЕ</p>
+      </div>
+      <div class="d-flex align-items-center flex-column mx-sm-5">
+        <div class="rounded-circle  service">
+          <img src="../../assets/images/main-page/kist.png" alt="">
+        </div>
+        <p class="text-center">ОЧИСТКА СТОКОВ ЖИЛОГО СЕКТОРА</p>
+      </div>
+      
   </div>
   <div class="sponsText"><b>НАШИ ПАРТНЕРЫ</b></div>
   <div class="container conspon">
