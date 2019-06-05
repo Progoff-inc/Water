@@ -1,5 +1,6 @@
 <form class="form my-3 py-3 px-3" [formGroup]="contactForm" (click)="sucChange()">
   <div *ngIf="success" class="alert alert-success">Ваше сообщение отправлено!</div>
+  <div class="d-flex justify-content-center align-items-center pb-3" style="font-size: 16pt"><b>Свяжитесь с нами!</b></div>
   <div class="form-group">
     <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Name), 'border-danger':(submitted && f.Name.errors)}">
       <input formControlName="Name" type="text" id="InputName" placeholder="Ваше имя">
@@ -26,7 +27,7 @@
       <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Topic!=''), 'border-danger':(submitted && this.contactForm.value.Topic=='')}">
         <div class="ls" (click)="topic.focus()">Тема сообщения</div>
         <select id="exampleFormControlSelect1" formControlName="Topic" #topic>
-          <option *ngFor="let t of topics, let i=index" value="{{i+1}}">{{t}}</option>
+          <option *ngFor="let t of topics, let i=index" value="{{t}}">{{t}}</option>
         </select>
         <label for="exampleFormControlSelect1">Тема сообщения</label>
       </div>

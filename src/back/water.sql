@@ -2,8 +2,9 @@ CREATE TABLE IF NOT EXISTS apps (
 	Id int(20) PRIMARY KEY AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
     Phone varchar(255) NOT NULL,
-    Description text NOT NULL,
     Email varchar(255) NOT NULL,
+    Topic varchar(255) NOT NULL,
+    Description text NOT NULL,
     CreateDate datetime DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -39,13 +39,11 @@ export class FeedbackComponent implements OnInit {
       return;
     }
     let app = {
-      App: {
         Name:this.contactForm.value.Name,
         Phone:this.contactForm.value.Phone,
         Email:this.contactForm.value.Email,
         Topic:this.contactForm.value.Topic,
         Description:this.contactForm.value.Description
-      }
     }
     this.ws.addApp(app).subscribe(data =>{
       this.submitted = false;
