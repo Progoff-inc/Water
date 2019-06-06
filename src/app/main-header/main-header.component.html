@@ -6,8 +6,8 @@
     <div class="h-100 d-flex flex-column justify-content-between">
         <div class="d-flex align-items-center justify-content-between">
             <fieldset class="d-flex">
-                <input type="text" class="form-control" placeholder="Поиск по сайту">
-                <button class="btn"><i class="fas fa-search" aria-hidden="true"></i></button>
+                <input type="text" class="form-control" placeholder="Поиск по сайту" (keydown)="searchBtn($event,srch.value)" #srch>
+                <button class="btn" (click)="search(srch.value)"><i class="fas fa-search" aria-hidden="true"></i></button>
             </fieldset>
         </div>
     </div>

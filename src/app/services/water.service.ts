@@ -18,6 +18,10 @@ export class WaterService{
       return this.http.get<News[]>(this.baseUrl + 'Key=get-news');
     }
 
+    search(str){
+      return this.http.get<any>(this.baseUrl + 'Key=search&SearchString='+str);
+    }
+
     getLimitNews(lim:number){
       return this.http.get<News[]>(this.baseUrl + 'Key=get-news&Limit='+lim);
     }

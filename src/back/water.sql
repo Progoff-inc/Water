@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS props (
 CREATE TABLE IF NOT EXISTS pricetypes (
 	Id int(20) PRIMARY KEY AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
-    Type varchar(255) NULL
+    Type varchar(255) NOT NULL,
+    Search varchar(200) NOT NULL,
+    SearchLink varchar(200) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS pricevalues (

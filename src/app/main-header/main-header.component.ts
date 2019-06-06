@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { WaterService } from '../services/water.service';
+import { Router } from '@angular/router';
+import { LoadService } from '../services/load.service';
 
 @Component({
   selector: 'main-header',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-header.component.less']
 })
 export class MainHeaderComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(private ws:WaterService, private router:Router, private ls:LoadService) { }
 
   ngOnInit() {
+  }
+  search(str){
+    this.ls.showLoad = true;
+    this.ws.search(str).subscribe(res => {
+      console.log(res);
+      sessionStorage.setItem('searchResultWater', JSON.stringify(res));
+      this.ls.showLoad = false;
+      this.router.navigate(['/search']);
+    })
+  }
+  searchBtn(e, str){
+    console.log(e);
+    if(e.key=='Enter'){
+      this.search(str);
+    }
   }
 
 }
