@@ -3,8 +3,8 @@
   <div class="d-flex justify-content-center align-items-center pb-3" style="font-size: 16pt"><b>Свяжитесь с нами!</b></div>
   <div class="form-group">
     <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Name), 'border-danger':(submitted && f.Name.errors)}">
-      <input formControlName="Name" type="text" id="InputName" placeholder="Ваше имя">
-      <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Имя</label>
+      <input formControlName="Name" type="text" id="InputName" placeholder="Ваше имя*">
+      <label for="InputName" [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Имя*</label>
     </div>
     <small  class="form-text text-danger" *ngIf="submitted && f.Name.errors && f.Name.errors.required">Введите Ваше имя</small>
   </div>
@@ -17,26 +17,26 @@
   </div>
   <div class="form-group">
     <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Email), 'border-danger':(submitted && f.Email.errors)}">
-      <input type="email" formControlName="Email" id="InputEmail" placeholder="Ваш Email">
-      <label for="InputEmail" [ngClass]="{'text-danger':(submitted && f.Email.errors)}">Email</label>
+      <input type="email" formControlName="Email" id="InputEmail" placeholder="Ваш Email*">
+      <label for="InputEmail" [ngClass]="{'text-danger':(submitted && f.Email.errors)}">Email*</label>
     </div>
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.required">Введите Ваш Email</small>
     <small class="form-text text-danger" *ngIf="submitted && f.Email.errors && f.Email.errors.email">Некорректный Email</small>
   </div>
   <div class="form-group">
       <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Topic!=''), 'border-danger':(submitted && this.contactForm.value.Topic=='')}">
-        <div class="ls" (click)="topic.focus()">Тема сообщения</div>
+        <div class="ls" (click)="topic.focus()">Тема сообщения*</div>
         <select id="exampleFormControlSelect1" formControlName="Topic" #topic>
           <option *ngFor="let t of topics, let i=index" value="{{t}}">{{t}}</option>
         </select>
-        <label for="exampleFormControlSelect1">Тема сообщения</label>
+        <label for="exampleFormControlSelect1">Тема сообщения*</label>
       </div>
       <small class="form-text text-danger" *ngIf="submitted && this.contactForm.value.Topic==''">Выберите тему сообщения</small>
   </div>
   <div class="form-group">
     <div class="form-control nl" [ngClass]="{'foc':(this.contactForm.value.Description), 'border-danger':(submitted && f.Description.errors)}" style="height: 150px">
-      <textarea rows="5" formControlName="Description" id="InputMessage" placeholder="Ваше сообщение"></textarea>
-      <label for="InputMessage" [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Сообщение</label>
+      <textarea rows="5" formControlName="Description" id="InputMessage" placeholder="Ваше сообщение*"></textarea>
+      <label for="InputMessage" [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Сообщение*</label>
     </div>
     <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors && f.Description.errors.required">Введите сообщение</small>
   </div>
