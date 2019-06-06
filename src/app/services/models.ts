@@ -38,6 +38,15 @@ export class Rate{
     Type:ClientTypes;
     Prices:Price[];
 }
+export class Contact{
+    Id:number;
+    Head:string;
+    Time:string;
+    Boss:string;
+    Tel:string[];
+    Address:string[];
+    Email:string[];
+}
 export class Price{
     Id:number;
     RateId:number;
@@ -72,4 +81,10 @@ export enum RateTypes{
 export enum ClientTypes{
     Client = "client",
     Business = "business"
+}
+
+export enum ContactTypes{
+    Address = "address",
+    Phone = "phone",
+    Email = "email"
 }
