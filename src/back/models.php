@@ -4,7 +4,15 @@ class BaseEntity{
     public $Name;
     public $Description;
 }
-
+class Contact{
+    public $Id;
+    public $Head;
+    public $Time;
+    public $Boss;
+    public $Tel;
+    public $Address;
+    public $Email;
+}
 class App extends BaseEntity{
     public $Phone;
     public $Email;
@@ -28,5 +36,19 @@ class Prop{
     public $Id;
     public $Name;
     public $Value;
+}
+
+class Rate{
+    public $Id;
+    public $Name;
+    public $Type;
+}
+
+class Price{
+    public $Id;
+    public $PriceTypeId;
+    public $DateStart;
+    public $DateFinish;
+    public $Price;
 }
 ?>

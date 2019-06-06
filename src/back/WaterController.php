@@ -18,12 +18,21 @@ if(isset($_GET['Key']))
         case 'get-apps':
             echo json_encode($ctxt->getApps($_GET['Login'], $_GET['Password']));
             break;
+        case 'get-contacts':
+            echo json_encode($ctxt->getContacts());
+            break;
+        case 'get-important-docs':
+            echo json_encode($ctxt->getImportantDocs());
+            break;
         case 'get-type-docs':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->getTypeDocs($b));
             break;
         case 'get-prop':
             echo json_encode($ctxt->getProp($_GET['Name']));
+            break;
+        case 'get-rates':
+            echo json_encode($ctxt->getRates($_GET['Type']));
             break;
         case 'get-props':
             echo json_encode($ctxt->getProps());
