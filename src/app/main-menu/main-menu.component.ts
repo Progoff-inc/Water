@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { WaterService } from '../services/water.service';
+import { LoadService } from '../services/load.service';
 
 @Component({
   selector: 'main-menu',
@@ -9,7 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class MainMenuComponent implements OnInit {
 
   showMenu = false;
-  constructor( private router:Router) { }
+  constructor( private ws:WaterService, private router:Router, private ls:LoadService) { }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
@@ -25,6 +27,24 @@ export class MainMenuComponent implements OnInit {
 
   show(){
     this.showMenu = !this.showMenu;
+  }
+  search(str){
+    this.ls.showLoad = true;
+    this.ws.search(str).subscribe(res => {
+      sessionStorage.setItem('searchResultWater', JSON.stringify(res));
+      this.ls.showLoad = false;
+      this.router.navigate(['/search'], 
+      {
+        queryParams:{
+            'searchStr': str
+        }
+    });
+    })
+  }
+  searchBtn(e, str){
+    if(e.key=='Enter'){
+      this.search(str);
+    }
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h4 class="page-min-head mt-4">Результаты поиска</h4>
+  <h4 class="page-min-head mt-4">Результаты поиска "{{searchStr}}"</h4>
   <div class="section" *ngIf="result[0] && result[0].length>0">
     <div class="section-header" (click)="show('first')"><span>Документы</span><i class="fas " [ngClass]="{'fa-caret-down':!shows['first'], 'fa-caret-up':shows['first']}"></i></div>
     <div class="section-body  pt-3" *ngIf="this.shows.first">

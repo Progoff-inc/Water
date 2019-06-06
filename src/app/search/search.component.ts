@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -8,16 +8,21 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   result = [];
-  shows = {};
-  constructor(private router:Router) { }
+  shows = {'first':true,'second':true,'third':true,'forth':true};
+  searchStr:string;
+  constructor(private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem('searchResultWater')){
-      this.result = JSON.parse(sessionStorage.getItem('searchResultWater'));
-      this.shows['first'] = true;
-    }else{
-      this.router.navigate(['/']);
-    }
+    this.route.queryParams.subscribe(
+      (queryParam: any) => {
+          this.searchStr = queryParam['searchStr'];
+          if(sessionStorage.getItem('searchResultWater')){
+            this.result = JSON.parse(sessionStorage.getItem('searchResultWater'));
+          }else{
+            this.router.navigate(['/']);
+          }
+      }
+  );
   }
 
   show(s){

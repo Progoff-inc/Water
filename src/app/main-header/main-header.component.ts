@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WaterService } from '../services/water.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { LoadService } from '../services/load.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class MainHeaderComponent implements OnInit {
   constructor(private ws:WaterService, private router:Router, private ls:LoadService) { }
 
   ngOnInit() {
+    
   }
   search(str){
     this.ls.showLoad = true;
@@ -20,7 +21,12 @@ export class MainHeaderComponent implements OnInit {
       console.log(res);
       sessionStorage.setItem('searchResultWater', JSON.stringify(res));
       this.ls.showLoad = false;
-      this.router.navigate(['/search']);
+      this.router.navigate(['/search'], 
+      {
+        queryParams:{
+            'searchStr': str
+        }
+    });
     })
   }
   searchBtn(e, str){
