@@ -14,25 +14,13 @@
               <div *ngFor="let tel of con.Tel, let i=index">{{tel}}</div>
             </div>
           </div>
-          <div *ngIf='con.Email'>
+          <div *ngFor="let e of con.Email, let i=index">
             <div><i class="fas fa-envelope"></i></div>
-            <div>{{con.Email}}</div>
+            <div>{{e}}</div>
           </div>
-          <div *ngIf='con.Adress'>
+          <div *ngFor="let a of con.Adress, let i=index">
             <div><i class="fas fa-map-marker-alt"></i></div>
-            <div>{{con.Adress}}</div>
-          </div>
-          <div *ngIf='con.Tel_1'>
-            <div><i class="fas fa-phone"></i></div>
-            <div>{{con.Tel_1}}</div>
-          </div>
-          <div *ngIf='con.Email_1'>
-            <div><i class="fas fa-envelope"></i></div>
-            <div>{{con.Email_1}}</div>
-          </div>
-          <div *ngIf='con.Adress_1'>
-            <div><i class="fas fa-map-marker-alt"></i></div>
-            <div>{{con.Adress_1}}</div>
+            <div>{{a}}</div>
           </div>
           <div *ngIf='con.Time' class="time">({{con.Time}})</div>
           <div *ngIf='con.Boss'>{{con.Boss}}</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Doc, DocTypes, RateTypes, ClientTypes } from '../services/models';
+import { Doc, DocTypes, RateTypes, ClientTypes, Rate } from '../services/models';
 import { WaterService } from '../services/water.service';
 import { forkJoin } from 'rxjs';
 
@@ -16,113 +16,7 @@ export class ClientRatesComponent implements OnInit {
   curYears = {};
   rateTypes = {};
 
-  rates:any = [
-    {
-      Name:RateTypes.GetWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    },
-    {
-      Name:RateTypes.GiveWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    },
-    {
-      Name:RateTypes.DrinkWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    }
-  ]
+  rates:Rate[] = [];
 
   archs = [
     {Year:2012},

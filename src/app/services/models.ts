@@ -54,8 +54,9 @@ export enum DocTypes{
   Constituent = "constituent",
   Bookkeeping = "bookkeping",
   Allowing = "allowing",
-  Evaluation = "Evaluation",
-  Important = 'important'
+  Evaluation = "evaluation",
+  Important = 'important',
+  Single = 'single'
 }
 
 export enum UploadTypes{
