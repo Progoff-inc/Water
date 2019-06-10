@@ -16,7 +16,7 @@ class DataBase {
             if($img){
                 $this->removeFile($img);
             }
-            $url = "http://client.nomokoiw.beget.tech/water/";
+            $url = "http://vdknf.ru/water/";
             $n = basename($t."_".$pid."_".$files['Data']['name']);
             //$tid=ucfirst($t)."Id";
             $tid="Id";

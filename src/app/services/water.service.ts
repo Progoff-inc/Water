@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 @Injectable()
 export class WaterService{
     
-    baseUrl:string='http://client.nomokoiw.beget.tech/water/WaterController.php?';
+    baseUrl:string='http://vdknf.ru/water/WaterController.php?';
     constructor(private http: HttpClient, private ls:LoadService, private us:UserService ){
     }
 

@@ -10,7 +10,7 @@ import { LoadService } from './load.service';
 export class UserService{
     public user;
     loading = false;
-    baseUrl:string='http://client.nomokoiw.beget.tech/water/WaterController.php?';
+    baseUrl:string='http://vdknf.ru/water/WaterController.php?';
 
     constructor(private router:Router, private http: HttpClient, private ls:LoadService){
         // sessionStorage.removeItem('userWaterNar');
