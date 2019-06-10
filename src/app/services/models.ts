@@ -54,7 +54,7 @@ export enum DocTypes{
   Constituent = "constituent",
   Bookkeeping = "bookkeping",
   Allowing = "allowing",
-  Evaluation = "Evaluation",
+  Evaluation = "evaluation",
   Important = 'important'
 }
 
