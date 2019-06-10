@@ -18,7 +18,6 @@ export class MainHeaderComponent implements OnInit {
   search(str){
     this.ls.showLoad = true;
     this.ws.search(str).subscribe(res => {
-      console.log(res);
       sessionStorage.setItem('searchResultWater', JSON.stringify(res));
       this.ls.showLoad = false;
       this.router.navigate(['/search'], 
@@ -30,7 +29,6 @@ export class MainHeaderComponent implements OnInit {
     })
   }
   searchBtn(e, str){
-    console.log(e);
     if(e.key=='Enter'){
       this.search(str);
     }

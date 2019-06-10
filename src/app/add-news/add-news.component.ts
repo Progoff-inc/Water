@@ -25,7 +25,6 @@ export class AddNewsComponent implements OnInit {
   
   public config = {
     language: 'ru',
-    placeholder: 'Описание',
     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
   };
   public model = {

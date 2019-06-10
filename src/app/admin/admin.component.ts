@@ -41,9 +41,7 @@ export class AdminComponent implements OnInit {
     }
     this.ls.showLoad = true;
     this.ls.load = 0;
-    console.log(news);
     this.ws.updateNews(news).subscribe(id => {
-      console.log(id);
       if(this.image){
         var formData = new FormData();
         formData.append('Data', this.image);
@@ -53,7 +51,6 @@ export class AdminComponent implements OnInit {
             
           }
           else if(event.type == HttpEventType.Response){
-            console.log(event)
             this.ls.showLoad = false;
             this.ngOnInit();
           }

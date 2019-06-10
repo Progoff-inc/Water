@@ -24,7 +24,6 @@ export class UserService{
                     this.save();
                 }else{
                     if(this.router.url=='/admin'){
-                        console.log(2);
                         this.router.navigate(['/sign-in']);
                     }
                     sessionStorage.removeItem('userWaterNar');
@@ -43,7 +42,6 @@ export class UserService{
                     this.save();
                 }else{
                     if(this.router.url=='/admin'){
-                        console.log(1);
                         this.router.navigate(['/sign-in']);
                     }
                     localStorage.removeItem('userWaterNar');
@@ -58,7 +56,6 @@ export class UserService{
                 return;
             }
             if(this.router.url=='/admin' && !this.loading && !this.user){
-                console.log(3);
                 this.router.navigate(['/sign-in']);
             }
         });

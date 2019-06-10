@@ -130,7 +130,6 @@ export class BuisenessRatesComponent implements OnInit {
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
     forkJoin(this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]),this.ws.getRates(ClientTypes.Client))
     .subscribe(([docs, rates]) => {
-      console.log([docs, rates]);
       this.docs = docs;
       if(rates.length<0){
         this.rates = rates;

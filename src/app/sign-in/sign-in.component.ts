@@ -28,9 +28,7 @@ export class SignInComponent implements OnInit {
       return;
     }
     this.us.signIn(this.userForm.value.Login, this.userForm.value.Password).subscribe(data => {
-      console.log(data)
       if(data){
-        console.log(111);
         this.us.User = {Login:this.userForm.value.Login, Password:this.userForm.value.Password};
         this.us.save(this.save);
         this.router.navigate(['/admin']);
