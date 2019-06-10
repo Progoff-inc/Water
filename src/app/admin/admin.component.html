@@ -1,5 +1,7 @@
 
+
 <div class="container">
+        
     <h3 class="page-head">Панель администратора</h3>
     <h4 class="page-min-head">Добавление и редактирование новостей</h4>
     <!-- <div class="d-flex align-items-start clients">
@@ -30,7 +32,11 @@
             <div class="section-header" (click)="show(new.Id+'new')"><span>{{new.Name}}</span><span>{{new.CreateDate | date:"dd.MM.yyy"}}<i class="fas ml-1" [ngClass]="{'fa-caret-down':!shows[new.Id+'new'], 'fa-caret-up':shows[new.Id+'new']}"></i></span></div>
             <div class="section-body pt-3" *ngIf="shows[new.Id+'new']">
                 <div class="form-group">
-                    <label for="head" [ngClass]="{'text-danger':new.Name == ''}">Заголовок</label>
+                    <div class="d-flex justify-content-between">
+                        <label for="head" [ngClass]="{'text-danger':new.Name == ''}">Заголовок</label>
+                        <button class="btn btn-link text-danger" (click)="remove(new.Id)">Удалить</button>
+                    </div>
+                    
                     <input [ngClass]="{'border-danger':new.Name == ''}" class="form-control" type="text" [(ngModel)]="new.Name" (keydown)="checkChange()">
                     <small class="text-danger" *ngIf="new.Name == ''">Введите заголовок</small>
                 </div>
@@ -49,8 +55,9 @@
                     <label for="head" [ngClass]="{'text-danger':new.Description == ''}">Описание</label>
                     <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
                     <small class="text-danger" *ngIf="new.Description == ''">Введите описание</small>
+                    
                 </div>
-
+                
                 <button *ngIf="showBtn" class="btn btn-primary" [disabled]="!checkNew(new)" (click)="save(new)">Сохранить</button>
             </div>
         </div>

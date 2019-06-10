@@ -4,6 +4,8 @@ import { LoadService } from '../services/load.service';
 import { WaterService } from '../services/water.service';
 import { UploadTypes, News } from '../services/models';
 import { HttpEventType } from '@angular/common/http';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 
 @Component({
   selector: 'add-news',
@@ -18,6 +20,17 @@ export class AddNewsComponent implements OnInit {
   submitted = false;
   image = null;
   invalidImage = false;
+  description = '';
+  public Editor = ClassicEditor;
+  
+  public config = {
+    language: 'ru',
+    placeholder: 'Описание',
+    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
+  };
+  public model = {
+    editorData: this.description
+  };
   constructor(private fb:FormBuilder, private ls:LoadService, private ws:WaterService) { }
 
   ngOnInit() {
@@ -29,6 +42,15 @@ export class AddNewsComponent implements OnInit {
       Description:['',Validators.required]
     })
   }
+
+  public onReady( editor ) {
+      editor.ui.getEditableElement().parentElement.insertBefore(
+          editor.ui.view.toolbar.element,
+          editor.ui.getEditableElement()
+      );
+  }
+
+
 
   add(){
     this.submitted=true;
@@ -47,7 +69,6 @@ export class AddNewsComponent implements OnInit {
             
           }
           else if(event.type == HttpEventType.Response){
-            console.log(event.body)
             news.Image = event.body;
             this.news.unshift(news);
             this.ls.showLoad = false;

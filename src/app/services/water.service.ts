@@ -75,6 +75,10 @@ export class WaterService{
       return this.http.post<number>(this.baseUrl + 'Key=update-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
     }
 
+    removeNews(id){
+      return this.http.delete<number>(this.baseUrl + 'Key=remove-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
+    }
+
     
 }
 

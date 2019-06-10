@@ -45,6 +45,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { SearchComponent } from './search/search.component';
     HttpClientModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ],
   providers: [FormBuilder, HttpClient, ModalService, BsModalService, LoadService, WaterService, UserService],
   bootstrap: [AppComponent]

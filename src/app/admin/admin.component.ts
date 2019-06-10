@@ -6,6 +6,7 @@ import { WaterService } from '../services/water.service';
 import { HttpEventType } from '@angular/common/http';
 import { LoadService } from '../services/load.service';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -18,6 +19,8 @@ export class AdminComponent implements OnInit {
   image = null;
   invalidImage = false;
   showBtn = false;
+  
+
   constructor(private ws:WaterService, private router:Router, private ls:LoadService) { }
 
   ngOnInit() {
@@ -28,6 +31,8 @@ export class AdminComponent implements OnInit {
     this.ws.getNews().subscribe(news => {
       this.news=news;
     })
+
+    
   }
 
   save(news){
@@ -59,6 +64,12 @@ export class AdminComponent implements OnInit {
         this.ngOnInit();
       }
       
+    })
+  }
+
+  remove(id){
+    this.ws.removeNews(id).subscribe(x => {
+      this.news = this.news.filter(x=>x.Id!=id);
     })
   }
 

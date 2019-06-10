@@ -13,10 +13,15 @@
     <small  class="form-text text-danger" *ngIf="submitted && !image">Добавьте изображение</small>
     <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите изображение .jpg</small>
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
     <textarea formControlName="Description" [ngClass]="{'border-danger':(submitted && f.Description.errors)}" class="form-control"  placeholder="Описание" rows="3"></textarea>
     <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
+  </div> -->
+  <div class="form-group">
+      <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
+      <ckeditor [editor]="Editor" [formControl]="newForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
   </div>
   
   
