@@ -129,6 +129,12 @@ class DataBase {
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
         return $sth->fetchAll();
     }
+    
+    public function getImportantDocs(){
+        $sth = $this->db->query("SELECT * FROM docs WHERE IsImportant=1");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
+        return $sth->fetchAll();
+    }
 
     public function getTypeDocs($types){
         $types = "('".implode("','",$types)."')";
@@ -148,6 +154,48 @@ class DataBase {
     public function getProps(){
         $sth = $this->db->query("SELECT * FROM props");
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Prop');
+        return $sth->fetchAll();
+    }
+    
+    public function getContacts(){
+        $sth = $this->db->query("SELECT * FROM contacts");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Contact');
+        $contacts =  [];
+        while($r = $sth->fetch()){
+            $r->Tel = $this->getContact($r->Id, 'phone');
+            $r->Email = $this->getContact($r->Id, 'email');
+            $r->Address = $this->getContact($r->Id, 'address');
+            $contacts[] = $r;
+        }
+        return $contacts;
+    }
+    public function getContact($id, $type){
+        $sth = $this->db->prepare("SELECT * FROM contactvalues WHERE ContactId=? and Type=?");
+        $sth->execute(array($id, $type));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'ContactValue');
+        $contacts = [];
+        while($r = $sth->fetch()){
+            $contacts[] = $r[3];
+        }
+        return $contacts;
+    }
+    
+    public function getRates($type){
+        $sth = $this->db->prepare("SELECT * FROM pricetypes WHERE Type=?");
+        $sth->execute(array($type));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Rate');
+        $rates =  [];
+        while($r = $sth->fetch()){
+            $r->Prices = $this->getPrices($r->Id);
+            $rates[] = $r;
+        }
+        return $rates;
+    }
+    
+    private function getPrices($id){
+        $sth = $this->db->prepare("SELECT * FROM pricevalues WHERE PriceTypeId=?");
+        $sth->execute(array($id));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Price');
         return $sth->fetchAll();
     }
 

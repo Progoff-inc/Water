@@ -16,6 +16,7 @@ import { WaterServicesComponent } from './water-services/water-services.componen
 import { AdminComponent } from './admin/admin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { NewsComponent } from './news/news.component';
+import { SearchComponent } from './search/search.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch:'full'},
   {path:'about', component: AboutComponent},
   {path:'news/:id', component: NewsComponent},
+  {path:'news', component: NewsComponent},
   {path:'business', component: BusinessComponent, children:businessRoutes},
   {path:'clients', component:ClientsComponent, children:clientsRoutes},
   {path:'contacts', component:ContactsComponent},
@@ -46,6 +48,7 @@ const routes: Routes = [
   {path:'services', component:WaterServicesComponent, children: servicesRoutes},
   {path:'sign-in', component:SignInComponent},
   {path:'admin', component:AdminComponent},
+  {path:'search', component:SearchComponent},
   // {path:'**', redirectTo:''}
 ];
 

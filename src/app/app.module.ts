@@ -44,6 +44,7 @@ import { DocsMainComponent } from './docs-main/docs-main.component';
 import { FooterComponent } from './footer/footer.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NewsComponent } from './news/news.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { NewsComponent } from './news/news.component';
     DocsMainComponent,
     FooterComponent,
     FeedbackComponent,
-    NewsComponent
+    NewsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

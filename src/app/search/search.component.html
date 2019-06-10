@@ -1,0 +1,78 @@
+<div class="container">
+  <h4 class="page-min-head mt-4">Результаты поиска "{{searchStr}}"</h4>
+  <div class="section" *ngIf="result[0] && result[0].length>0">
+    <div class="section-header" (click)="show('first')"><span>Документы</span><i class="fas " [ngClass]="{'fa-caret-down':!shows['first'], 'fa-caret-up':shows['first']}"></i></div>
+    <div class="section-body  pt-3" *ngIf="this.shows.first">
+      <div class="flex-container left">
+        <div class="item" *ngFor="let doc of result[0]">
+          
+          <div class="image doc" >
+            <a target="blanc" href="{{doc.Document}}"></a>
+            <img src="{{doc.Image}}" alt="{{doc.Name}}">
+          </div>
+          <h5 ><a href="{{doc.Document}}">{{doc.Name}}</a></h5>
+        </div>
+      </div>
+      <div class="links">
+        <a routerLink="/ref-book" class="btn btn-link pl-0">Справочник абонента</a><a routerLink="/full-info" class="btn btn-link">Раскрытие информации</a>
+      </div>
+    </div>
+  </div>
+  <div class="section" *ngIf="result[1] && result[1].length>0">
+    <div class="section-header" (click)="show('second')"><span>Тарифы</span><i class="fas " [ngClass]="{'fa-caret-down':!shows['second'], 'fa-caret-up':shows['second']}"></i></div>
+    <div class="section-body" *ngIf="this.shows.second">
+      <p *ngFor="let r of result[1]"><a href="{{r.SearchLink}}">{{r.Search}}</a></p>
+      <div class="links">
+        <a routerLink="/clients/clients-rates" class="btn btn-link pl-0">Тарифы для частных лиц</a><a routerLink="/business/business-rates" class="btn btn-link">Тарифы для организаций</a>
+      </div>
+    </div>
+    
+  </div>
+  <div class="section" *ngIf="result[2] && result[2].length>0">
+    <div class="section-header" (click)="show('third')"><span>Новости</span><i class="fas " [ngClass]="{'fa-caret-down':!shows['third'], 'fa-caret-up':shows['third']}"></i></div>
+    <div class="section-body" *ngIf="this.shows.third">
+      <div class="flex-container align-items-start left">
+        <div class="news-item" routerLink="/news/{{n.Id}}" *ngFor="let n of result[2]">
+          <img src="{{n.Image}}" alt="{{n.Name}}">
+          <p>{{n.Name}}<br><i>{{n.CreateDate | date:"dd.MM.yyyy"}}</i></p>
+        </div>
+      </div>
+      <div class="links">
+        <a routerLink="/news" class="btn btn-link pl-0">Раздел новостей</a>
+      </div>
+    </div>
+  </div>
+  <div class="section" *ngIf="result[3] && result[3].length>0">
+    <div class="section-header" (click)="show('forth')"><span>Контакты</span><i class="fas " [ngClass]="{'fa-caret-down':!shows['forth'], 'fa-caret-up':shows['forth']}"></i></div>
+    <div class="section-body pt-3" *ngIf="this.shows.forth">
+      <div class="flex-container left">
+        <div *ngFor="let con of result[3], let i=index" class="item">
+          <div class="image">
+            <div class="con">
+              <div *ngIf='con.Head' class="head">{{con.Head}}</div>
+              <div *ngIf='con.Tel'>
+                <div><i class="fas fa-phone"></i></div>
+                <div>
+                  <div *ngFor="let tel of con.Tel, let i=index">{{tel}}</div>
+                </div>
+              </div>
+              <div *ngFor="let e of con.Email, let i=index">
+                <div><i class="fas fa-envelope"></i></div>
+                <div>{{e}}</div>
+              </div>
+              <div *ngFor="let a of con.Address, let i=index">
+                <div><i class="fas fa-map-marker-alt"></i></div>
+                <div>{{a}}</div>
+              </div>
+              <div *ngIf='con.Time' class="time">({{con.Time}})</div>
+              <div *ngIf='con.Boss'>{{con.Boss}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="links">
+        <a routerLink="/contacts" class="btn btn-link pl-0">Все контакты</a>
+      </div>
+    </div>
+  </div>
+</div>
