@@ -75,7 +75,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FooterComponent,
     FeedbackComponent,
     NewsComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
