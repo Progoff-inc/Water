@@ -35,13 +35,11 @@ export class ReferenceBookComponent implements OnInit {
 
   ngOnInit() {
     this.ws.getTypeDocs([DocTypes.RefBook]).subscribe(docs => {
-      console.log(docs);
       this.docs = docs;
     })
   }
 
   getDoc(url){
-    console.log(url);
     this.router.navigateByUrl(url);
   }
 

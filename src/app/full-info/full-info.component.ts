@@ -26,7 +26,6 @@ export class FullInfoComponent implements OnInit {
     this.ls.showLoad = true;
     this.ws.getTypeDocs([DocTypes.Allowing, DocTypes.Bookkeeping, DocTypes.Constituent, DocTypes.Evaluation, DocTypes.Props]).subscribe(docs => {
       this.docs = docs;
-      console.log(docs);
       this.ls.showLoad = false;
     })
   }
