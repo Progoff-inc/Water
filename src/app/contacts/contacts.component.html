@@ -11,16 +11,22 @@
           <div *ngIf='con.Tel'>
             <div><i class="fas fa-phone"></i></div>
             <div>
-              <div *ngFor="let tel of con.Tel, let i=index">{{tel}}</div>
+              <div *ngFor="let tel of con.Tel, let i=index"><a href="{{getTel(tel)}}">{{tel}}</a></div>
             </div>
           </div>
-          <div *ngFor="let e of con.Email, let i=index">
+          <div *ngIf="con.Email && con.Email.length>0">
             <div><i class="fas fa-envelope"></i></div>
-            <div>{{e}}</div>
+            <div>
+              <div *ngFor="let e of con.Email, let i=index"><a href="mailto:{{e}}">{{e}}</a></div>
+            </div>
+            
           </div>
-          <div *ngFor="let a of con.Address, let i=index">
+          <div *ngIf="con.Address && con.Address.length>0">
             <div><i class="fas fa-map-marker-alt"></i></div>
-            <div>{{a}}</div>
+            <div>
+              <div  *ngFor="let a of con.Address, let i=index">{{a}}</div>
+            </div>
+            
           </div>
           <div *ngIf='con.Time' class="time">({{con.Time}})</div>
           <div *ngIf='con.Boss'>{{con.Boss}}</div>

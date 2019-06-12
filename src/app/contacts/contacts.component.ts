@@ -16,6 +16,9 @@ export class ContactsComponent implements OnInit {
       this.contacts = c;
     })
   }
-
+  getTel(tel){
+    tel = tel.replace(/\D+/g,"");
+    return 'tel:+'+tel;
+  }
   
 }

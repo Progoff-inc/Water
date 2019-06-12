@@ -1,7 +1,14 @@
 @import "../reference-book/reference-book.component.less";
 
+.flex-container{
+    align-items: flex-start;
+}
 .image{
-    height: 500px !important;
+    height: auto !important;
+    padding: 5px !important ;
+    &:hover{
+        padding: 8px;
+    }
 }
 
 .con{
@@ -9,8 +16,9 @@
     &>div{
         display: flex;
         width: 100%;
-        padding: 10px;
-        font-size: 12pt;
+        min-height: 50px;
+        padding: 5px 10px;
+        font-size: 15px;
         i{
             display: flex;
             justify-content: center;
@@ -23,17 +31,13 @@
             align-items: center;
             padding-right: 10px;
         }
-        &>:last-child{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
     }
     .head{
         justify-content: center;
-        font-size: 14pt;
-        color: red;
+        line-height: 22px;
+        height: 70px;
+        font-size: 18px;
+        color: @red;
     }
     .time{
         justify-content: center;
