@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { News, UploadTypes } from '../services/models';
+import { News, UploadTypes, BaseEntity } from '../services/models';
 import { WaterService } from '../services/water.service';
 import { HttpEventType } from '@angular/common/http';
 import { LoadService } from '../services/load.service';
@@ -15,6 +15,7 @@ import { LoadService } from '../services/load.service';
 export class AdminComponent implements OnInit {
   shows:any = {};
   news:News[];
+  question:BaseEntity[];
   submitted = false;
   image = null;
   invalidImage = false;
@@ -30,6 +31,9 @@ export class AdminComponent implements OnInit {
     this.showBtn = false;
     this.ws.getNews().subscribe(news => {
       this.news=news;
+    })
+    this.ws.getQuestions().subscribe(news => {
+      this.question=news;
     })
 
     

@@ -97,9 +97,6 @@ class DataBase {
         $path = explode('water/',$filelink);
         if($path[1]){
             unlink($path[1]);
-        }else{
-            $path[0] = ltrim($path[0],'../');
-            unlink($path[0]);
         }
         
     }
@@ -111,6 +108,16 @@ class DataBase {
         
         $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");
         $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
+        return $sth->fetchAll();
+    }
+    
+    public function getQuestions($l){
+        if($l == null){
+            $l = 10;
+        }
+        
+        $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC LIMIT $l");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'BaseEntity');
         return $sth->fetchAll();
     }
 
@@ -169,6 +176,29 @@ class DataBase {
         }
         return $contacts;
     }
+    public function search($str){
+        $search = [];
+        $sth = $this->db->query("SELECT * FROM docs WHERE LOWER(Name) LIKE '%".strtolower($str)."%'");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
+        $search[] = $sth->fetchAll();
+        $sth = $this->db->query("SELECT * FROM pricetypes WHERE LOWER(Search) LIKE '%".strtolower($str)."%'");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Rate');
+        $search[] = $sth->fetchAll();
+        $sth = $this->db->query("SELECT * FROM news WHERE LOWER(Name) LIKE '%".strtolower($str)."%' OR LOWER(Description) LIKE '%".strtolower($str)."%'");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
+        $search[] = $sth->fetchAll();
+        $sth = $this->db->query("SELECT * FROM contacts WHERE LOWER(Head) LIKE '%".strtolower($str)."%' OR LOWER(Boss) LIKE '%".strtolower($str)."%'");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Contact');
+        $contacts =  [];
+        while($r = $sth->fetch()){
+            $r->Tel = $this->getContact($r->Id, 'phone');
+            $r->Email = $this->getContact($r->Id, 'email');
+            $r->Address = $this->getContact($r->Id, 'address');
+            $contacts[] = $r;
+        }
+        $search[] = $contacts;
+        return $search;
+    }
     public function getContact($id, $type){
         $sth = $this->db->prepare("SELECT * FROM contactvalues WHERE ContactId=? and Type=?");
         $sth->execute(array($id, $type));
@@ -221,6 +251,19 @@ class DataBase {
         }
     }
     
+    public function addQuestion($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $res = $this->genInsertQuery($new,"questions");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            return $this->db->lastInsertId();
+        }else{
+            return null;
+        }
+    }
+    
     public function getNewsById($id){
         $s = $this->db->prepare("SELECT * FROM news WHERE Id=?");
         $s->execute(array($id));
@@ -238,6 +281,19 @@ class DataBase {
         }
     }
 
+    public function updateQuestion($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "questions", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return $a;
+        }else{
+            return false;
+        }
+    }
+    
     public function updateNews($l, $p, $new){
         if($this->checkAdmin($l, $p)){
             $id = $new['Id'];

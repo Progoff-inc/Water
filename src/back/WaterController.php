@@ -12,6 +12,9 @@ if(isset($_GET['Key']))
         case 'get-news':
             echo json_encode($ctxt->getNews($_GET['Limit']));
             break;
+        case 'get-questions':
+            echo json_encode($ctxt->getQuestions($_GET['Limit']));
+            break;
         case 'get-docs':
             echo json_encode($ctxt->getDocs());
             break;
@@ -37,6 +40,10 @@ if(isset($_GET['Key']))
         case 'get-props':
             echo json_encode($ctxt->getProps());
             break;
+        case 'search':
+            
+            echo json_encode($ctxt->search($_GET['SearchString']));
+            break;
         case 'add-app':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addApp($b));
@@ -45,6 +52,9 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addNews($_GET['Login'], $_GET['Password'], $b));
             break;
+        case 'add-question':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->addQuestion($_GET['Login'], $_GET['Password'], $b));
         case 'enter-admin':
             echo json_encode($ctxt->enterAdmin($_GET['Login'], $_GET['Password']));
             break;
@@ -54,6 +64,10 @@ if(isset($_GET['Key']))
         case 'update-news':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateNews($_GET['Login'], $_GET['Password'], $b));
+            break;
+        case 'update-question':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updateQuestion($_GET['Login'], $_GET['Password'], $b));
             break;
         case 'upload-file':
             $inp = json_decode(file_get_contents('php://input'), true);

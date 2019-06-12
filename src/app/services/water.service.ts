@@ -1,4 +1,4 @@
-import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact } from './models';
+import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact, BaseEntity } from './models';
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoadService } from './load.service';
@@ -16,6 +16,10 @@ export class WaterService{
 
     getNews(){
       return this.http.get<News[]>(this.baseUrl + 'Key=get-news');
+    }
+
+    getQuestions(){
+      return this.http.get<BaseEntity[]>(this.baseUrl + 'Key=get-questions');
     }
 
     search(str){
@@ -73,6 +77,14 @@ export class WaterService{
 
     updateNews(news){
       return this.http.post<number>(this.baseUrl + 'Key=update-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
+    }
+
+    addQuestion(q){
+      return this.http.post<News>(this.baseUrl + 'Key=add-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
+    }
+
+    updateQuestion(q){
+      return this.http.post<number>(this.baseUrl + 'Key=update-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
     }
 
     removeNews(id){
