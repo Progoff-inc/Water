@@ -46,6 +46,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FeedbackComponent,
     NewsComponent,
     SearchComponent,
+    AddQuestionComponent,
   ],
   imports: [
     BrowserModule,

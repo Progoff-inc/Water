@@ -46,4 +46,9 @@ export class ContactsComponent implements OnInit {
     this.shows[s]=true;
     console.log(this.shows[s]);
   }
+  getTel(tel){
+    tel = tel.replace(/\D+/g,"");
+    return 'tel:+'+tel;
+  }
+  
 }
