@@ -11,20 +11,6 @@ export class ContactsComponent implements OnInit {
   contacts:Contact[];
   shows:any;
   faq:BaseEntity[];
-  // faq = [
-  //   {
-  //     "Quest":"После стольких лет?",
-  //     "Answ":"Всегда"
-  //   },
-  //   {
-  //     "Quest":"Всё собрал?",
-  //     "Answ":"Всё"
-  //   },
-  //   {
-  //     "Quest":"Ценой чего?",
-  //     "Answ":"Ценой всего"
-  //   },
-  // ]
   constructor(private ws:WaterService) {
     this.shows={first:true};
   }
@@ -44,7 +30,6 @@ export class ContactsComponent implements OnInit {
       return;
     }
     this.shows[s]=true;
-    console.log(this.shows[s]);
   }
   getTel(tel){
     tel = tel.replace(/\D+/g,"");

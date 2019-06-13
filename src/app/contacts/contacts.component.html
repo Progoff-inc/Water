@@ -5,7 +5,10 @@
       <feedback></feedback>
     </div>
     <div class="d-flex flex-column my-3 mx-3 faq">
+      <div class="d-flex justify-content-between">
         <h4 class="page-min-head">Часто задаваемые вопросы</h4>
+        <b class="text-primary" style="font-style: normal;"><a routerLink="/faq">Смотреть все</a></b>
+      </div>
       <div class="section" *ngFor="let q of faq, let i=index">
         <div class="section-header" (click)="show(i)"><span>{{q.Name}}</span><i class="fas fa-caret-down"></i></div>
         <div class="section-body" *ngIf="this.shows[i]">

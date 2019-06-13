@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
+import { FaqComponent } from './faq/faq.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path:'sign-in', component:SignInComponent},
   {path:'admin', component:AdminComponent},
   {path:'search', component:SearchComponent},
+  {path:'faq', component:FaqComponent}
   // {path:'**', redirectTo:''}
 ];
 
