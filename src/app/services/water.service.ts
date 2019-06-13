@@ -18,8 +18,8 @@ export class WaterService{
       return this.http.get<News[]>(this.baseUrl + 'Key=get-news');
     }
 
-    getQuestions(){
-      return this.http.get<BaseEntity[]>(this.baseUrl + 'Key=get-questions');
+    getQuestions(lim:number){
+      return this.http.get<BaseEntity[]>(this.baseUrl + 'Key=get-questions&Limit='+lim);
     }
 
     search(str){
