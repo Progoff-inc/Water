@@ -3,63 +3,17 @@
 <div class="container">
         
     <h3 class="page-head">Панель администратора</h3>
-    <h4 class="page-min-head">Добавление и редактирование новостей</h4>
-    <!-- <div class="d-flex align-items-start clients">
+    <div class="d-flex align-items-start clients">
         <div class="menu">
-            <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients"]' [routerLinkActiveOptions]='{ exact: true }' >
-                Услуги
+            <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/admin/admin-news"]' [routerLinkActiveOptions]='{ exact: true }' >
+                Новости
             </div>
-            <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients/clients-rates"]' >
-                Тарифы
-            </div>
-            <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/clients/clients-info"]' >
-                Информация
-            </div>
-            <div class="menu-item" [routerLink]='["/ref-book"]'>
-                Справочник<br>абонента
+            <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/admin/admin-faq"]' >
+                Частые вопросы
             </div>
         </div>
         <div class="content">
             <router-outlet></router-outlet>
-        </div>
-    </div> -->
-    <div class="border border-primary p-5">
-        <add-news [news]="news"></add-news>
-    </div>
-    
-    <div class="news">
-        <div class="section" *ngFor="let new of news">
-            <div class="section-header" (click)="show(new.Id+'new')"><span>{{new.Name}}</span><span>{{new.CreateDate | date:"dd.MM.yyy"}}<i class="fas ml-1" [ngClass]="{'fa-caret-down':!shows[new.Id+'new'], 'fa-caret-up':shows[new.Id+'new']}"></i></span></div>
-            <div class="section-body pt-3" *ngIf="shows[new.Id+'new']">
-                <div class="form-group">
-                    <div class="d-flex justify-content-between">
-                        <label for="head" [ngClass]="{'text-danger':new.Name == ''}">Заголовок</label>
-                        <button class="btn btn-link text-danger" (click)="remove(new.Id)">Удалить</button>
-                    </div>
-                    
-                    <input [ngClass]="{'border-danger':new.Name == ''}" class="form-control" type="text" [(ngModel)]="new.Name" (keydown)="checkChange()">
-                    <small class="text-danger" *ngIf="new.Name == ''">Введите заголовок</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Изображение</label>
-                    <div class="d-flex align-items-start my-2">
-                        <img *ngIf="!!new.Image" class="w-25" src="{{new.Image}}"><i *ngIf="!!new.Image" class="fa fa-times ml-1" aria-hidden="true" (click)="unloadLink(new) && checkChange()"></i>
-                    </div>    
-                    <p class="img-text" *ngIf="image"><span>{{image.name}}</span> <i class="fa fa-times ml-1" aria-hidden="true" (click)="unload()"></i> </p>
-                    <input  type="file" (change)="putFile($event)"  style="display:none" #fileload>
-                    <button *ngIf="!image && !new.Image" class="btn btn-link border-primary" (click)="fileload.click()">Загрузить картинку</button>
-                    <small  class="form-text text-danger" *ngIf="submitted && !image">Добавьте изображение</small>
-                    <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите изображение .jpg</small>
-                </div>
-                <div class="form-group">
-                    <label for="head" [ngClass]="{'text-danger':new.Description == ''}">Описание</label>
-                    <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
-                    <small class="text-danger" *ngIf="new.Description == ''">Введите описание</small>
-                    
-                </div>
-                
-                <button *ngIf="showBtn" class="btn btn-primary" [disabled]="!checkNew(new)" (click)="save(new)">Сохранить</button>
-            </div>
         </div>
     </div>
 </div>

@@ -17,11 +17,19 @@ import { AdminComponent } from './admin/admin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
+import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
   {path:'clients-rates', component:ClientRatesComponent},
   {path:'clients-info', component:InfoComponent}
+];
+
+const adminRoutes: Routes = [
+  {path:'', redirectTo:'admin-news', pathMatch:'full'},
+  {path:'admin-faq', component:AddQuestionComponent},
+  {path:'admin-news', component:AdminNewsComponent}
 ];
 
 const servicesRoutes: Routes = [
@@ -47,7 +55,7 @@ const routes: Routes = [
   {path:'ref-book', component:ReferenceBookComponent},
   {path:'services', component:WaterServicesComponent, children: servicesRoutes},
   {path:'sign-in', component:SignInComponent},
-  {path:'admin', component:AdminComponent},
+  {path:'admin', component:AdminComponent, children: adminRoutes},
   {path:'search', component:SearchComponent},
   // {path:'**', redirectTo:''}
 ];
