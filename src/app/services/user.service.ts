@@ -19,11 +19,12 @@ export class UserService{
             this.loading = true;
             let u = JSON.parse(sessionStorage.getItem('userWaterNar'));
             this.signIn(u.Login, u.Password).subscribe(data => {
+                console.log(data);
                 if(data){
                     this.User = {Login:u.Login, Password:u.Password};
                     this.save();
                 }else{
-                    if(this.router.url=='/admin'){
+                    if(this.router.url.indexOf('/admin')>-1){
                         this.router.navigate(['/sign-in']);
                     }
                     sessionStorage.removeItem('userWaterNar');
@@ -37,11 +38,12 @@ export class UserService{
             this.loading = true;
             let u = JSON.parse(localStorage.getItem('userWaterNar'));
             this.signIn(u.Login, u.Password).subscribe(data => {
+                console.log(data);
                 if(data){
                     this.User = {Login:u.Login, Password:u.Password};
                     this.save();
                 }else{
-                    if(this.router.url=='/admin'){
+                    if(this.router.url.indexOf('/admin')>-1){
                         this.router.navigate(['/sign-in']);
                     }
                     localStorage.removeItem('userWaterNar');
@@ -49,13 +51,19 @@ export class UserService{
                 this.loading=false;
             })
             
+        }else{
+            sessionStorage.removeItem('userWaterNar');
+            localStorage.removeItem('userWaterNar');
+            if(this.router.url.indexOf('/admin')>-1){
+                this.router.navigate(['/sign-in']);
+            }
         }
         
         this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
-            if(this.router.url=='/admin' && !this.loading && !this.user){
+            if(this.router.url.indexOf('/admin')>-1 && !this.loading && !this.user){
                 this.router.navigate(['/sign-in']);
             }
         });

@@ -16,17 +16,21 @@ export class MainHeaderComponent implements OnInit {
     
   }
   search(str){
-    this.ls.showLoad = true;
-    this.ws.search(str).subscribe(res => {
-      sessionStorage.setItem('searchResultWater', JSON.stringify(res));
-      this.ls.showLoad = false;
-      this.router.navigate(['/search'], 
-      {
-        queryParams:{
-            'searchStr': str
-        }
-    });
-    })
+    let s = str.value;
+    if (s!="") {
+      this.ls.showLoad = true;
+      this.ws.search(s).subscribe(res => {
+        sessionStorage.setItem('searchResultWater', JSON.stringify(res));
+        this.ls.showLoad = false;
+        str.value='';
+        this.router.navigate(['/search'], 
+        {
+          queryParams:{
+              'searchStr': s
+          }
+        });
+      }) 
+    }
   }
   searchBtn(e, str){
     if(e.key=='Enter'){

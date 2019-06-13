@@ -80,7 +80,7 @@ export class WaterService{
     }
 
     addQuestion(q){
-      return this.http.post<News>(this.baseUrl + 'Key=add-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
+      return this.http.post<number>(this.baseUrl + 'Key=add-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
     }
 
     updateQuestion(q){
@@ -88,9 +88,12 @@ export class WaterService{
     }
 
     removeNews(id){
-      return this.http.delete<number>(this.baseUrl + 'Key=remove-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
+      return this.http.delete<number>(this.baseUrl + 'Key=remove-new&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
     }
 
+    removeQuestion(id){
+      return this.http.delete<number>(this.baseUrl + 'Key=remove-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
+    }
     
 }
 

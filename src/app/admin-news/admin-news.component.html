@@ -33,7 +33,8 @@
               </div>
               <div class="form-group">
                   <label for="head" [ngClass]="{'text-danger':new.Description == ''}">Описание</label>
-                  <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
+                  <!-- <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea> -->
+                  <ckeditor (keydown)="checkChange()" [editor]="Editor" [(ngModel)]="new.Description" [config]="config"  (ready)="onReady($event)"></ckeditor>
                   <small class="text-danger" *ngIf="new.Description == ''">Введите описание</small>
                   
               </div>

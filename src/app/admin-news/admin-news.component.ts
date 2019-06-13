@@ -4,6 +4,8 @@ import { UploadTypes, BaseEntity, News } from '../services/models';
 import { WaterService } from '../services/water.service';
 import { Router } from '@angular/router';
 import { LoadService } from '../services/load.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 
 @Component({
   selector: 'app-admin-news',
@@ -18,7 +20,12 @@ export class AdminNewsComponent implements OnInit {
   image = null;
   invalidImage = false;
   showBtn = false;
+  public Editor = ClassicEditor;
   
+  public config = {
+    language: 'ru',
+    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
+  };
 
   constructor(private ws:WaterService, private router:Router, private ls:LoadService) { }
 
@@ -32,6 +39,13 @@ export class AdminNewsComponent implements OnInit {
     })
 
     
+  }
+
+  public onReady( editor ) {
+      editor.ui.getEditableElement().parentElement.insertBefore(
+          editor.ui.view.toolbar.element,
+          editor.ui.getEditableElement()
+      );
   }
 
   save(news){
@@ -72,6 +86,7 @@ export class AdminNewsComponent implements OnInit {
   checkChange(){
     this.showBtn = true;
   }
+  
   checkNew(nw:News){
     return nw.Name!='' && nw.Description!='' && (!!nw.Image || this.image);
   }

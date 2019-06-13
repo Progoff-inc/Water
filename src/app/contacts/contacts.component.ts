@@ -10,7 +10,7 @@ import { Contact, BaseEntity } from '../services/models';
 export class ContactsComponent implements OnInit {
   contacts:Contact[];
   shows:any;
-  faq:BaseEntity[];
+  faq:BaseEntity[] = [];
   constructor(private ws:WaterService) {
     this.shows={first:true};
   }
@@ -19,7 +19,7 @@ export class ContactsComponent implements OnInit {
     this.ws.getContacts().subscribe(c => {
       this.contacts = c;
     })
-    this.ws.getQuestions(5).subscribe(q => {
+    this.ws.getQuestions(8).subscribe(q => {
       this.faq = q;
     })
   }

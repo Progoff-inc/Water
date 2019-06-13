@@ -2,8 +2,6 @@
   <h4 class="page-min-head my-4">Часто задаваемые вопросы</h4>
   <div class="section" *ngFor="let q of faq, let i=index">
     <div class="section-header" (click)="show(i)"><span>{{q.Name}}</span><i class="fas fa-caret-down"></i></div>
-    <div class="section-body" *ngIf="this.shows[i]">
-      <p><i>{{q.Description}}</i></p>
-    </div>
+    <div class="section-body" *ngIf="this.shows[i]" [innerHTML]="q.Description"></div>
   </div>
 </div>
