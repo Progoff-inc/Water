@@ -19,6 +19,7 @@ import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
+import { FaqComponent } from './faq/faq.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -57,6 +58,7 @@ const routes: Routes = [
   {path:'sign-in', component:SignInComponent},
   {path:'admin', component:AdminComponent, children: adminRoutes},
   {path:'search', component:SearchComponent},
+  {path:'faq', component:FaqComponent}
   // {path:'**', redirectTo:''}
 ];
 

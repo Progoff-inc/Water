@@ -42,7 +42,7 @@
   </div>
   <div class="form-group form-check">
     <input type="checkbox" formControlName="Policy" class="form-check-input" value="" id="defaultCheck1">
-    <label for="defaultCheck1" class="form-check-label">Я согласен(-на) с <a href="http://vdknf.ru/water/Docs/conf.pdf">политикой конфиденциальности</a></label>
+    <label for="defaultCheck1" class="form-check-label">Я согласен(-на) с <a href="http://vdknf.ru/water/Docs/conf.pdf" target="_blank">политикой конфиденциальности</a></label>
     <small class="form-text text-danger" *ngIf="submitted && f.Policy.errors">Вы должны согласиться с политикой конфиденциальности</small>
   </div>
   <button type="submit" class="btn btn-primary" (click)="send()">Отправить</button>

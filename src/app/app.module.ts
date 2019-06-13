@@ -48,6 +48,7 @@ import { SearchComponent } from './search/search.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
     SearchComponent,
     AddQuestionComponent,
     AdminNewsComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 @import "../reference-book/reference-book.component.less";
+@import "../clients-services/clients-services.component.less";
 
 .flex-container{
     align-items: flex-start;
@@ -9,6 +10,15 @@
     &:hover{
         padding: 8px;
     }
+}
+
+.faq{
+    flex:1;
+    // h3{
+    //     width: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    // }
 }
 
 .con{
@@ -30,6 +40,11 @@
             justify-content: center;
             align-items: center;
             padding-right: 10px;
+        }
+        &>:last-child{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     }
     .head{
