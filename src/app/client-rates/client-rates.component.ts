@@ -55,7 +55,7 @@ export class ClientRatesComponent implements OnInit {
 
   getDocs(type){
     if(this.docs){
-      return this.docs.filter(x => x.Type == type);
+      return this.docs.filter(x => x.Type == type).reverse();
     }else{
       return [];
     }
