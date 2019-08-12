@@ -234,6 +234,19 @@ class DataBase {
         $s = $this->db->prepare($res[0]);
         if($res[1][0]!=null){
             $s->execute($res[1]);
+            $tel = "Не указано";
+            if($app['Phone']!=null){
+                $tel=$app['Phone'];
+            }
+            $to = "<volik9925@yandex.ru>";
+            $subject = $app['Topic'];
+            $str = file_get_contents("appsMess.html");
+            $str = str_replace ( '#name#' , $app['Name'], $str);
+            $str = str_replace ( '#tel#' , $tel, $str);
+            $str = str_replace ( '#text#' , $app['Description'], $str);
+            $headers  = "Content-type: text/html; charset=utf-8 \r\n";
+            $headers .= "From:".$app['Email']."\r\n";
+            mail($to, $subject, $str, $headers);
         }
         return $this->db->lastInsertId();
     }
