@@ -53,7 +53,7 @@ export class AddNewsComponent implements OnInit {
 
   add(){
     this.submitted=true;
-    if(this.newForm.invalid || !this.image){
+    if(this.newForm.invalid){
       return;
     }
     this.ls.showLoad = true;

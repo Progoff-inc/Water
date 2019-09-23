@@ -49,7 +49,7 @@ export class AdminNewsComponent implements OnInit {
   }
 
   save(news){
-    if(!this.checkNew){
+    if(!this.checkNew(news)){
       return;
     }
     this.ls.showLoad = true;
@@ -88,7 +88,7 @@ export class AdminNewsComponent implements OnInit {
   }
   
   checkNew(nw:News){
-    return nw.Name!='' && nw.Description!='' && (!!nw.Image || this.image);
+    return nw.Name!='' && nw.Description!='' && !this.invalidImage;
   }
   show(s){
     this.submitted = false;

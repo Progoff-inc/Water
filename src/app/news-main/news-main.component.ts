@@ -11,6 +11,7 @@ import { News } from '../services/models';
 export class NewsMainComponent implements OnInit {
   news:News[];
   newsMain:News[];
+  private readonly defaultLogo = "http://vdknf.ru/water/Files/logo_vdknf.png";
   constructor(private ls:LoadService, private ws: WaterService) { }
 
   ngOnInit() {
