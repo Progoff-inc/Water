@@ -17,7 +17,7 @@ class DataBase {
                 $this->removeFile($img);
             }
             $url = "http://vdknf.ru/water/";
-            $n = basename($t."_".$pid."_".$files['Data']['name']);
+            $n = basename($t."_".$pid);
             //$tid=ucfirst($t)."Id";
             $tid="Id";
             $t .="s";
@@ -238,7 +238,7 @@ class DataBase {
             if($app['Phone']!=null){
                 $tel=$app['Phone'];
             }
-            $to = "<volik9925@yandex.ru>";
+            $to = "reception@vdknf.ru, lawyer2@vdknf.ru";
             $subject = $app['Topic'];
             $str = file_get_contents("appsMess.html");
             $str = str_replace ( '#name#' , $app['Name'], $str);
@@ -317,6 +317,26 @@ class DataBase {
             return $a;
         }else{
             return false;
+        }
+    }
+    
+    public function removeNew($l, $p, $id){
+        if($this->checkAdmin($l, $p)){
+            $s = $this->db->prepare('DELETE FROM news WHERE Id=?');
+            $s->execute(array($id));
+            return true;
+        }else{
+            return null;
+        }
+    }
+    
+    public function removeQuestion($l, $p, $id){
+        if($this->checkAdmin($l, $p)){
+            $s = $this->db->prepare('DELETE FROM questions WHERE Id=?');
+            $s->execute(array($id));
+            return true;
+        }else{
+            return null;
         }
     }
 

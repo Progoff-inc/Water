@@ -60,6 +60,7 @@ export class AddNewsComponent implements OnInit {
     this.ls.load = 0;
     this.ws.addNews(this.newForm.value).subscribe(news => {
       if(this.image){
+        this.image.name.replace(' ','_');
         var formData = new FormData();
         formData.append('Data', this.image);
         this.ws.UploadFile(news.Id, UploadTypes.News, formData).subscribe(event=>{
