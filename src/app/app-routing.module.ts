@@ -20,6 +20,7 @@ import { SearchComponent } from './search/search.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { FaqComponent } from './faq/faq.component';
+import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -30,7 +31,8 @@ const clientsRoutes: Routes = [
 const adminRoutes: Routes = [
   {path:'', redirectTo:'admin-news', pathMatch:'full'},
   {path:'admin-faq', component:AddQuestionComponent},
-  {path:'admin-news', component:AdminNewsComponent}
+  {path:'admin-news', component:AdminNewsComponent},
+  {path:'admin-docs', component: AdminDocsComponent}
 ];
 
 const servicesRoutes: Routes = [
