@@ -1,3 +1,14 @@
-<p>
-  admin-docs works!
-</p>
+
+<div class="container" *ngIf="docs">
+  <h4 class="page-min-head">Добавление и редактирование документов</h4>
+  <div class="form-group">
+    <label>Выберете документ</label>
+    <prog-select [items]="docs"></prog-select>
+  </div>
+  <form>
+    <div class="form-group">
+      <label>Выберете документ</label>
+      <input type="text" >
+    </div>
+  </form>
+</div>

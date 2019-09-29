@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WaterService } from '../services/water.service';
+import { DocTypes, Doc } from '../services/models';
 
 @Component({
   selector: 'app-admin-docs',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-docs.component.less']
 })
 export class AdminDocsComponent implements OnInit {
-
-  constructor() { }
+  docs: Doc[];
+  constructor(private _ws: WaterService) { }
 
   ngOnInit() {
+    this._ws.getTypeDocs(<DocTypes[]>Object.keys(DocTypes)).subscribe(docs => {
+      this.docs = docs;
+    })
   }
 
 }
