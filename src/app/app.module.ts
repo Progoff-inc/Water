@@ -49,6 +49,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { FaqComponent } from './faq/faq.component';
+import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { FaqComponent } from './faq/faq.component';
     AddQuestionComponent,
     AdminNewsComponent,
     FaqComponent,
+    AdminDocsComponent,
   ],
   imports: [
     BrowserModule,
