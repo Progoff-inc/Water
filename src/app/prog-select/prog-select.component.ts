@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, SimpleChanges, HostListener, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -29,6 +29,8 @@ export class ProgSelectComponent implements ControlValueAccessor, OnInit, OnChan
    */
   @Input() search:boolean = true;
   @Input() errors:any = null;
+
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   value = 0;
   disabled = false;
@@ -96,6 +98,7 @@ export class ProgSelectComponent implements ControlValueAccessor, OnInit, OnChan
     this.value = value;
     this.onChange(value);
     this.onTouched();
+    this.change.emit(value);
   }
 
   get Value() { 

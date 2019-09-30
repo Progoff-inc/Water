@@ -3,12 +3,37 @@
   <h4 class="page-min-head">Добавление и редактирование документов</h4>
   <div class="form-group">
     <label>Выберете документ</label>
-    <prog-select [items]="docs"></prog-select>
+    <prog-select [items]="docs" (change)="setForm($event)"></prog-select>
   </div>
-  <form>
+  <form [formGroup]="docForm" class="border border-primary p-5">
     <div class="form-group">
-      <label>Выберете документ</label>
-      <input type="text" >
+      <label>Название</label>
+      <input formControlName="Name" class="form-control" type="text" >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Изображение</label>
+      <p class="img-text" *ngIf="image"><span>{{image.name}}</span> <i class="fa fa-times" aria-hidden="true" (click)="unload()"></i> </p>
+      <input type="file" (change)="putFile($event)"  style="display:none" #fileload>
+      <button *ngIf="!image" class="btn btn-link border-primary" (click)="fileload.click()">Загрузить картинку</button>
+      <small  class="form-text text-danger" *ngIf="submitted && !image">Добавьте изображение</small>
+      <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите изображение .jpg</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail13" class="w-100" [ngClass]="{'text-danger':(submitted && !image)}">Документ</label>
+      <p class="img-text" *ngIf="image"><span>{{image.name}}</span> <i class="fa fa-times" aria-hidden="true" (click)="unload()"></i> </p>
+      <input type="file" (change)="putFile($event)"  style="display:none" #fileload>
+      <button *ngIf="!image" class="btn btn-link border-primary" (click)="fileload.click()">Загрузить документ</button>
+      <small  class="form-text text-danger" *ngIf="submitted && !image">Добавьте документ</small>
+      <small  class="form-text text-danger" *ngIf="invalidImage">Загрузите документ .doc, .docx, .pdf, .xls, .xlsx</small>
+    </div>
+    <div class="form-group">
+      <label>Тип документа</label>
+      <prog-select formControlName="Type" [items]="docTypes" [search]="false"></prog-select>
+    </div>
+    <div class="form-group">
+        <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
+        <ckeditor [editor]="Editor" [formControl]="docForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor>
+        <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
     </div>
   </form>
 </div>
