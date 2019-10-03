@@ -52,6 +52,7 @@ import { FaqComponent } from './faq/faq.component';
 import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 import { ProgSelectComponent } from './prog-select/prog-select.component';
 import { DocumentComponent } from './document/document.component';
+import { ProgFileInputComponent } from './prog-file-input/prog-file-input.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { DocumentComponent } from './document/document.component';
     FaqComponent,
     AdminDocsComponent,
     ProgSelectComponent,
-    DocumentComponent
+    DocumentComponent,
+    ProgFileInputComponent
   ],
   imports: [
     BrowserModule,

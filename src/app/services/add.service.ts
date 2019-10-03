@@ -4,17 +4,44 @@ import { Validators } from '@angular/forms';
 
 @Injectable()
 export class AddService{
-    @Input() item:any;
+    private _item:any;
+    @Input() public set item(item){
+        this._item = item;
+        this.update = {};
+    };
     @Input() items:any;
     public update = {};
-    public addForm:FormGroup;
+    public _addForm:FormGroup;
     public fb:FormBuilder = new FormBuilder();
     public submitted = false;
     public files = {};
     constructor(){
 
     }
+    public get addForm(){
+        return this._addForm;
+    }
 
+    public get item(){
+        return this._item;
+    }
+    public set addForm(form:FormGroup){
+        this._addForm = form;
+        console.log(form.controls)
+        Object.keys(this.addForm.controls).forEach(controlName => {
+            this._addForm.controls[controlName].valueChanges.subscribe(c => {
+                
+                if(this.item){
+                    if(this.item[controlName] && this.item[controlName]!=c){
+                        this.update[controlName]=c;
+                    }else{
+                        delete this.update[controlName];
+                    }
+                    console.log(this.update)
+                }
+            })
+        })
+    }
     getValue(v){
         if(v){
             return v.split('\\')[2];
@@ -27,11 +54,6 @@ export class AddService{
 
     updArray(name, arr){
         this.update[name]=arr;
-    }
-
-    upd(item){
-        this.update[item.id]=item.value;
-       
     }
 
     deleteItem(parent, arr, name, id){

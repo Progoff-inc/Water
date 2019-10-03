@@ -13,15 +13,15 @@
     <div class="form-group d-flex flex-column align-items-start">
       <label [ngClass]="{'text-danger':(submitted && f.Image.errors)}">Фотография</label>
       <document *ngIf="v.Image=='' && item && item.Image" [type]="'img'" [href]="item.Image"></document>
-      <span>{{v.photo==''?'':getValue(v.photo)}}<button class="btn btn-link" (click)="photo.click()">{{!item && v.Image=='' || item && item.Image==''?'Загрузить':'Изменить'}} фотографию</button></span>
-      <input class="d-none" id='Image' type="file" (change)="setFile($event)" formControlName="Image" #Image>
+      <!-- <span>{{v.photo==''?'':getValue(v.photo)}}<button class="btn btn-link" (click)="photo.click()">{{!item && v.Image=='' || item && item.Image==''?'Загрузить':'Изменить'}} фотографию</button></span>
+      <input class="d-none" id='Image' type="file" (change)="setFile($event)" formControlName="Image" #Image> -->
+      <prog-file-input formControlName="Image"></prog-file-input>
       <small  class="form-text text-danger" *ngIf="submitted && f.Image.errors && f.Image.errors.pattern">Файл с расширением .png или .jpg</small>
     </div>
     <div class="form-group d-flex flex-column align-items-start">
       <label for="exampleInputEmail1" [ngClass]="{'text-danger':(submitted && f.Document.errors)}">Документ</label>
       <document *ngIf="v.Document=='' && item && item.Document" [type]="'doc'" [href]="item.Document"></document>
-      <span>{{v.Document==''?'':getValue(v.Document)}}<button class="btn btn-link" (click)="Document.click()">{{!item && v.Document=='' || item && item.Document==''?'Загрузить':'Изменить'}} файл исследования</button></span>
-      <input class="d-none" id='Document' type="file" (change)="setFile($event)" formControlName="Document" #Document>
+      <prog-file-input formControlName="Document"></prog-file-input>
       <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.pattern">Файл с расширением .doc, .docx, .pdf, .xlsx или .xls</small>
     </div>
     <div class="form-group">

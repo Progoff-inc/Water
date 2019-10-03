@@ -55,13 +55,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   public setForm(id){
     this.item = this.docs.find(x => x.Id == id)
     console.log(this.item);
-    this.addForm.setValue({
-      Name: this.item.Name,
-      Type: this.item.Type,
-      Description: this.item.Description,
-      Image: '',
-      Document: ''
-    });
+    this.addForm.patchValue(this.item);
   }
 
 
