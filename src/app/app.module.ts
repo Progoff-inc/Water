@@ -51,6 +51,7 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { FaqComponent } from './faq/faq.component';
 import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 import { ProgSelectComponent } from './prog-select/prog-select.component';
+import { DocumentComponent } from './document/document.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ProgSelectComponent } from './prog-select/prog-select.component';
     AdminNewsComponent,
     FaqComponent,
     AdminDocsComponent,
-    ProgSelectComponent
+    ProgSelectComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,

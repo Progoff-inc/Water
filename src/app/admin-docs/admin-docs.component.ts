@@ -4,15 +4,18 @@ import { DocTypes, Doc } from '../services/models';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AddService } from '../services/add.service';
 
 @Component({
   selector: 'app-admin-docs',
   templateUrl: './admin-docs.component.html',
   styleUrls: ['./admin-docs.component.less']
 })
-export class AdminDocsComponent implements OnInit {
+export class AdminDocsComponent extends AddService implements OnInit {
   docs: Doc[];
   description = '';
+  tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls)$/i;
+  ipattern=/(\.png|\.jpg)$/i;
   docTypes = Object.keys(DocTypes).map(t => {
     return {Id: t.toLowerCase(), Name: t.toLowerCase()}
   });
@@ -25,18 +28,21 @@ export class AdminDocsComponent implements OnInit {
   public model = {
     editorData: this.description
   };
-  docForm: FormGroup;
-  constructor(private _ws: WaterService, private _fb: FormBuilder) { }
+  constructor(private _ws: WaterService, private _fb: FormBuilder) {
+    super();
+   }
 
   ngOnInit() {
     this._ws.getTypeDocs(<DocTypes[]>Object.keys(DocTypes)).subscribe(docs => {
       this.docs = docs;
     })
 
-    this.docForm = this._fb.group({
+    this.addForm = this._fb.group({
       Name:['', Validators.required],
       Type:[null, Validators.required],
-      Description: ['']
+      Description: [''],
+      Image:['', Validators.pattern(this.ipattern)],
+      Document:['', Validators.pattern(this.tpattern)]
     })
   }
 
@@ -47,9 +53,16 @@ export class AdminDocsComponent implements OnInit {
     );
   }
   public setForm(id){
-    console.log(id)
-    this.docForm.patchValue(this.docs.find(x => x.Id == id));
-    console.log(this.docForm.value)
+    this.item = this.docs.find(x => x.Id == id)
+    console.log(this.item);
+    this.addForm.setValue({
+      Name: this.item.Name,
+      Type: this.item.Type,
+      Description: this.item.Description,
+      Image: '',
+      Document: ''
+    });
   }
+
 
 }
