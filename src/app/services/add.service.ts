@@ -12,7 +12,6 @@ export class AddService{
     @Input() items:any;
     public update = {};
     public _addForm:FormGroup;
-    public fb:FormBuilder = new FormBuilder();
     public submitted = false;
     public files = {};
     constructor(){
@@ -27,7 +26,6 @@ export class AddService{
     }
     public set addForm(form:FormGroup){
         this._addForm = form;
-        console.log(form.controls)
         Object.keys(this.addForm.controls).forEach(controlName => {
             this._addForm.controls[controlName].valueChanges.subscribe(c => {
                 
@@ -37,7 +35,6 @@ export class AddService{
                     }else{
                         delete this.update[controlName];
                     }
-                    console.log(this.update)
                 }
             })
         })
@@ -63,5 +60,5 @@ export class AddService{
 
     get f() { return this.addForm.controls; }
     get v() { return this.addForm.value; }
-    get upd_length() { return Object.keys(this.update).length+Object.keys(this.files).filter(x => !!this.files[x]).length; }
+    get upd_length() { return Object.keys(this.update).length }
 }

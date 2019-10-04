@@ -69,7 +69,8 @@ export enum DocTypes{
 }
 
 export enum UploadTypes{
-    News = "new"
+    News = "new",
+    Docs = "doc"
 }
 
 export enum RateTypes{

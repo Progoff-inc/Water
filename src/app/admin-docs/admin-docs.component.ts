@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { WaterService } from '../services/water.service';
-import { DocTypes, Doc } from '../services/models';
+import { DocTypes, Doc, UploadTypes } from '../services/models';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddService } from '../services/add.service';
+import { WaterValidators } from '../services/water.validators';
+import { Subscription, forkJoin } from 'rxjs';
+import { LoadService } from '../services/load.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-docs',
@@ -28,7 +32,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   public model = {
     editorData: this.description
   };
-  constructor(private _ws: WaterService, private _fb: FormBuilder) {
+  constructor(private _ws: WaterService, private _fb: FormBuilder, private _ls:LoadService) {
     super();
    }
 
@@ -41,8 +45,8 @@ export class AdminDocsComponent extends AddService implements OnInit {
       Name:['', Validators.required],
       Type:[null, Validators.required],
       Description: [''],
-      Image:['', Validators.pattern(this.ipattern)],
-      Document:['', Validators.pattern(this.tpattern)]
+      Image:['', [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
+      Document:['', [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
     })
   }
 
@@ -54,9 +58,53 @@ export class AdminDocsComponent extends AddService implements OnInit {
   }
   public setForm(id){
     this.item = this.docs.find(x => x.Id == id)
-    console.log(this.item);
     this.addForm.patchValue(this.item);
+  }
+
+  public save(): void{
+    if(this.addForm.invalid){
+      return;
+    }
+    if(this.item){
+      this._update();
+    }else{
+      this._add();
+    }
+  }
+
+  private _add(): void{
+    this._ls.showLoad = true;
+    this._ws.addDoc({Name: this.v.Name, Type: this.v.Type, Description: this.v.Description}).subscribe(docId => {
+      const formData = new FormData();
+      formData.append('Image', this.v.Image);
+      formData.append('Document', this.v.Document);
+      this._ws.UploadFile(docId, UploadTypes.Docs, formData).subscribe(event=>{
+        if(event.type == HttpEventType.UploadProgress){
+          this._ls.load = Math.round(event.loaded/event.total * 100);
+          
+        }
+        else if(event.type == HttpEventType.Response){
+          this.items.unshift({
+            Id: docId, 
+            Image: event.body.Image, 
+            Document: event.body.Document, 
+            Name: this.v.Name, 
+            Type: this.v.Type, 
+            Description: this.v.Description
+          });
+          this._ls.showLoad = false;
+          this.addForm.reset();
+        }
+        
+      })
+    })
+  }
+
+  private _update(){
+
   }
 
 
 }
+
+

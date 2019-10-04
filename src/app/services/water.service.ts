@@ -65,7 +65,7 @@ export class WaterService{
      * @param data изображение (FormData)
      */
     UploadFile(id, type:UploadTypes, data) {
-      return this.http.post<string>(this.baseUrl + 'Key=upload-file&Id='+id+'&Type='+type+'&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), data, {
+      return this.http.post<any>(this.baseUrl + 'Key=upload-file&Id='+id+'&Type='+type+'&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), data, {
         reportProgress:true,
         observe:'events'
       });
@@ -73,6 +73,9 @@ export class WaterService{
 
     addNews(news){
       return this.http.post<News>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
+    }
+    addDoc(doc){
+      return this.http.post<number>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), doc);
     }
 
     updateNews(news){

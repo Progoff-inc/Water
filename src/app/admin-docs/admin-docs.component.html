@@ -16,13 +16,15 @@
       <!-- <span>{{v.photo==''?'':getValue(v.photo)}}<button class="btn btn-link" (click)="photo.click()">{{!item && v.Image=='' || item && item.Image==''?'Загрузить':'Изменить'}} фотографию</button></span>
       <input class="d-none" id='Image' type="file" (change)="setFile($event)" formControlName="Image" #Image> -->
       <prog-file-input formControlName="Image"></prog-file-input>
-      <small  class="form-text text-danger" *ngIf="submitted && f.Image.errors && f.Image.errors.pattern">Файл с расширением .png или .jpg</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.required">Загрузите изображение</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Image.errors && f.Image.errors.filename">Файл с расширением .png или .jpg</small>
     </div>
     <div class="form-group d-flex flex-column align-items-start">
       <label for="exampleInputEmail1" [ngClass]="{'text-danger':(submitted && f.Document.errors)}">Документ</label>
       <document *ngIf="v.Document" [type]="'doc'" [href]="v.Document.name || v.Document"></document>
       <prog-file-input formControlName="Document"></prog-file-input>
-      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.pattern">Файл с расширением .doc, .docx, .pdf, .xlsx или .xls</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.required">Загрузите документ</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.filename">Файл с расширением .doc, .docx, .pdf, .xlsx или .xls</small>
     </div>
     <div class="form-group">
       <label>Тип документа</label>
@@ -33,5 +35,6 @@
         <ckeditor [editor]="Editor" [formControl]="addForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor>
         <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
     </div>
+    <div class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</div>
   </form>
 </div>
