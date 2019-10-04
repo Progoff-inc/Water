@@ -1,18 +1,24 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'prog-file-input',
   templateUrl: './prog-file-input.component.html',
-  styleUrls: ['./prog-file-input.component.less']
+  styleUrls: ['./prog-file-input.component.less'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(()=>ProgFileInputComponent),
+    multi: true
+  }]
 })
 export class ProgFileInputComponent implements ControlValueAccessor, OnInit {
-
+  @Input() singleFile = true;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   private onChange = (value: any)=> {};
   private onTouched = () => {};
-  value = 0;
+  value = null;
+  file = null;
   disabled = false;
   constructor() { }
 
@@ -37,11 +43,13 @@ export class ProgFileInputComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  updateValue(value){
-    this.value = value;
-    this.onChange(value);
+  updateValue(event){
+    console.log(event)
+    this.file = this.singleFile? event.target.files[0]: event.target.files;
+    this.value = this.singleFile? this.file.name : this.file.map(x => x.name);
+    this.onChange(this.file);
     this.onTouched();
-    this.change.emit(value);
+    this.change.emit(this.file);
   }
 
   get Value() { 

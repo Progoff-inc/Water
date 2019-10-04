@@ -9,6 +9,7 @@ export class DocumentComponent implements OnInit {
   @Input() type:string;
   @Input() href:string;
   @Input() text:string;
+  @Input() showImage:boolean = true;
   constructor() { }
 
   ngOnInit() {
