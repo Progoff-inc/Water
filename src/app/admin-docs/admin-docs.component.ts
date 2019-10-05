@@ -42,11 +42,11 @@ export class AdminDocsComponent extends AddService implements OnInit {
     })
 
     this.addForm = this._fb.group({
-      Name:['', Validators.required],
+      Name:[null, Validators.required],
       Type:[null, Validators.required],
-      Description: [''],
-      Image:['', [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
-      Document:['', [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
+      Description: [null],
+      Image:[null, [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
+      Document:[null, [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
     })
   }
 
@@ -101,7 +101,29 @@ export class AdminDocsComponent extends AddService implements OnInit {
   }
 
   private _update(){
-
+    const update = this.generateUpdateRequest();
+    if(update.data){
+      this._ws.updateDoc(update.data).subscribe(()=>{
+        this.item = Object.assign(this.item, update.data);
+        this.addForm.patchValue(this.item);
+        
+      })
+    }
+    
+    if(update.files){
+      this._ws.UploadFile(this.item.Id, UploadTypes.Docs,update.files).subscribe(event=>{
+        if(event.type == HttpEventType.UploadProgress){
+          this._ls.load = Math.round(event.loaded/event.total * 100);
+          
+        }
+        else if(event.type == HttpEventType.Response){
+          this.item = Object.assign(this.item, event.body);
+          this.addForm.patchValue(this.item);
+        }
+        
+      })
+    }
+    
   }
 
 

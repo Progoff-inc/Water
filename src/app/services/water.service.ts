@@ -75,11 +75,15 @@ export class WaterService{
       return this.http.post<News>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
     }
     addDoc(doc){
-      return this.http.post<number>(this.baseUrl + 'Key=add-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), doc);
+      return this.http.post<number>(this.baseUrl + 'Key=add-doc&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), doc);
     }
 
     updateNews(news){
       return this.http.post<number>(this.baseUrl + 'Key=update-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
+    }
+
+    updateDoc(doc){
+      return this.http.post<number>(this.baseUrl + 'Key=update-doc&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), doc);
     }
 
     addQuestion(q){
