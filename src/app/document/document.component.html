@@ -1,0 +1,10 @@
+<div *ngIf="type=='img'" class="cont img">
+  <img *ngIf="showImage; else showName" src="{{href}}">
+  <ng-template #showName>
+    <p>{{href}}</p>
+  </ng-template>
+</div>
+<div *ngIf="type!='img'" class="cont">
+  <img src="../../assets/images/pdf.png" >
+  <a href="{{href}}">{{getValue(href)}}</a>
+</div>

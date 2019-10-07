@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { LoadService } from './load.service';
+import { environment } from 'src/environments/environment';
 // import { OnInit } from '@angular/core';
 
 @Injectable()
 export class UserService{
     public user;
     loading = false;
-    baseUrl:string='http://vdknf.ru/water/WaterController.php?';
+    baseUrl:string=`${environment.base_url}WaterController.php?`;
 
     constructor(private router:Router, private http: HttpClient, private ls:LoadService){
         // sessionStorage.removeItem('userWaterNar');

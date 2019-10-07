@@ -6,7 +6,7 @@ class DataBase {
     public function __construct()
     {
         //$this->db = new PDO('mysql:host=localhost;dbname=myblog;charset=UTF8','nlc','12345');
-        $this->db = new PDO('mysql:host=localhost;dbname=ih654686_water;charset=UTF8','ih654686_ivan','M*WRpDl1');
+        $this->db = new PDO('mysql:host=localhost;dbname=nomokoiw_water;charset=UTF8','nomokoiw_water','rvUjM8c%');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
@@ -16,29 +16,66 @@ class DataBase {
             if($img){
                 $this->removeFile($img);
             }
-            $url = "http://vdknf.ru/water/";
+            $url = "http://client.nomokoiw.beget.tech/water/";
             $n = basename($t."_".$pid);
             //$tid=ucfirst($t)."Id";
             $tid="Id";
             $t .="s";
-            $d = "Files/$n";
+            
             if(file_exists("Files")){
-                
-                if(move_uploaded_file($files['Data']['tmp_name'], $d)){
-                    $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
-                    $s->execute(array($url.$d, $pid));
-                    return($url.$d);
+                if($files['Data'] != null){
+                    $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
+                    $d = "Files/$n";
+                    if(move_uploaded_file($files['Data']['tmp_name'], $d)){
+                        $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
+                        $s->execute(array($url.$d, $pid));
+                        return($url.$d);
+                    }else{
+                        return($_FILES['Data']['tmp_name']);
+                    }
                 }else{
-                    return($_FILES['Data']['tmp_name']);
+                    $result = array();
+                    for ($i = 0; $i < count(array_keys($files)); $i++) {
+                        
+                        
+                        $collumn = array_keys($files)[$i];
+                        $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
+                        $d = "Files/$n";
+                        if(move_uploaded_file($files[$collumn]['tmp_name'], $d)){
+                            $s = $this->db->prepare("UPDATE $t SET $collumn=? WHERE $tid=?");
+                            $s->execute(array($url.$d, $pid));
+                            $result[$collumn] = $url.$d;
+                        }else{
+                            $result[$collumn] = "error";
+                        }
+                        
+                    }
+                    return $result;
                 }
             }else{
                 mkdir("Files");
-                if(move_uploaded_file($files['Data']['tmp_name'], $d)){
-                    $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
-                    $s->execute(array($url.$d, $pid));
-                    return($url.$d);
+                if($files['Data'] != null){
+                    if(move_uploaded_file($files['Data']['tmp_name'], $d)){
+                        $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
+                        $s->execute(array($url.$d, $pid));
+                        return($url.$d);
+                    }else{
+                        return($_FILES['Data']['tmp_name']);
+                    }
                 }else{
-                    return($_FILES['Data']['tmp_name']);
+                    $result = array();
+                    for ($i = 0; $i < count(array_keys($files)); $i++) {
+                        $collumn = array_keys($files)[$i];
+                        if(move_uploaded_file($files[$collumn]['tmp_name'], $d)){
+                            $s = $this->db->prepare("UPDATE $t SET $collumn=? WHERE $tid=?");
+                            $s->execute(array($url.$d, $pid));
+                            $result[$collumn] = $url.$d;
+                        }else{
+                            $result[$collumn] = "error";
+                        }
+                        
+                    }
+                    return $result;
                 }
             }
             
@@ -238,7 +275,7 @@ class DataBase {
             if($app['Phone']!=null){
                 $tel=$app['Phone'];
             }
-            $to = "reception@vdknf.ru, lawyer2@vdknf.ru";
+            $to = "nomokonov.vana@yandex.ru";
             $subject = $app['Topic'];
             $str = file_get_contents("appsMess.html");
             $str = str_replace ( '#name#' , $app['Name'], $str);
@@ -267,6 +304,19 @@ class DataBase {
     public function addQuestion($l, $p, $new){
         if($this->checkAdmin($l, $p)){
             $res = $this->genInsertQuery($new,"questions");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            return $this->db->lastInsertId();
+        }else{
+            return null;
+        }
+    }
+    
+    public function addDoc($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $res = $this->genInsertQuery($new,"docs");
             $s = $this->db->prepare($res[0]);
             if($res[1][0]!=null){
                 $s->execute($res[1]);
@@ -315,6 +365,19 @@ class DataBase {
             $s = $this->db->prepare($a[0]);
             $s->execute($a[1]);
             return $a;
+        }else{
+            return false;
+        }
+    }
+    
+    public function updateDoc($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "docs", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return true;
         }else{
             return false;
         }

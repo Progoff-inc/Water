@@ -3,12 +3,38 @@
   <h4 class="page-min-head">Добавление и редактирование документов</h4>
   <div class="form-group">
     <label>Выберете документ</label>
-    <prog-select [items]="docs"></prog-select>
+    <prog-select [items]="docs" (change)="setForm($event)"></prog-select>
   </div>
-  <form>
+  <form [formGroup]="addForm" class="border border-primary p-5">
     <div class="form-group">
-      <label>Выберете документ</label>
-      <input type="text" >
+      <label [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Название</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" class="form-control" type="text" >
     </div>
+    <div class="form-group d-flex flex-column align-items-start">
+      <label [ngClass]="{'text-danger':(submitted && f.Image.errors)}">Фотография</label>
+      <document *ngIf="v.Image" [showImage]="!v.Image.name" [type]="'img'" [href]="v.Image.name || v.Image"></document>
+      <!-- <span>{{v.photo==''?'':getValue(v.photo)}}<button class="btn btn-link" (click)="photo.click()">{{!item && v.Image=='' || item && item.Image==''?'Загрузить':'Изменить'}} фотографию</button></span>
+      <input class="d-none" id='Image' type="file" (change)="setFile($event)" formControlName="Image" #Image> -->
+      <prog-file-input formControlName="Image"></prog-file-input>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.required">Загрузите изображение</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Image.errors && f.Image.errors.filename">Файл с расширением .png или .jpg</small>
+    </div>
+    <div class="form-group d-flex flex-column align-items-start">
+      <label for="exampleInputEmail1" [ngClass]="{'text-danger':(submitted && f.Document.errors)}">Документ</label>
+      <document *ngIf="v.Document" [type]="'doc'" [href]="v.Document.name || v.Document"></document>
+      <prog-file-input formControlName="Document"></prog-file-input>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.required">Загрузите документ</small>
+      <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.filename">Файл с расширением .doc, .docx, .pdf, .xlsx или .xls</small>
+    </div>
+    <div class="form-group">
+      <label>Тип документа</label>
+      <prog-select formControlName="Type" [items]="docTypes" [search]="false"></prog-select>
+    </div>
+    <div class="form-group">
+        <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
+        <ckeditor [editor]="Editor" formControlName="Description" [config]="config"  (ready)="onReady($event)"></ckeditor>
+        <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
+    </div>
+    <div class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</div>
   </form>
 </div>
