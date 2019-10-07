@@ -52,6 +52,10 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addNews($_GET['Login'], $_GET['Password'], $b));
             break;
+        case 'add-doc':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->addDoc($_GET['Login'], $_GET['Password'], $b));
+            break;
         case 'add-question':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addQuestion($_GET['Login'], $_GET['Password'], $b));

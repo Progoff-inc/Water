@@ -39,6 +39,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   ngOnInit() {
     this._ws.getTypeDocs(<DocTypes[]>Object.keys(DocTypes)).subscribe(docs => {
       this.docs = docs;
+      this.items = docs;
     })
 
     this.addForm = this._fb.group({
@@ -62,6 +63,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   }
 
   public save(): void{
+    this.submitted = true;
     if(this.addForm.invalid){
       return;
     }

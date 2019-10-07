@@ -16,29 +16,60 @@ class DataBase {
             if($img){
                 $this->removeFile($img);
             }
-            $url = "http://vdknf.ru/water/";
+            $url = "http://client.nomokoiw.beget.tech/water/";
             $n = basename($t."_".$pid);
             //$tid=ucfirst($t)."Id";
             $tid="Id";
             $t .="s";
             $d = "Files/$n";
             if(file_exists("Files")){
-                
-                if(move_uploaded_file($files['Data']['tmp_name'], $d)){
-                    $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
-                    $s->execute(array($url.$d, $pid));
-                    return($url.$d);
+                if($files['Data'] != null){
+                    if(move_uploaded_file($files['Data']['tmp_name'], $d)){
+                        $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
+                        $s->execute(array($url.$d, $pid));
+                        return($url.$d);
+                    }else{
+                        return($_FILES['Data']['tmp_name']);
+                    }
                 }else{
-                    return($_FILES['Data']['tmp_name']);
+                    $result = array();
+                    for ($i = 0; $i < count(array_keys($files)); $i++) {
+                        $collumn = array_keys($files)[$i];
+                        if(move_uploaded_file($files[$collumn]['tmp_name'], $d)){
+                            $s = $this->db->prepare("UPDATE $t SET $collumn=? WHERE $tid=?");
+                            $s->execute(array($url.$d, $pid));
+                            $result[$collumn] = $url.$d;
+                        }else{
+                            $result[$collumn] = "error";
+                        }
+                        
+                    }
+                    return $result;
                 }
             }else{
                 mkdir("Files");
-                if(move_uploaded_file($files['Data']['tmp_name'], $d)){
-                    $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
-                    $s->execute(array($url.$d, $pid));
-                    return($url.$d);
+                if($files['Data'] != null){
+                    if(move_uploaded_file($files['Data']['tmp_name'], $d)){
+                        $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
+                        $s->execute(array($url.$d, $pid));
+                        return($url.$d);
+                    }else{
+                        return($_FILES['Data']['tmp_name']);
+                    }
                 }else{
-                    return($_FILES['Data']['tmp_name']);
+                    $result = array();
+                    for ($i = 0; $i < count(array_keys($files)); $i++) {
+                        $collumn = array_keys($files)[$i];
+                        if(move_uploaded_file($files[$collumn]['tmp_name'], $d)){
+                            $s = $this->db->prepare("UPDATE $t SET $collumn=? WHERE $tid=?");
+                            $s->execute(array($url.$d, $pid));
+                            $result[$collumn] = $url.$d;
+                        }else{
+                            $result[$collumn] = "error";
+                        }
+                        
+                    }
+                    return $result;
                 }
             }
             
@@ -267,6 +298,19 @@ class DataBase {
     public function addQuestion($l, $p, $new){
         if($this->checkAdmin($l, $p)){
             $res = $this->genInsertQuery($new,"questions");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            return $this->db->lastInsertId();
+        }else{
+            return null;
+        }
+    }
+    
+    public function addDoc($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $res = $this->genInsertQuery($new,"docs");
             $s = $this->db->prepare($res[0]);
             if($res[1][0]!=null){
                 $s->execute($res[1]);
