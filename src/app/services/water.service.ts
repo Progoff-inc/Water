@@ -3,13 +3,15 @@ import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoadService } from './load.service';
 import { UserService } from './user.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
 export class WaterService{
     
-    baseUrl:string='http://vdknf.ru/water/WaterController.php?';
+    baseUrl:string=`${environment.base_url}WaterController.php?`;
     constructor(private http: HttpClient, private ls:LoadService, private us:UserService ){
+
     }
 
     

@@ -6,7 +6,7 @@ class DataBase {
     public function __construct()
     {
         //$this->db = new PDO('mysql:host=localhost;dbname=myblog;charset=UTF8','nlc','12345');
-        $this->db = new PDO('mysql:host=localhost;dbname=ih654686_water;charset=UTF8','ih654686_ivan','M*WRpDl1');
+        $this->db = new PDO('mysql:host=localhost;dbname=nomokoiw_water;charset=UTF8','nomokoiw_water','rvUjM8c%');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
@@ -238,7 +238,7 @@ class DataBase {
             if($app['Phone']!=null){
                 $tel=$app['Phone'];
             }
-            $to = "reception@vdknf.ru, lawyer2@vdknf.ru";
+            $to = "nomokonov.vana@yandex.ru";
             $subject = $app['Topic'];
             $str = file_get_contents("appsMess.html");
             $str = str_replace ( '#name#' , $app['Name'], $str);
