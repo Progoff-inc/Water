@@ -105,7 +105,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   private _update(){
     const update = this.generateUpdateRequest();
     if(update.data){
-      this._ws.updateDoc(update.data).subscribe(()=>{
+      this._ws.updateDoc({Id: this.item.Id, ...update.data}).subscribe(()=>{
         this.item = Object.assign(this.item, update.data);
         this.addForm.patchValue(this.item);
         
@@ -119,7 +119,8 @@ export class AdminDocsComponent extends AddService implements OnInit {
           
         }
         else if(event.type == HttpEventType.Response){
-          this.item = Object.assign(this.item, event.body);
+          console.log(event.body);
+          this.item = Object.assign(this.item, event.body[0]);
           this.addForm.patchValue(this.item);
         }
         

@@ -69,6 +69,10 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateNews($_GET['Login'], $_GET['Password'], $b));
             break;
+        case 'update-doc':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updateDoc($_GET['Login'], $_GET['Password'], $b));
+            break;
         case 'update-question':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateQuestion($_GET['Login'], $_GET['Password'], $b));

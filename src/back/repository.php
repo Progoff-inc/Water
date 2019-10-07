@@ -21,9 +21,11 @@ class DataBase {
             //$tid=ucfirst($t)."Id";
             $tid="Id";
             $t .="s";
-            $d = "Files/$n";
+            
             if(file_exists("Files")){
                 if($files['Data'] != null){
+                    $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
+                    $d = "Files/$n";
                     if(move_uploaded_file($files['Data']['tmp_name'], $d)){
                         $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
                         $s->execute(array($url.$d, $pid));
@@ -34,7 +36,11 @@ class DataBase {
                 }else{
                     $result = array();
                     for ($i = 0; $i < count(array_keys($files)); $i++) {
+                        
+                        
                         $collumn = array_keys($files)[$i];
+                        $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
+                        $d = "Files/$n";
                         if(move_uploaded_file($files[$collumn]['tmp_name'], $d)){
                             $s = $this->db->prepare("UPDATE $t SET $collumn=? WHERE $tid=?");
                             $s->execute(array($url.$d, $pid));
@@ -359,6 +365,19 @@ class DataBase {
             $s = $this->db->prepare($a[0]);
             $s->execute($a[1]);
             return $a;
+        }else{
+            return false;
+        }
+    }
+    
+    public function updateDoc($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "docs", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return true;
         }else{
             return false;
         }
