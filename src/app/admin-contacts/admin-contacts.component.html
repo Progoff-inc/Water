@@ -1,0 +1,9 @@
+
+<div class="container" *ngIf="contacts">
+  <h4 class="page-min-head">Добавление и редактирование контактов</h4>
+  <div class="form-group">
+    <label>Выберете контакт</label>
+    <prog-select [items]="contacts" [view]="'Head'" (change)="setForm($event)"></prog-select>
+  </div>
+  
+</div>
