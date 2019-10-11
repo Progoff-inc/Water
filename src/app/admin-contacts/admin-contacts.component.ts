@@ -10,16 +10,13 @@ import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl, Valid
   styleUrls: ['./admin-contacts.component.less']
 })
 export class AdminContactsComponent extends AddService implements OnInit {
-  contacts:Contact[] = null;
   constructor( private _ws:WaterService, private _fb:FormBuilder) {
     super();
    }
 
   ngOnInit() {
     this._ws.getContacts().subscribe(contacts => {
-      this.contacts = contacts;
-      console.log(this.contacts)
-      this.items = contacts;
+      this.items = <Contact[]>contacts;
     })
 
     this.addForm = this._fb.group({
@@ -43,7 +40,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
 
   public setForm(id): void{
     this.submitted = true;
-    this.item = this.contacts.find(c => c.Id == id);
+    this.item = this.items.find(c => c.Id == id);
     
     this.addForm = this._fb.group({
       Head: this.item.Head, 

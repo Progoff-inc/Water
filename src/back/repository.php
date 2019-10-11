@@ -328,47 +328,86 @@ class DataBase {
                 $s->execute($res[1]);
             }
             $id = $this->db->lastInsertId();
-            for ($i = 0; $i < count($phones); $i++) {
-                $c = array(
-                    'ContactId'=> $id,
-                    'Type'=> 'phone',
-                    'Value'=> $phones[$i]
-                    );
-                $res = $this->genInsertQuery($c,"contactvalues");
-                $s = $this->db->prepare($res[0]);
-                if($res[1][0]!=null){
-                    $s->execute($res[1]);
-                }
-            }
-            for ($i = 0; $i < count($emails); $i++) {
-                $c = array(
-                    'ContactId'=> $id,
-                    'Type'=> 'email',
-                    'Value'=> $emails[$i]
-                    );
-                $res = $this->genInsertQuery($c,"contactvalues");
-                $s = $this->db->prepare($res[0]);
-                if($res[1][0]!=null){
-                    $s->execute($res[1]);
-                }
-            }
-            for ($i = 0; $i < count($address); $i++) {
-                $c = array(
-                    'ContactId'=> $id,
-                    'Type'=> 'address',
-                    'Value'=> $address[$i]
-                    );
-                $res = $this->genInsertQuery($c,"contactvalues");
-                $s = $this->db->prepare($res[0]);
-                if($res[1][0]!=null){
-                    $s->execute($res[1]);
-                }
-            }
+            $this->addContacts($phones, $emails, $address, $id);
             
             return $id;
             
         }else{
             return null;
+        }
+    }
+    public function updateContact($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            $this->addContacts($new['Phone'], $new['Email'], $new['Address'], $id, true);
+            unset($new['Phone']);
+            unset($new['Address']);
+            unset($new['Email']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "contacts", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return $a;
+        }else{
+            return false;
+        }
+    }
+    private function removeContacts($id, $types = array('phone', 'email', 'address')){
+        $types = "('".implode("','",$types)."')";
+        $s = $this->db->prepare("DELETE FROM contactvalues WHERE ContactId=? AND Type IN ".$types);
+        $s->execute(array($id));
+    }
+    private function addContacts($phones, $emails, $address, $id, $rm = false){
+        if($rm){
+            $types = [];
+            if($phones != null){
+                $types[]='phone';
+            }
+            if($emails != null){
+                $types[]='email';
+            }
+            if($address != null){
+                $types[]='address';
+            }
+            $this->removeContacts($id, $types);
+        }
+        
+        
+        for ($i = 0; $i < count($phones); $i++) {
+            $c = array(
+                'ContactId'=> $id,
+                'Type'=> 'phone',
+                'Value'=> $phones[$i]
+                );
+            $res = $this->genInsertQuery($c,"contactvalues");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+        }
+        for ($i = 0; $i < count($emails); $i++) {
+            $c = array(
+                'ContactId'=> $id,
+                'Type'=> 'email',
+                'Value'=> $emails[$i]
+                );
+            $res = $this->genInsertQuery($c,"contactvalues");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+        }
+        for ($i = 0; $i < count($address); $i++) {
+            $c = array(
+                'ContactId'=> $id,
+                'Type'=> 'address',
+                'Value'=> $address[$i]
+                );
+            $res = $this->genInsertQuery($c,"contactvalues");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
         }
     }
     
