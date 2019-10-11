@@ -43,7 +43,7 @@ export class Contact{
     Head:string;
     Time:string;
     Boss:string;
-    Tel:string[];
+    Phone:string[];
     Address:string[];
     Email:string[];
 }

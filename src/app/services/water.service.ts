@@ -96,6 +96,14 @@ export class WaterService{
       return this.http.post<number>(this.baseUrl + 'Key=update-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
     }
 
+    addContact(q){
+      return this.http.post<number>(this.baseUrl + 'Key=add-contact&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
+    }
+
+    updateContact(q){
+      return this.http.post<number>(this.baseUrl + 'Key=update-contact&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), q);
+    }
+
     removeNews(id){
       return this.http.delete<number>(this.baseUrl + 'Key=remove-new&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
     }

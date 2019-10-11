@@ -21,6 +21,8 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { FaqComponent } from './faq/faq.component';
 import { AdminDocsComponent } from './admin-docs/admin-docs.component';
+import { AdminRatesComponent } from './admin-rates/admin-rates.component';
+import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -32,7 +34,9 @@ const adminRoutes: Routes = [
   {path:'', redirectTo:'admin-news', pathMatch:'full'},
   {path:'admin-faq', component:AddQuestionComponent},
   {path:'admin-news', component:AdminNewsComponent},
-  {path:'admin-docs', component: AdminDocsComponent}
+  {path:'admin-docs', component: AdminDocsComponent},
+  {path:'admin-rates', component: AdminRatesComponent},
+  {path:'admin-contacts', component: AdminContactsComponent}
 ];
 
 const servicesRoutes: Routes = [

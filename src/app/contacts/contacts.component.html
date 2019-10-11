@@ -20,10 +20,10 @@
       <div class="image">
         <div class="con">
           <div *ngIf='con.Head' class="head">{{con.Head}}</div>
-          <div *ngIf='con.Tel'>
+          <div *ngIf='con.Phone'>
             <div><i class="fas fa-phone"></i></div>
             <div>
-              <div *ngFor="let tel of con.Tel, let i=index"><a href="{{getTel(tel)}}">{{tel}}</a></div>
+              <div *ngFor="let tel of con.Phone, let i=index"><a href="{{getTel(tel)}}">{{tel}}</a></div>
             </div>
           </div>
           <div *ngIf="con.Email && con.Email.length>0">
@@ -46,7 +46,8 @@
       </div>
     </div>
   </div>
-  <div >
-    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa33ca3cf2370445c1193fd0e32e1a7cc255def6c2054b8a05536e830b9b15ff8&amp;source=constructor" width="100%" height="506" frameborder="0"></iframe>
-  </div>
+  
+</div>
+<div >
+  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa33ca3cf2370445c1193fd0e32e1a7cc255def6c2054b8a05536e830b9b15ff8&amp;source=constructor" width="100%" height="506" frameborder="0"></iframe>
 </div>

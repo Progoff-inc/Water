@@ -53,6 +53,8 @@ import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 import { ProgSelectComponent } from './prog-select/prog-select.component';
 import { DocumentComponent } from './document/document.component';
 import { ProgFileInputComponent } from './prog-file-input/prog-file-input.component';
+import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
+import { AdminRatesComponent } from './admin-rates/admin-rates.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { ProgFileInputComponent } from './prog-file-input/prog-file-input.compon
     AdminDocsComponent,
     ProgSelectComponent,
     DocumentComponent,
-    ProgFileInputComponent
+    ProgFileInputComponent,
+    AdminContactsComponent,
+    AdminRatesComponent
   ],
   imports: [
     BrowserModule,
