@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WaterService } from '../services/water.service';
 import { Contact } from '../services/models';
 import { AddService } from '../services/add.service';
-import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-contacts',
@@ -74,7 +74,14 @@ export class AdminContactsComponent extends AddService implements OnInit {
 
   addContact(formControlName: string){
     const formControl = (<FormGroup>this.addForm.get(formControlName));
-    formControl.addControl((Object.keys(formControl.controls).length).toString(), new FormControl(null,[Validators.required]))
+    const validators:ValidatorFn[] = [Validators.required];
+    if(formControlName == 'Tel'){
+      validators.push(Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/));
+    }
+    if(formControlName == 'Email'){
+      validators.push(Validators.email);
+    }
+    formControl.addControl((Object.keys(formControl.controls).length).toString(), new FormControl(null, validators))
   }
 
   getFormControls(form: string){
