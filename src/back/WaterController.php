@@ -77,6 +77,17 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateQuestion($_GET['Login'], $_GET['Password'], $b));
             break;
+            
+        case 'add-contact':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->addContact($_GET['Login'], $_GET['Password'], $b));
+            break;
+            
+        case 'update-contact':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updateContact($_GET['Login'], $_GET['Password'], $b));
+            break;
+            
         case 'upload-file':
             $inp = json_decode(file_get_contents('php://input'), true);
             echo json_encode(array($ctxt->uploadFile($_GET['Login'], $_GET['Password'], $_GET['Id'], $_FILES, $_GET['Type'])));

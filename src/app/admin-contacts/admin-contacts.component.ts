@@ -26,7 +26,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
       Head:[null, Validators.required],
       Time:[null, Validators.required],
       Boss:[null],
-      Tel: new FormGroup({
+      Phone: new FormGroup({
         0: new FormControl(null, [Validators.required, Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)])
       }),
       Address: new FormGroup({
@@ -49,16 +49,16 @@ export class AdminContactsComponent extends AddService implements OnInit {
       Head: this.item.Head, 
       Time: this.item.Time, 
       Boss: this.item.Boss,
-      Tel: new FormGroup({}),
+      Phone: new FormGroup({}),
       Address: new FormGroup({}),
       Email: new FormGroup({})
     });
 
-    const tels = (<FormGroup>this.addForm.get('Tel'));
+    const tels = (<FormGroup>this.addForm.get('Phone'));
     const addresses = (<FormGroup>this.addForm.get('Address'));
     const emails = (<FormGroup>this.addForm.get('Email'));
 
-    this.item.Tel.forEach((t,i) => {
+    this.item.Phone.forEach((t,i) => {
       tels.addControl(i, new FormControl(t,[Validators.required, Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)]))
       console.log(tels)
     })
@@ -75,7 +75,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
   addContact(formControlName: string){
     const formControl = (<FormGroup>this.addForm.get(formControlName));
     const validators:ValidatorFn[] = [Validators.required];
-    if(formControlName == 'Tel'){
+    if(formControlName == 'Phone'){
       validators.push(Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/));
     }
     if(formControlName == 'Email'){
@@ -108,7 +108,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
 
   saveContact(){
     let contact = this.addForm.value;
-    contact.Tel = Object.values(contact.Tel);
+    contact.Phone = Object.values(contact.Phone);
     contact.Address = Object.values(contact.Address);
     contact.Email = Object.values(contact.Email);
     this._ws.addContact(contact).subscribe(id => {

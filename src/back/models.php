@@ -9,7 +9,7 @@ class Contact{
     public $Head;
     public $Time;
     public $Boss;
-    public $Tel;
+    public $Phone;
     public $Address;
     public $Email;
 }

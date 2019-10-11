@@ -206,7 +206,7 @@ class DataBase {
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Contact');
         $contacts =  [];
         while($r = $sth->fetch()){
-            $r->Tel = $this->getContact($r->Id, 'phone');
+            $r->Phone = $this->getContact($r->Id, 'phone');
             $r->Email = $this->getContact($r->Id, 'email');
             $r->Address = $this->getContact($r->Id, 'address');
             $contacts[] = $r;
@@ -228,7 +228,7 @@ class DataBase {
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Contact');
         $contacts =  [];
         while($r = $sth->fetch()){
-            $r->Tel = $this->getContact($r->Id, 'phone');
+            $r->Phone = $this->getContact($r->Id, 'phone');
             $r->Email = $this->getContact($r->Id, 'email');
             $r->Address = $this->getContact($r->Id, 'address');
             $contacts[] = $r;
@@ -309,6 +309,64 @@ class DataBase {
                 $s->execute($res[1]);
             }
             return $this->db->lastInsertId();
+        }else{
+            return null;
+        }
+    }
+    
+    public function addContact($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $phones = $new['Phone'];
+            $address = $new['Address'];
+            $emails = $new['Email'];
+            unset($new['Phone']);
+            unset($new['Address']);
+            unset($new['Email']);
+            $res = $this->genInsertQuery($new,"contacts");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            $id = $this->db->lastInsertId();
+            for ($i = 0; $i < count($phones); $i++) {
+                $c = array(
+                    'ContactId'=> $id,
+                    'Type'=> 'phone',
+                    'Value'=> $phones[$i]
+                    );
+                $res = $this->genInsertQuery($c,"contactvalues");
+                $s = $this->db->prepare($res[0]);
+                if($res[1][0]!=null){
+                    $s->execute($res[1]);
+                }
+            }
+            for ($i = 0; $i < count($emails); $i++) {
+                $c = array(
+                    'ContactId'=> $id,
+                    'Type'=> 'email',
+                    'Value'=> $emails[$i]
+                    );
+                $res = $this->genInsertQuery($c,"contactvalues");
+                $s = $this->db->prepare($res[0]);
+                if($res[1][0]!=null){
+                    $s->execute($res[1]);
+                }
+            }
+            for ($i = 0; $i < count($address); $i++) {
+                $c = array(
+                    'ContactId'=> $id,
+                    'Type'=> 'address',
+                    'Value'=> $address[$i]
+                    );
+                $res = $this->genInsertQuery($c,"contactvalues");
+                $s = $this->db->prepare($res[0]);
+                if($res[1][0]!=null){
+                    $s->execute($res[1]);
+                }
+            }
+            
+            return $id;
+            
         }else{
             return null;
         }

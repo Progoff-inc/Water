@@ -20,10 +20,10 @@
       <div class="image">
         <div class="con">
           <div *ngIf='con.Head' class="head">{{con.Head}}</div>
-          <div *ngIf='con.Tel'>
+          <div *ngIf='con.Phone'>
             <div><i class="fas fa-phone"></i></div>
             <div>
-              <div *ngFor="let tel of con.Tel, let i=index"><a href="{{getTel(tel)}}">{{tel}}</a></div>
+              <div *ngFor="let tel of con.Phone, let i=index"><a href="{{getTel(tel)}}">{{tel}}</a></div>
             </div>
           </div>
           <div *ngIf="con.Email && con.Email.length>0">

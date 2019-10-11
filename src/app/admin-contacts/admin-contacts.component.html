@@ -18,13 +18,13 @@
       <label [ngClass]="{'text-danger':(submitted && f.Boss.errors)}">Руководитель</label>
       <input [ngClass]="{'border-danger':(submitted && f.Boss.errors)}" formControlName="Boss" class="form-control" type="text" >
     </div>
-    <div class="form-group-container" formGroupName="Tel">
-      <label [ngClass]="{'text-danger':(submitted && addForm.get('Tel').invalid)}">Телефоны</label>
-      <span *ngIf="addForm.get('Tel').valid" class="ml-2 btn-link" (click)="addContact('Tel')">Добавить</span>
-      <div class="form-group" *ngFor="let control of getFormControls('Tel'); let i = index">
+    <div class="form-group-container" formGroupName="Phone">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Phone').invalid)}">Телефоны</label>
+      <span *ngIf="addForm.get('Phone').valid" class="ml-2 btn-link" (click)="addContact('Phone')">Добавить</span>
+      <div class="form-group" *ngFor="let control of getFormControls('Phone'); let i = index">
         <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
         [formControlName]="i" placeholder="Введите телефон" class="form-control" type="text" >
-        <span (click)="clearContact(i, 'Tel')" class="remove">&times;</span>
+        <span (click)="clearContact(i, 'Phone')" class="remove">&times;</span>
       </div>
     </div>
     <div class="form-group-container" formGroupName="Address">
