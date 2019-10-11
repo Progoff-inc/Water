@@ -11,7 +11,7 @@ export class AddService{
     };
     @Input() items:any;
     public update = {};
-    public _addForm:FormGroup;
+    private _addForm:FormGroup;
     public submitted = false;
     public files = {};
     constructor(){

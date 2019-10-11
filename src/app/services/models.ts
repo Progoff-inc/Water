@@ -49,7 +49,7 @@ export class Contact{
 }
 export class Price{
     Id:number;
-    RateId:number;
+    PriceTypeId:number;
     DateStart:string;
     DateFinish:string;
     Price:number;
