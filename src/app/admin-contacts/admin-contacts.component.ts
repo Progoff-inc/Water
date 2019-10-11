@@ -25,34 +25,96 @@ export class AdminContactsComponent extends AddService implements OnInit {
     this.addForm = this._fb.group({
       Head:[null, Validators.required],
       Time:[null, Validators.required],
-      Boss:[null, Validators.required],
-      Tel: new FormGroup({}),
-      Address: new FormGroup({}),
-      Email: new FormGroup({})
+      Boss:[null],
+      Tel: new FormGroup({
+        0: new FormControl(null, [Validators.required, Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)])
+      }),
+      Address: new FormGroup({
+        0: new FormControl(null, Validators.required)
+      }),
+      Email: new FormGroup({
+        0: new FormControl(null, [Validators.required, Validators.email])
+      })
     })
+
+    console.log(this.addForm)
   }
 
 
   public setForm(id): void{
-    console.log(id)
+    this.submitted = true;
     this.item = this.contacts.find(c => c.Id == id);
-    console.log(this.item)
-    this.addForm.patchValue({Head: this.item.Head, Time: this.item.Time, Boss: this.item.Boss});
-    let tels:FormGroup = this.addForm.get('Tel') as FormGroup;
+    
+    this.addForm = this._fb.group({
+      Head: this.item.Head, 
+      Time: this.item.Time, 
+      Boss: this.item.Boss,
+      Tel: new FormGroup({}),
+      Address: new FormGroup({}),
+      Email: new FormGroup({})
+    });
+
+    const tels = (<FormGroup>this.addForm.get('Tel'));
+    const addresses = (<FormGroup>this.addForm.get('Address'));
+    const emails = (<FormGroup>this.addForm.get('Email'));
+
     this.item.Tel.forEach((t,i) => {
       tels.addControl(i, new FormControl(t,[Validators.required, Validators.pattern(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)]))
+      console.log(tels)
     })
-    let addresses:FormGroup = this.addForm.get('Address') as FormGroup;
     this.item.Address.forEach((t,i) => {
-      console.log(111)
       addresses.addControl(i, new FormControl(t,[Validators.required]))
     })
-    let emails:FormGroup = this.addForm.get('Email') as FormGroup;
     this.item.Email.forEach((t,i) => {
       emails.addControl(i, new FormControl(t,[Validators.required, Validators.email]))
     })
-
     console.log(this.addForm)
+    this.update = {};
+  }
+
+  addContact(formControlName: string){
+    const formControl = (<FormGroup>this.addForm.get(formControlName));
+    formControl.addControl((Object.keys(formControl.controls).length).toString(), new FormControl(null,[Validators.required]))
+  }
+
+  getFormControls(form: string){
+    return Object.values((<FormGroup>this.addForm.get(form)).controls)
+  }
+
+  clearContact(formControlName: string, formName: string){
+    const form = (<FormGroup>this.addForm.get(formName));
+    form.removeControl(formControlName.toString());
+    
+  }
+
+  save(){
+    this.submitted = true;
+    if(this.addForm.invalid){
+      return;
+    }
+    if(this.item){
+      this.updateContact();
+    }else{
+      this.saveContact();
+    }
+  }
+
+  saveContact(){
+    let contact = this.addForm.value;
+    contact.Tel = Object.values(contact.Tel);
+    contact.Address = Object.values(contact.Address);
+    contact.Email = Object.values(contact.Email);
+    this._ws.addContact(contact).subscribe(id => {
+      this.items.push({Id:id, ...contact});
+      this.addForm.reset()
+    })
+  }
+
+  updateContact(){
+    this.update['Id']=this.item.Id;
+    this._ws.updateContact(this.update).subscribe(id => {
+      this.item = JSON.parse(JSON.stringify(this.update));
+    })
   }
 
 }

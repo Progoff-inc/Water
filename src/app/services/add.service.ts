@@ -31,11 +31,21 @@ export class AddService{
                 
                 if(this.item){
                     if(this.item[controlName]!=c){
-                        this.update[controlName]=c;
+                        if(this.addForm.controls[controlName] instanceof FormGroup){
+                            if(JSON.stringify(this.item[controlName]) !== JSON.stringify(Object.values(c))){
+                                this.update[controlName]=Object.values(c);
+                            }else{
+                                delete this.update[controlName]; 
+                            }
+                        }else{
+                            this.update[controlName]=c;
+                        }
+                        
                     }else{
                         delete this.update[controlName];
                     }
                 }
+                console.log(this.update);
             })
         })
     }

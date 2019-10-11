@@ -5,5 +5,46 @@
     <label>Выберете контакт</label>
     <prog-select [items]="contacts" [view]="'Head'" (change)="setForm($event)"></prog-select>
   </div>
-  
+  <form [formGroup]="addForm" class="border border-primary p-5">  
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.Head.errors)}">Заголовок</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Head.errors)}" formControlName="Head" class="form-control" type="text" >
+    </div>
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.Time.errors)}">Время работы</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Time.errors)}" formControlName="Time" class="form-control" type="text" >
+    </div>
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.Boss.errors)}">Руководитель</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Boss.errors)}" formControlName="Boss" class="form-control" type="text" >
+    </div>
+    <div class="form-group-container" formGroupName="Tel">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Tel').invalid)}">Телефоны</label>
+      <span *ngIf="addForm.get('Tel').valid" class="ml-2 btn-link" (click)="addContact('Tel')">Добавить</span>
+      <div class="form-group" *ngFor="let control of getFormControls('Tel'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        [formControlName]="i" placeholder="Введите телефон" class="form-control" type="text" >
+        <span (click)="clearContact(i, 'Tel')" class="remove">&times;</span>
+      </div>
+    </div>
+    <div class="form-group-container" formGroupName="Address">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Address').invalid)}">Адреса</label>
+      <span *ngIf="addForm.get('Address').valid" class="ml-2 btn-link" (click)="addContact('Address')">Добавить</span>
+      <div class="form-group" *ngFor="let control of getFormControls('Address'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        [formControlName]="i" placeholder="Введите адрес" class="form-control" type="text" >
+        <span (click)="clearContact(i, 'Address')" class="remove">&times;</span>
+      </div>
+    </div>
+    <div class="form-group-container" formGroupName="Email">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Email').invalid)}">Электронные почты</label>
+      <span *ngIf="addForm.get('Email').valid" class="ml-2 btn-link" (click)="addContact('Email')">Добавить</span>
+      <div class="form-group" *ngFor="let control of getFormControls('Email'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        [formControlName]="i" placeholder="Введите email" class="form-control" type="text" >
+        <span (click)="clearContact(i, 'Email')" class="remove">&times;</span>
+      </div>
+    </div>
+    <button [disabled]="addForm.invalid" class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</button>
+  </form>
 </div>
