@@ -1,14 +1,21 @@
-<div class="section" *ngFor="let rate of items">
-  <div class="section-header" (click)="show(rate.Id)"><span>{{rate.Search}}</span><i class="fas fa-caret-down"></i></div>
-  <div class="section-body" *ngIf="this.shows[rate.Id]">
-    <ul class="squared-list space-li" style="padding-left:20px;">
-      <li><span>Подготовки разрешения на подключение жилого дома в частном секторе к сетям ВиВ;</span></li>
-      <li><span>Предоставления информации о плате за подключение к сетям ВиВ (для строящегося, реконструируемого с увеличением нагрузок или построенного, но ранее не подключенного объекта);</span></li>
-      <li><span>Заключения договора на подключение к сетям ВиВ (для строящегося, реконструируемого с увеличением нагрузок или построенного, но ранее не подключенного объекта);</span></li>
-      <li><span>Подготовки технических условий на подключение к сетям ВиВ в городской/ благоустроенной застройке (для реконструируемого без увеличения нагрузок объекта);</span></li>
-      <li><span>Согласования проекта/проекта производства работ;</span></li>
-      <li><span>Согласования размещения объекта.</span></li>
-    </ul>
-    <p><i>Вам необходимо обратиться в <b class="text-primary" style="font-style: normal;"><a routerLink="/contacts">ПТО</a></b>(производственно-технический отдел) МУП «Водоканал»</i></p>
+<div [formGroup]="addForm" class="section" *ngFor="let rateFormName of getForms()">
+  <h4 class="page-min-head">Добавление и редактирование тарифов</h4>
+  <div class="section-header" (click)="show(rateFormName)"><span>{{rateFormName}}</span><i class="fas fa-caret-down"></i></div>
+  <div [formArrayName]="rateFormName" class="section-body" *ngIf="this.shows[rateFormName]">
+    <div class="form-group-container" 
+    *ngFor="let priceForm of addForm.get(rateFormName).controls; let i = index" [formGroupName]="i">
+      <div class="form-group">
+        <label>Дата начала</label>
+        <p-calendar [locale]="ru" formControlName="DateStart" dateFormat="dd.mm.yy"></p-calendar>
+      </div>
+      <div class="form-group">
+        <label>Дата кончания</label>
+        <p-calendar [locale]="ru" formControlName="DateFinish" dateFormat="dd.mm.yy"></p-calendar>
+      </div>
+      <div class="form-group">
+        <label>Цена</label>
+        <input formControlName="Price" class="form-control" type="number" >
+      </div>
+    </div>
   </div>
 </div>

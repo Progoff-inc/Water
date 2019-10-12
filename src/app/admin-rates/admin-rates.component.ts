@@ -12,6 +12,18 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 })
 export class AdminRatesComponent extends AddService implements OnInit {
   shows:any = { };
+  ru = {
+    firstDayOfWeek: 1,
+    dayNames: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+    dayNamesShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    monthNames: [ "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь" ],
+    monthNamesShort: [ "Янв", "Фев", "Мар", "Апр", "Май", "Июн","Июл", "Авг", "Сен", "Окт", "Ноя", "Дек" ],
+    today: 'Сегодня',
+    clear: 'Очистить',
+    dateFormat: 'dd.mm.yyyy',
+    weekHeader: 'Нед'
+};
   constructor( private _ws: WaterService) { 
     super();
   }
@@ -23,6 +35,13 @@ export class AdminRatesComponent extends AddService implements OnInit {
       this._ws.getRates(ClientTypes.Business)
     ]).subscribe(([clientRates, businessRates]) => {
       this.items = [...clientRates, ...businessRates];
+      this.items.forEach(rate => {
+        rate.Prices.forEach(p => {
+          p.DateStart = new Date(p.DateStart);
+          p.DateFinish = new Date(p.DateFinish);
+        })
+        
+      })
       this._initForm(this.items);
     })
     
@@ -34,15 +53,20 @@ export class AdminRatesComponent extends AddService implements OnInit {
       r.Prices.forEach((p:Price) => {
         priceForm.push(new FormGroup({
           DateStart: new FormControl(p.DateStart, [Validators.required]),
-          FinishStart: new FormControl(p.DateFinish, [Validators.required]),
+          DateFinish: new FormControl(p.DateFinish, [Validators.required]),
           Price: new FormControl(p.Price, [Validators.required])
         }))
       })
       this.addForm.addControl(`${r.Name}-${r.Type}`, priceForm);
     })
-    console.log(this.addForm)
-    console.log(this.items)
-    console.log(this.addForm.value)
+  }
+
+  getForms(){
+    return Object.keys(this.addForm.controls);
+  }
+
+  getRatePrices(form: string){
+    return <FormArray>this.addForm.get(form)
   }
 
   show(s){
