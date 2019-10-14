@@ -1,21 +1,8 @@
-<div [formGroup]="addForm" class="section" *ngFor="let rateFormName of getForms()">
-  <h4 class="page-min-head">Добавление и редактирование тарифов</h4>
-  <div class="section-header" (click)="show(rateFormName)"><span>{{rateFormName}}</span><i class="fas fa-caret-down"></i></div>
-  <div [formArrayName]="rateFormName" class="section-body" *ngIf="this.shows[rateFormName]">
-    <div class="form-group-container" 
-    *ngFor="let priceForm of addForm.get(rateFormName).controls; let i = index" [formGroupName]="i">
-      <div class="form-group">
-        <label>Дата начала</label>
-        <p-calendar [locale]="ru" formControlName="DateStart" dateFormat="dd.mm.yy"></p-calendar>
-      </div>
-      <div class="form-group">
-        <label>Дата кончания</label>
-        <p-calendar [locale]="ru" formControlName="DateFinish" dateFormat="dd.mm.yy"></p-calendar>
-      </div>
-      <div class="form-group">
-        <label>Цена</label>
-        <input formControlName="Price" class="form-control" type="number" >
-      </div>
-    </div>
+<h4 class="page-min-head">Добавление и редактирование тарифов</h4>
+<div class="section" *ngFor="let rateView of rates">
+  <div class="section-header" (click)="show(rateView.rateFormName)"><span>{{rateView.rateFormName | rateName}}</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows[rateView.rateFormName]">
+      <admin-rate-form [rate]="rateView.rate"></admin-rate-form>
   </div>
 </div>
+

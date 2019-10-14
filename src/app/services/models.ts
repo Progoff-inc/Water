@@ -50,8 +50,8 @@ export class Contact{
 export class Price{
     Id:number;
     PriceTypeId:number;
-    DateStart:string;
-    DateFinish:string;
+    DateStart:Date;
+    DateFinish:Date;
     Price:number;
 }
 

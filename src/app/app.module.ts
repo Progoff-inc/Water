@@ -58,6 +58,8 @@ import { AdminRatesComponent } from './admin-rates/admin-rates.component';
 
 import {CalendarModule} from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AdminRateFormComponent } from './admin-rate-form/admin-rate-form.component';
+import { RatePipe } from './services/pipes/rate.pipe';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     DocumentComponent,
     ProgFileInputComponent,
     AdminContactsComponent,
-    AdminRatesComponent
+    AdminRatesComponent,
+    AdminRateFormComponent,
+    RatePipe
   ],
   imports: [
     BrowserModule,
