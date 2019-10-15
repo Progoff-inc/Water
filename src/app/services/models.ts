@@ -49,9 +49,9 @@ export class Contact{
 }
 export class Price{
     Id:number;
-    RateId:number;
-    DateStart:string;
-    DateFinish:string;
+    PriceTypeId:number;
+    DateStart:Date;
+    DateFinish:Date;
     Price:number;
 }
 

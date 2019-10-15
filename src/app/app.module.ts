@@ -56,6 +56,11 @@ import { ProgFileInputComponent } from './prog-file-input/prog-file-input.compon
 import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
 import { AdminRatesComponent } from './admin-rates/admin-rates.component';
 
+import {CalendarModule} from 'primeng/calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AdminRateFormComponent } from './admin-rate-form/admin-rate-form.component';
+import { RatePipe } from './services/pipes/rate.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +98,9 @@ import { AdminRatesComponent } from './admin-rates/admin-rates.component';
     DocumentComponent,
     ProgFileInputComponent,
     AdminContactsComponent,
-    AdminRatesComponent
+    AdminRatesComponent,
+    AdminRateFormComponent,
+    RatePipe
   ],
   imports: [
     BrowserModule,
@@ -102,7 +109,9 @@ import { AdminRatesComponent } from './admin-rates/admin-rates.component';
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    CalendarModule,
+    BrowserAnimationsModule
   ],
   providers: [FormBuilder, HttpClient, ModalService, BsModalService, LoadService, WaterService, UserService],
   bootstrap: [AppComponent]

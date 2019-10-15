@@ -1,0 +1,59 @@
+<form [formGroup]="addForm">
+  <div class="form-group-container">
+    <div class="form-group">
+      <label>Дата начала</label>
+      <p-calendar [locale]="ru" [yearRange]="years[0]+':'+years[years.length-1]"
+      formControlName="DateStart" 
+      dateFormat="dd.mm.yy"
+      [monthNavigator]="true"
+      [yearNavigator]="true"></p-calendar>
+    </div>
+    <div class="form-group">
+      <label>Дата окончания</label>
+      <p-calendar [locale]="ru" [yearRange]="years[0]+':'+years[years.length-1]"
+      formControlName="DateFinish" 
+      dateFormat="dd.mm.yy"
+      
+      [monthNavigator]="true"
+      [yearNavigator]="true"></p-calendar>
+    </div>
+    <div class="form-group">
+      <label>Цена</label>
+      <input type="number" formControlName="Price" class="form-control">
+    </div>
+  </div>
+  
+</form>
+<div class="d-flex justify-content-between">
+    <div>
+      <button class="btn btn-primary" [disabled]="addForm.invalid || choosedPriceId && !upd_length" (click)="save()">{{choosedPriceId?'Сохранить':'Добавить'}}</button>
+      <button class="btn btn-danger mx-1" *ngIf="choosedPriceId" (click)="remove(choosedPriceId)">Удалить</button>
+      <button class="btn btn-link" (click)="clearForm()">Очистить</button>
+    </div>
+    <div>
+      <select class="form-control" [formControl]="yearControl">
+        <option [value]="y" *ngFor="let y of years">{{y}}</option>
+      </select>
+    </div>
+    
+  </div>
+  <hr>
+  <table class="mt-2 prices" *ngIf="prices?.length;else noprices">
+    <thead>
+      <td>Дата начала</td>
+      <td>Дата окончания</td>
+      <td>Цена</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of prices" [class.active]="p.Id==choosedPriceId" (click)="choosePrice(p.Id)">
+        <td>{{p.DateStart | date:'dd.MM.yyyy'}}</td>
+        <td>{{p.DateFinish | date:'dd.MM.yyyy'}}</td>
+        <td>{{p.Price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noprices>
+    <div class="d-flex justify-content-center py-3 text-muted">
+      Тарифы отсутствуют
+    </div>
+  </ng-template>

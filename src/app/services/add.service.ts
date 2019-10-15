@@ -11,11 +11,12 @@ export class AddService{
     };
     @Input() items:any;
     public update = {};
-    public _addForm:FormGroup;
+    private _addForm:FormGroup;
     public submitted = false;
     public files = {};
-    constructor(){
-
+    private _checkUpdate;
+    constructor(checkUpdate: boolean = true){
+        this._checkUpdate = checkUpdate;
     }
     public get addForm(){
         return this._addForm;
@@ -26,9 +27,14 @@ export class AddService{
     }
     public set addForm(form:FormGroup){
         this._addForm = form;
+        if(this._checkUpdate){
+            this.setSubscriptions();
+        }
+        
+    }
+    setSubscriptions(){
         Object.keys(this.addForm.controls).forEach(controlName => {
             this._addForm.controls[controlName].valueChanges.subscribe(c => {
-                
                 if(this.item){
                     if(this.item[controlName]!=c){
                         if(this.addForm.controls[controlName] instanceof FormGroup){
@@ -45,7 +51,6 @@ export class AddService{
                         delete this.update[controlName];
                     }
                 }
-                console.log(this.update);
             })
         })
     }
@@ -86,7 +91,22 @@ export class AddService{
         return out;
     }
 
+    public _formatDate(date: Date): any {
+
+        let formatted = date ? ((date.getFullYear()) + '-' + (date.getMonth()+1) + '-' + date.getDate()) : null;
+      
+        return formatted;
+      
+      }
+
+    /**
+     * Form controls
+     */
     get f() { return this.addForm.controls; }
+
+    /**
+     * Form values
+     */
     get v() { return this.addForm.value; }
     get upd_length() { return Object.keys(this.update).length }
 }

@@ -78,6 +78,10 @@ if(isset($_GET['Key']))
             echo json_encode($ctxt->updateQuestion($_GET['Login'], $_GET['Password'], $b));
             break;
             
+        case 'remove-item': 
+            echo json_encode($ctxt->removeItem($_GET['Login'], $_GET['Password'], $_GET['Id'], $_GET['Table']));
+            break;
+            
         case 'add-contact':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addContact($_GET['Login'], $_GET['Password'], $b));
@@ -86,6 +90,15 @@ if(isset($_GET['Key']))
         case 'update-contact':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateContact($_GET['Login'], $_GET['Password'], $b));
+            break;
+        case 'add-price':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->addPrice($_GET['Login'], $_GET['Password'], $b));
+            break;
+            
+        case 'update-price':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updatePrice($_GET['Login'], $_GET['Password'], $b));
             break;
             
         case 'upload-file':

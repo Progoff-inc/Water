@@ -84,6 +84,14 @@ export class WaterService{
       return this.http.post<number>(this.baseUrl + 'Key=update-news&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), news);
     }
 
+    addPrice(price){
+      return this.http.post<number>(this.baseUrl + 'Key=add-price&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), price);
+    }
+
+    updatePrice(price){
+      return this.http.post<number>(this.baseUrl + 'Key=update-price&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), price);
+    }
+
     updateDoc(doc){
       return this.http.post<number>(this.baseUrl + 'Key=update-doc&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), doc);
     }
@@ -110,6 +118,10 @@ export class WaterService{
 
     removeQuestion(id){
       return this.http.delete<number>(this.baseUrl + 'Key=remove-question&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id);
+    }
+
+    removeItem(id, table){
+      return this.http.delete<number>(this.baseUrl + 'Key=remove-item&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password)+'&Id='+id+'&Table='+table);
     }
     
 }
