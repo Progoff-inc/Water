@@ -314,6 +314,19 @@ class DataBase {
         }
     }
     
+    public function addPrice($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $res = $this->genInsertQuery($new,"pricevalues");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            return $this->db->lastInsertId();
+        }else{
+            return null;
+        }
+    }
+    
     public function addContact($l, $p, $new){
         if($this->checkAdmin($l, $p)){
             $phones = $new['Phone'];
@@ -429,6 +442,16 @@ class DataBase {
         $s->execute(array($id));
         return $s->fetch();
     }
+    
+    public function removeItem($l, $p, $id, $table){
+        if($this->checkAdmin($l, $p)){
+            $s = $this->db->prepare("DELETE FROM $table WHERE Id=?");
+            $s->execute(array($id));
+            return true;
+        }else{
+            return null;
+        }
+    }
 
     public function updateProp($l, $p, $id, $v){
         if($this->checkAdmin($l, $p)){
@@ -449,6 +472,19 @@ class DataBase {
             $s = $this->db->prepare($a[0]);
             $s->execute($a[1]);
             return $a;
+        }else{
+            return false;
+        }
+    }
+    
+    public function updatePrice($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "pricevalues", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return $id;
         }else{
             return false;
         }

@@ -91,6 +91,14 @@ export class AddService{
         return out;
     }
 
+    public _formatDate(date: Date): any {
+
+        let formatted = date ? ((date.getFullYear()) + '-' + (date.getMonth()+1) + '-' + date.getDate()) : null;
+      
+        return formatted;
+      
+      }
+
     /**
      * Form controls
      */
