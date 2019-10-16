@@ -213,6 +213,20 @@ class DataBase {
         }
         return $contacts;
     }
+    
+    public function getVacancies(){
+        $sth = $this->db->query("SELECT * FROM vacancies");
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Vacancy');
+        $vacancies =  [];
+        while($r = $sth->fetch()){
+            $r->Duties = $this->getVacancy($r->Id, 'duty');
+            $r->Requirements = $this->getVacancy($r->Id, 'requirement');
+            $r->Conditions = $this->getVacancy($r->Id, 'condition');
+            $vacancies[] = $r;
+        }
+        return $vacancies;
+    }
+    
     public function search($str){
         $search = [];
         $sth = $this->db->query("SELECT * FROM docs WHERE LOWER(Name) LIKE '%".strtolower($str)."%'");
@@ -236,7 +250,7 @@ class DataBase {
         $search[] = $contacts;
         return $search;
     }
-    public function getContact($id, $type){
+    private function getContact($id, $type){
         $sth = $this->db->prepare("SELECT * FROM contactvalues WHERE ContactId=? and Type=?");
         $sth->execute(array($id, $type));
         $sth->setFetchMode(PDO::FETCH_CLASS, 'ContactValue');
@@ -245,6 +259,13 @@ class DataBase {
             $contacts[] = $r[3];
         }
         return $contacts;
+    }
+    
+    private function getVacancy($id, $type){
+        $sth = $this->db->prepare("SELECT * FROM vacancyvalues WHERE VacancyId=? and Type=?");
+        $sth->execute(array($id, $type));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'VacancyValue');
+        return $sth->fetchAll();
     }
     
     public function getRates($type){

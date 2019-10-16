@@ -60,6 +60,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AdminRateFormComponent } from './admin-rate-form/admin-rate-form.component';
 import { RatePipe } from './services/pipes/rate.pipe';
+import { VacanciesComponent } from './vacancies/vacancies.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { RatePipe } from './services/pipes/rate.pipe';
     AdminContactsComponent,
     AdminRatesComponent,
     AdminRateFormComponent,
-    RatePipe
+    RatePipe,
+    VacanciesComponent
   ],
   imports: [
     BrowserModule,

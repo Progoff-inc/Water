@@ -23,6 +23,7 @@ import { FaqComponent } from './faq/faq.component';
 import { AdminDocsComponent } from './admin-docs/admin-docs.component';
 import { AdminRatesComponent } from './admin-rates/admin-rates.component';
 import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -64,7 +65,8 @@ const routes: Routes = [
   {path:'sign-in', component:SignInComponent},
   {path:'admin', component:AdminComponent, children: adminRoutes},
   {path:'search', component:SearchComponent},
-  {path:'faq', component:FaqComponent}
+  {path:'faq', component:FaqComponent},
+  {path:'vacancies', component:VacanciesComponent}
   // {path:'**', redirectTo:''}
 ];
 
