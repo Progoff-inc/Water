@@ -89,3 +89,23 @@ export enum ContactTypes{
     Phone = "phone",
     Email = "email"
 }
+
+export enum VacancyType{
+
+}
+
+export interface Vacancy{
+    Id: number;
+    Name: string;
+    WorkTime: string;
+    Salary: string;
+    Duties: VacancyItem[];
+    Requirements: VacancyItem[];
+    Conditions: VacancyItem[];
+}
+
+export interface VacancyItem{
+    Id: number;
+    Name: string;
+    Type: VacancyType;
+}

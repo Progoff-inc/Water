@@ -3,11 +3,38 @@
     <p class="phone"><i>Телефон отдела кадров:</i> <a class="ml-1" href="tel:+74963438782"><b>+7(496)343-87-82</b></a></p>
     <div class="flex-container">
       <div class="item" *ngFor="let vac of vacancies">
-       <div class="header">Оператор котельной</div> 
+       <div class="header">{{vac.Name}}</div> 
        <div class="content">
          <div class="line">
-           <p><b class="text-danger mr-1">График работы:</b>сменный. Рабочая смена 12 часов. Предусмотрены ночтые смены.
+           <p><b class="text-danger mr-1">График работы:</b>{{vac.WorkTime}}</p>
          </div>
+         <div class="line">
+          <p><b class="text-danger mr-1">Заработная плата:</b>{{vac.Salary}}</p>
+        </div>
+        <div class="line">
+          <p><b class="text-danger mr-1">График работы:</b>{{vac.WorkTime}}</p>
+        </div>
+        <span class="vac-toggle" (click)="toggle(vac.Id)">Подробнее</span>
+        <div class="info" *ngIf="show[vac.Id]">
+          <div class="line">
+            <p><b class="text-danger">Обязанности:</b></p>
+            <ul>
+              <li *ngFor="let duty of vac.Duties">{{duty.Name}}</li>
+            </ul>
+          </div>
+          <div class="line">
+            <p><b class="text-danger">Требования:</b></p>
+            <ul>
+              <li *ngFor="let rec of vac.Requirements">{{rec.Name}}</li>
+            </ul>
+          </div>
+          <div class="line">
+            <p><b class="text-danger">Условия:</b></p>
+            <ul>
+              <li *ngFor="let cond of vac.Conditions">{{cond.Name}}</li>
+            </ul>
+          </div>
+        </div>
        </div>
       </div>
     </div>
