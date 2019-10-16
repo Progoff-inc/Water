@@ -24,6 +24,10 @@ if(isset($_GET['Key']))
         case 'get-contacts':
             echo json_encode($ctxt->getContacts());
             break;
+            
+        case 'get-vacancies':
+            echo json_encode($ctxt->getVacancies());
+            break;
         case 'get-important-docs':
             echo json_encode($ctxt->getImportantDocs());
             break;

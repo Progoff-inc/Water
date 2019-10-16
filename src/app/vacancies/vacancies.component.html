@@ -14,8 +14,8 @@
         <div class="line">
           <p><b class="text-danger mr-1">График работы:</b>{{vac.WorkTime}}</p>
         </div>
-        <span class="vac-toggle" (click)="toggle(vac.Id)">Подробнее</span>
-        <div class="info" *ngIf="show[vac.Id]">
+        <span class="vac-toggle" (click)="toggle(vac.Id)">Подробнее <i class="fas fa-caret-{{shows[vac.Id]?'right':'down'}} ml-2"></i></span>
+        <div class="info" *ngIf="shows[vac.Id]">
           <div class="line">
             <p><b class="text-danger">Обязанности:</b></p>
             <ul>

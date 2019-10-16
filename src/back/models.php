@@ -13,6 +13,25 @@ class Contact{
     public $Address;
     public $Email;
 }
+
+class Vacancy{
+    public $Id;
+    public $Name;
+    public $WorkTime;
+    public $Salary;
+    public $Duties;
+    public $Requirements;
+    public $Conditions;
+    
+}
+
+class VacancyValue{
+    public $Id;
+    public $VacancyId;
+    public $Name;
+    public $Type;
+    
+}
 class App extends BaseEntity{
     public $Phone;
     public $Email;
