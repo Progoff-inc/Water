@@ -61,6 +61,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AdminRateFormComponent } from './admin-rate-form/admin-rate-form.component';
 import { RatePipe } from './services/pipes/rate.pipe';
 import { VacanciesComponent } from './vacancies/vacancies.component';
+import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
     AdminRatesComponent,
     AdminRateFormComponent,
     RatePipe,
-    VacanciesComponent
+    VacanciesComponent,
+    AdminVacanciesComponent
   ],
   imports: [
     BrowserModule,

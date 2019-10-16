@@ -1,0 +1,50 @@
+
+<div class="container" *ngIf="items">
+  <h4 class="page-min-head">Добавление и редактирование контактов</h4>
+  <div class="form-group">
+    <label>Выберете вакансию</label>
+    <prog-select [items]="items" (change)="setForm($event)"></prog-select>
+  </div>
+  <form [formGroup]="addForm" class="border border-primary p-5">  
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.Name.errors)}">Название вакансии</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" class="form-control" type="text" >
+    </div>
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.WorkTime.errors)}">Время работы</label>
+      <input [ngClass]="{'border-danger':(submitted && f.WorkTime.errors)}" formControlName="WorkTime" class="form-control" type="text" >
+    </div>
+    <div class="form-group">
+      <label [ngClass]="{'text-danger':(submitted && f.Salary.errors)}">Заработная плата</label>
+      <input [ngClass]="{'border-danger':(submitted && f.Salary.errors)}" formControlName="Salary" class="form-control" type="text" >
+    </div>
+    <div class="form-group-container" formArrayName="Duties">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Duties').invalid)}">Обязанности</label>
+      <span *ngIf="addForm.get('Duties').valid" class="ml-2 btn-link" (click)="addVacancy('Duties', type.Duty)">Добавить</span>
+      <div [formGroupName]="i" class="form-group" *ngFor="let control of getFormControls('Duties'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        formControlName="Name" placeholder="Введите обязанность" class="form-control" type="text" >
+        <span (click)="clearVacancy(i, 'Duties')" class="remove">&times;</span>
+      </div>
+    </div>
+    <div class="form-group-container" formArrayName="Requirements">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Requirements').invalid)}">Обязанности</label>
+      <span *ngIf="addForm.get('Requirements').valid" class="ml-2 btn-link" (click)="addVacancy('Requirements', type.Requirement)">Добавить</span>
+      <div [formGroup]="control" class="form-group" *ngFor="let control of getFormControls('Requirements'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        formControlName="Name" placeholder="Введите требование" class="form-control" type="text" >
+        <span (click)="clearVacancy(i, 'Requirements')" class="remove">&times;</span>
+      </div>
+    </div>
+    <div class="form-group-container" formArrayName="Conditions">
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Conditions').invalid)}">Обязанности</label>
+      <span *ngIf="addForm.get('Conditions').valid" class="ml-2 btn-link" (click)="addVacancy('Conditions', type.Condition)">Добавить</span>
+      <div [formGroup]="control" class="form-group" *ngFor="let control of getFormControls('Conditions'); let i = index">
+        <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
+        formControlName="Name" placeholder="Введите условие" class="form-control" type="text" >
+        <span (click)="clearVacancy(i, 'Conditions')" class="remove">&times;</span>
+      </div>
+    </div>
+    <button [disabled]="addForm.invalid" class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</button>
+  </form>
+</div>
