@@ -117,7 +117,8 @@ export class AdminContactsComponent extends AddService implements OnInit {
   updateContact(){
     this.update['Id']=this.item.Id;
     this._ws.updateContact(this.update).subscribe(id => {
-      this.item = JSON.parse(JSON.stringify(this.update));
+      this.item = Object.assign(this.item, this.update);
+      this.update = {};
     })
   }
 
