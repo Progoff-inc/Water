@@ -91,7 +91,9 @@ export enum ContactTypes{
 }
 
 export enum VacancyType{
-
+    Duty = "duty",
+    Requirement = "requirement",
+    Condition = "condition"
 }
 
 export interface Vacancy{

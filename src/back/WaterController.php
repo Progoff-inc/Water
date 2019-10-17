@@ -95,6 +95,15 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateContact($_GET['Login'], $_GET['Password'], $b));
             break;
+        case 'add-vacancy':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->addVacancy($_GET['Login'], $_GET['Password'], $b));
+            break;
+            
+        case 'update-vacancy':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updateVacancy($_GET['Login'], $_GET['Password'], $b));
+            break;
         case 'add-price':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addPrice($_GET['Login'], $_GET['Password'], $b));

@@ -370,6 +370,60 @@ class DataBase {
             return null;
         }
     }
+    public function addVacancy($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $children = $new['AllConditions'];
+            unset($new['AllConditions']);
+            $res = $this->genInsertQuery($new,"vacancies");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            $id = $this->db->lastInsertId();
+            for($i = 0; $i<count($children); $i++){
+                $c = $children[$i];
+                $c['VacancyId'] = $id;
+                $res = $this->genInsertQuery($c,"vacancyvalues");
+                $s = $this->db->prepare($res[0]);
+                if($res[1][0]!=null){
+                    $s->execute($res[1]);
+                }
+            }
+            
+            return $id;
+            
+        }else{
+            return null;
+        }
+    }
+    
+    public function updateVacancy($l, $p, $new){
+        if($this->checkAdmin($l, $p)){
+            $id = $new['Id'];
+            unset($new['Id']);
+            if(count($new['Types'])>0){
+                $this->removeChildren($id, 'vacancyvalues', 'VacancyId', $new['Types']);
+            }
+            
+            unset($new['Types']);
+            for ($i = 0; $i < count($new['AllConditions']); $i++) {
+                $new['AllConditions'][$i]['VacancyId'] = $id;
+                $res = $this->genInsertQuery($new['AllConditions'][$i],"vacancyvalues");
+                $s = $this->db->prepare($res[0]);
+                if($res[1][0]!=null){
+                    $s->execute($res[1]);
+                }
+            }
+            unset($new['AllConditions']);
+            $a = $this->genUpdateQuery(array_keys($new), array_values($new), "vacancies", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return $a;
+        }else{
+            return false;
+        }
+    }
+    
     public function updateContact($l, $p, $new){
         if($this->checkAdmin($l, $p)){
             $id = $new['Id'];
@@ -391,6 +445,13 @@ class DataBase {
         $s = $this->db->prepare("DELETE FROM contactvalues WHERE ContactId=? AND Type IN ".$types);
         $s->execute(array($id));
     }
+    
+    private function removeChildren($id, $table, $collumn, $types = array('phone', 'email', 'address')){
+        $types = "('".implode("','",$types)."')";
+        $s = $this->db->prepare("DELETE FROM $table WHERE $collumn=? AND Type IN ".$types);
+        $s->execute(array($id));
+    }
+    
     private function addContacts($phones, $emails, $address, $id, $rm = false){
         if($rm){
             $types = [];
