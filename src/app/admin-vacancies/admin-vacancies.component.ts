@@ -124,19 +124,48 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
   }
 
   saveVacancy(){
-    console.log(this.v)
-    // this._ws.addContact(contact).subscribe(id => {
-    //   this.items.push({Id:id, ...contact});
-    //   this.addForm.reset()
-    // })
+    let vacancy = Object.assign({}, this.v, {AllConditions: [...this.v.Duties, ...this.v.Requirements, ...this.v.Conditions]});
+    delete vacancy.Duties;
+    delete vacancy.Requirements;
+    delete vacancy.Conditions;
+    this._ws.addVacancy(vacancy).subscribe(id => {
+      this.items.push({Id:id, ...this.v});
+      this.addForm.reset()
+    })
   }
 
   updateVacancy(){
-    this.update['Id']=this.item.Id;
-    console.log(this.update);
-    // this._ws.updateContact(this.update).subscribe(id => {
-    //   this.item = JSON.parse(JSON.stringify(this.update));
-    // })
+    
+    let conditions = [];
+    let types = Object.entries(this.update)
+    .filter(([k,v]) => v instanceof Array)
+    .map(([k,v]) => {
+      conditions.push(...(<any>v));
+      if(v[0]){
+        return v[0].Type
+      }else{
+        switch(k){
+          case 'Duties':{
+            return VacancyType.Duty;
+          }
+          case 'Requirements':{
+            return VacancyType.Requirement;
+          }
+          case 'Conditions':{
+            return VacancyType.Condition;
+          }
+        }
+      }
+      
+    })
+    let upd = Object.assign(this.update, {AllConditions: conditions, Types: types, Id: this.item.Id});
+    delete upd['Duties'];
+    delete upd['Requirements'];
+    delete upd['Conditions'];
+    this._ws.updateVacancy(upd).subscribe(id => {
+      this.item = Object.assign(this.item, this.update);
+      this.update = {};
+    })
   }
 
 }

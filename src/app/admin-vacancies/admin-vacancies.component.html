@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="form-group-container" formArrayName="Requirements">
-      <label [ngClass]="{'text-danger':(submitted && addForm.get('Requirements').invalid)}">Обязанности</label>
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Requirements').invalid)}">Требования</label>
       <span *ngIf="addForm.get('Requirements').valid" class="ml-2 btn-link" (click)="addVacancy('Requirements', type.Requirement)">Добавить</span>
       <div [formGroup]="control" class="form-group" *ngFor="let control of getFormControls('Requirements'); let i = index">
         <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="form-group-container" formArrayName="Conditions">
-      <label [ngClass]="{'text-danger':(submitted && addForm.get('Conditions').invalid)}">Обязанности</label>
+      <label [ngClass]="{'text-danger':(submitted && addForm.get('Conditions').invalid)}">Условия</label>
       <span *ngIf="addForm.get('Conditions').valid" class="ml-2 btn-link" (click)="addVacancy('Conditions', type.Condition)">Добавить</span>
       <div [formGroup]="control" class="form-group" *ngFor="let control of getFormControls('Conditions'); let i = index">
         <input [ngClass]="{'border-danger':(submitted && control.errors)}" 
