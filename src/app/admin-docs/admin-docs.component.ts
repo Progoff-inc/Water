@@ -37,7 +37,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
    }
 
   ngOnInit() {
-    this._ws.getTypeDocs(<DocTypes[]>Object.keys(DocTypes)).subscribe(docs => {
+    this._ws.getTypeDocs(<DocTypes[]>Object.values(DocTypes)).subscribe(docs => {
       this.docs = docs;
       this.items = docs;
     })
