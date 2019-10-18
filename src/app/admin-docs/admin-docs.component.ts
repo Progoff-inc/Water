@@ -21,7 +21,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls)$/i;
   ipattern=/(\.png|\.jpg)$/i;
   docTypes = Object.keys(DocTypes).map(t => {
-    return {Id: t.toLowerCase(), Name: t.toLowerCase()}
+    return {Id: DocTypes[t], Name: t.toLowerCase()}
   });
   public Editor = ClassicEditor;
   
