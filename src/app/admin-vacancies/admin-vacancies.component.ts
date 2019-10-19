@@ -19,10 +19,15 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
     this._ws.getVacancies().subscribe(v => {
       this.items = v;
     })
+    this._initForm(); 
+
+    console.log(this.addForm)
+  }
+
+  private _initForm(){
     this.addForm = this._fb.group({
       Name:[null, Validators.required],
       WorkTime:[null, Validators.required],
-      Salary:[null, Validators.required],
       Duties: new FormArray([
         this._fb.group({
           Type: [VacancyType.Duty],
@@ -42,8 +47,7 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
         })
       ]),
     })
-
-    console.log(this.addForm)
+    this.update = {};
   }
 
 
@@ -54,7 +58,6 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
     this.addForm = this._fb.group({
       Name:[this.item.Name, Validators.required],
       WorkTime:[this.item.WorkTime, Validators.required],
-      Salary:[this.item.Salary, Validators.required],
       Duties: new FormArray([]),
       Requirements: new FormArray([]),
       Conditions: new FormArray([]),
@@ -130,7 +133,8 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
     delete vacancy.Conditions;
     this._ws.addVacancy(vacancy).subscribe(id => {
       this.items.push({Id:id, ...this.v});
-      this.addForm.reset()
+      this.submitted = false;
+      this._initForm();
     })
   }
 
@@ -164,7 +168,21 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
     delete upd['Conditions'];
     this._ws.updateVacancy(upd).subscribe(id => {
       this.item = Object.assign(this.item, this.update);
+      this.submitted = false;
       this.update = {};
+    })
+  }
+  remove(){
+    this._ws.removeItem(this.item.Id, 'vacancies').subscribe(x => {
+      if(x){
+        this._initForm();
+        (this.items as Vacancy[]).splice(
+          (this.items as Vacancy[]).findIndex(x => x.Id == this.item.Id),
+          1
+        )
+        this.submitted = false;
+        this.item = null;
+      }
     })
   }
 

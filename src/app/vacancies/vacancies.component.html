@@ -1,7 +1,7 @@
 <div class="container">
     <h3 class="page-head">Вакансии</h3>
     <p class="phone"><i>Телефон отдела кадров:</i> <a class="ml-1" href="tel:+74963438782"><b>+7(496)343-87-82</b></a></p>
-    <div class="flex-container">
+    <div class="flex-container align-items-start" *ngIf="vacancies?.length; else novacancies">
       <div class="item" *ngFor="let vac of vacancies">
        <div class="header">{{vac.Name}}</div> 
        <div class="content">
@@ -9,10 +9,10 @@
            <p><b class="text-danger mr-1">График работы:</b>{{vac.WorkTime}}</p>
          </div>
          <div class="line">
-          <p><b class="text-danger mr-1">Заработная плата:</b>{{vac.Salary}}</p>
-        </div>
-        <div class="line">
-          <p><b class="text-danger mr-1">График работы:</b>{{vac.WorkTime}}</p>
+          <p><b class="text-danger">Требования:</b></p>
+          <ul>
+            <li *ngFor="let rec of vac.Requirements">{{rec.Name}}</li>
+          </ul>
         </div>
         <span class="vac-toggle" (click)="toggle(vac.Id)">Подробнее <i class="fas fa-caret-{{shows[vac.Id]?'right':'down'}} ml-2"></i></span>
         <div class="info" *ngIf="shows[vac.Id]">
@@ -22,12 +22,7 @@
               <li *ngFor="let duty of vac.Duties">{{duty.Name}}</li>
             </ul>
           </div>
-          <div class="line">
-            <p><b class="text-danger">Требования:</b></p>
-            <ul>
-              <li *ngFor="let rec of vac.Requirements">{{rec.Name}}</li>
-            </ul>
-          </div>
+          
           <div class="line">
             <p><b class="text-danger">Условия:</b></p>
             <ul>
@@ -39,3 +34,8 @@
       </div>
     </div>
 </div>
+<ng-template #novacancies>
+  <div class="d-flex justify-content-center align-items-center py-5 text-muted">
+    Свободные вакансии недоступны
+  </div>
+</ng-template>
