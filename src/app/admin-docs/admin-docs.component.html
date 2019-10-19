@@ -1,8 +1,10 @@
-
+<div class="alert alert-danger" role="alert">
+  Функция на стадии тестирования. Использование не рекомендуется.
+</div>
 <div class="container" *ngIf="docs">
   <h4 class="page-min-head">Добавление и редактирование документов</h4>
   <div class="form-group">
-    <label>Выберете документ</label>
+    <label>Выберите документ</label>
     <prog-select [items]="docs" (change)="setForm($event)"></prog-select>
   </div>
   <form [formGroup]="addForm" class="border border-primary p-5">

@@ -1,8 +1,7 @@
 CREATE TABLE IF NOT EXISTS vacancies (
 	Id int(20) PRIMARY KEY AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
-    WorkTime varchar(255) NOT NULL,
-    Salary varchar(255) NOT NULL
+    WorkTime varchar(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS vacancyvalues (

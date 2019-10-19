@@ -8,7 +8,7 @@ import { WaterService } from '../services/water.service';
   styleUrls: ['./vacancies.component.less']
 })
 export class VacanciesComponent implements OnInit {
-  vacancies: Vacancy[] = [];
+  vacancies: Vacancy[] = null;
   shows:any = {};
   constructor(private _ws: WaterService) { }
 
