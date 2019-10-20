@@ -1,0 +1,50 @@
+.prog-alert{
+    position: fixed;
+    right: 20px;
+    top:10px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    z-index: -1;
+    opacity: 0;
+    transition: .5s;
+    max-width: 300px;
+    &::before{
+        display: none;
+    }
+
+    i{
+        margin-right: 15px;
+        height: 56px;
+        line-height: 56px;
+        font-size: 40px;
+        color: white;
+    }
+    p{
+        margin: 0;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    &.show{
+        z-index: 1000;
+        opacity: 1;
+
+    }
+
+    &.fa-check-circle{
+        background-color: #33CC33;
+        border-color: #33CC66;
+    }
+    &.fa-times-circle{
+        background-color: #FF3300;
+        border-color: #FF0000;
+    }
+    &.fa-exclamation-circle{
+        background-color: #00CCFF;
+        border-color: #3399CC;
+    }
+}

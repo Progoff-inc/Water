@@ -62,6 +62,7 @@ import { AdminRateFormComponent } from './admin-rate-form/admin-rate-form.compon
 import { RatePipe } from './services/pipes/rate.pipe';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
+import { ProgAlertComponent } from './prog-alert/prog-alert.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.compo
     AdminRateFormComponent,
     RatePipe,
     VacanciesComponent,
-    AdminVacanciesComponent
+    AdminVacanciesComponent,
+    ProgAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +119,13 @@ import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.compo
     CalendarModule,
     BrowserAnimationsModule
   ],
-  providers: [FormBuilder, HttpClient, ModalService, BsModalService, LoadService, WaterService, UserService],
+  providers: [FormBuilder, 
+    HttpClient, 
+    ModalService, 
+    BsModalService, 
+    LoadService, 
+    WaterService, 
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
