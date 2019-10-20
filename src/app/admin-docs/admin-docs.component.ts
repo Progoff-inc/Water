@@ -133,11 +133,11 @@ export class AdminDocsComponent extends AddService implements OnInit {
   remove(){
     this._ws.removeItem(this.item.Id, 'docs').subscribe(x => {
       if(x){
-        this.addForm.reset();
         (this.items as Doc[]).splice(
           (this.items as Doc[]).findIndex(x => x.Id == this.item.Id),1
         )
         this.submitted = false;
+        this.addForm.reset();
         this.item = null;
       }
     })

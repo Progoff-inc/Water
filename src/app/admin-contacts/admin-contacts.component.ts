@@ -17,8 +17,12 @@ export class AdminContactsComponent extends AddService implements OnInit {
   ngOnInit() {
     this._ws.getContacts().subscribe(contacts => {
       this.items = <Contact[]>contacts;
-    })
+    });
 
+    this._initForm();
+  }
+
+  private _initForm(){
     this.addForm = this._fb.group({
       Head:[null, Validators.required],
       Time:[null, Validators.required],
@@ -33,10 +37,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
         0: new FormControl(null, [Validators.required, Validators.email])
       })
     })
-
-    console.log(this.addForm)
   }
-
 
   public setForm(id): void{
     this.submitted = true;
@@ -126,11 +127,11 @@ export class AdminContactsComponent extends AddService implements OnInit {
   remove(){
     this._ws.removeItem(this.item.Id, 'contacts').subscribe(x => {
       if(x){
-        this.addForm.reset();
         (this.items as Contact[]).splice(
           (this.items as Contact[]).findIndex(x => x.Id == this.item.Id),1
         )
         this.submitted = false;
+        this._initForm();
         this.item = null;
       }
     })
