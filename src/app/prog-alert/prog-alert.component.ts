@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AlertService } from '../services/alert.service';
+import { AlertComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'prog-alert',
@@ -7,21 +8,18 @@ import { AlertService } from '../services/alert.service';
   styleUrls: ['./prog-alert.component.less']
 })
 export class ProgAlertComponent implements OnInit {
-  alert:Alert = null;
-  show: boolean = false;
+  alerts: any[] = [];
   constructor(private _as: AlertService) { }
   ngOnInit() {
   }
 
   showAlert(alert:Alert){
-    this.alert = alert;
-    this.show = true;
-    let af = this;
-    
-    setTimeout(() => {
-      af.show = false;
-    }, 5000)
+    this.alerts.push(alert);
 
+  }
+ 
+  onClosed(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
 }
@@ -32,7 +30,8 @@ export interface Alert{
 } 
 
 export enum AlertType{
-  Success = "fa-check-circle",
-  Warning = "fa-times-circle",
-  Info = "fa-exclamation-circle"
+  Success = "success",
+  Warning = "warning",
+  Info = "info",
+  Danger = "danger"
 }

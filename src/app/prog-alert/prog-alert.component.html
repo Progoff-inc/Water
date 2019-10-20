@@ -1,4 +1,10 @@
-<div   class="prog-alert {{alert?.type}} {{show?'show':''}}" #alertField>
+<!-- <div   class="prog-alert {{alert?.type}} {{show?'show':''}}" #alertField>
   <i class="fas {{alert?.type}}"></i>
   <p>{{alert?.message}}</p>
+</div> -->
+<div class="prog-alert {{alerts.length?'show':''}}" >
+  <div class="mb-1" *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissOnTimeout]="5000" (onClosed)="onClosed(alert)">{{ alert.message }}</alert>
+  </div>
 </div>
+
