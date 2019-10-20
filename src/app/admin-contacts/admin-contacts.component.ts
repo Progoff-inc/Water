@@ -3,6 +3,7 @@ import { WaterService } from '../services/water.service';
 import { Contact } from '../services/models';
 import { AddService } from '../services/add.service';
 import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-admin-contacts',
@@ -10,7 +11,8 @@ import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl, Valid
   styleUrls: ['./admin-contacts.component.less']
 })
 export class AdminContactsComponent extends AddService implements OnInit {
-  constructor( private _ws:WaterService, private _fb:FormBuilder) {
+  constructor( private _as: AlertService,
+     private _ws:WaterService, private _fb:FormBuilder) {
     super();
    }
 

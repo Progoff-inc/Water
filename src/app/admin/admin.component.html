@@ -2,7 +2,7 @@
 
 <div class="container">
         
-    <h3 class="page-head">Панель администратора</h3>
+    <h3 class="page-head" (click)="showAlert()">Панель администратора</h3>
     <div class="d-flex align-items-start clients">
         <div class="menu">
             <div class="menu-item" [routerLinkActive]='["active"]' [routerLink]='["/admin/admin-news"]' >
@@ -29,5 +29,6 @@
         </div>
     </div>
 </div>
+<prog-alert #alert></prog-alert>
 
 
