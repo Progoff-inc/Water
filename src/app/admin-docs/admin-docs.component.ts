@@ -18,7 +18,7 @@ import { HttpEventType } from '@angular/common/http';
 export class AdminDocsComponent extends AddService implements OnInit {
   docs: Doc[];
   description = '';
-  tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls)$/i;
+  tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls|\.zip|\.7z|\.rar)$/i;
   ipattern=/(\.png|\.jpg)$/i;
   docTypes = Object.keys(DocTypes).map(t => {
     return {Id: DocTypes[t], Name: t.toLowerCase()}
@@ -95,6 +95,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
             Description: this.v.Description
           });
           this._ls.showLoad = false;
+          this.submitted = false;
           this.addForm.reset();
         }
         
@@ -129,6 +130,18 @@ export class AdminDocsComponent extends AddService implements OnInit {
     
   }
 
+  remove(){
+    this._ws.removeItem(this.item.Id, 'docs').subscribe(x => {
+      if(x){
+        this.addForm.reset();
+        (this.items as Doc[]).splice(
+          (this.items as Doc[]).findIndex(x => x.Id == this.item.Id),1
+        )
+        this.submitted = false;
+        this.item = null;
+      }
+    })
+  }
 
 }
 
