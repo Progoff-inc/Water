@@ -175,12 +175,12 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
   remove(){
     this._ws.removeItem(this.item.Id, 'vacancies').subscribe(x => {
       if(x){
-        this._initForm();
         (this.items as Vacancy[]).splice(
           (this.items as Vacancy[]).findIndex(x => x.Id == this.item.Id),
           1
         )
         this.submitted = false;
+        this._initForm();
         this.item = null;
       }
     })
