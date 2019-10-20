@@ -37,7 +37,7 @@
         <ckeditor [editor]="Editor" formControlName="Description" [config]="config"  (ready)="onReady($event)"></ckeditor>
         <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
     </div>
-    <div class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</div>
-    <div class="btn btn-link text-danger" *ngIf="item" (click)="remove()">Удалить</div>
+    <button [disabled]="addForm.invalid" class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</button>
+    <button class="btn btn-link text-danger" *ngIf="item" (click)="remove()">Удалить</button>
   </form>
 </div>

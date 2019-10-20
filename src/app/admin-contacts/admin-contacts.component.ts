@@ -110,6 +110,7 @@ export class AdminContactsComponent extends AddService implements OnInit {
     contact.Email = Object.values(contact.Email);
     this._ws.addContact(contact).subscribe(id => {
       this.items.push({Id:id, ...contact});
+      this.submitted = false;
       this.addForm.reset()
     })
   }
@@ -119,6 +120,19 @@ export class AdminContactsComponent extends AddService implements OnInit {
     this._ws.updateContact(this.update).subscribe(id => {
       this.item = Object.assign(this.item, this.update);
       this.update = {};
+    })
+  }
+
+  remove(){
+    this._ws.removeItem(this.item.Id, 'contacts').subscribe(x => {
+      if(x){
+        this.addForm.reset();
+        (this.items as Contact[]).splice(
+          (this.items as Contact[]).findIndex(x => x.Id == this.item.Id),1
+        )
+        this.submitted = false;
+        this.item = null;
+      }
     })
   }
 

@@ -48,5 +48,6 @@
       </div>
     </div>
     <button [disabled]="addForm.invalid" class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</button>
+    <button class="btn btn-link text-danger" *ngIf="item" (click)="remove()">Удалить</button>
   </form>
 </div>
