@@ -3,6 +3,8 @@ import { WaterService } from '../services/water.service';
 import { AddService } from '../services/add.service';
 import { FormBuilder, Validators, FormControl, FormArray, FormGroup, ValidatorFn } from '@angular/forms';
 import { VacancyType, Vacancy } from '../services/models';
+import { AlertType } from '../prog-alert/prog-alert.component';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-admin-vacancies',
@@ -11,7 +13,8 @@ import { VacancyType, Vacancy } from '../services/models';
 })
 export class AdminVacanciesComponent extends AddService implements OnInit {
   type = VacancyType;
-  constructor(private _ws:WaterService, private _fb:FormBuilder) { 
+  constructor(private _as:AlertService,
+     private _ws:WaterService, private _fb:FormBuilder) { 
     super();
   }
 
@@ -135,6 +138,10 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
       this.items.push({Id:id, ...this.v});
       this.submitted = false;
       this._initForm();
+      this._as.alert.showAlert({
+        type: AlertType.Success,
+        message: "Вакансия успешно добавлена"
+      })
     })
   }
 
@@ -170,6 +177,10 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
       this.item = Object.assign(this.item, this.update);
       this.submitted = false;
       this.update = {};
+      this._as.alert.showAlert({
+        type: AlertType.Success,
+        message: "Вакансия успешно обновлена"
+      })
     })
   }
   remove(){
@@ -182,6 +193,11 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
         this.submitted = false;
         this._initForm();
         this.item = null;
+
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Вакансия успешно удалена"
+        })
       }
     })
   }

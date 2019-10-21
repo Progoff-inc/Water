@@ -6,6 +6,8 @@ import { UploadTypes, News } from '../services/models';
 import { HttpEventType } from '@angular/common/http';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
+import { AlertType } from '../prog-alert/prog-alert.component';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'add-news',
@@ -30,7 +32,8 @@ export class AddNewsComponent implements OnInit {
   public model = {
     editorData: this.description
   };
-  constructor(private fb:FormBuilder, private ls:LoadService, private ws:WaterService) { }
+  constructor(private _as:AlertService,
+     private fb:FormBuilder, private ls:LoadService, private ws:WaterService) { }
 
   ngOnInit() {
     this.submitted = false;
@@ -72,12 +75,20 @@ export class AddNewsComponent implements OnInit {
             news.Image = event.body;
             this.news.unshift(news);
             this.ls.showLoad = false;
+            this._as.alert.showAlert({
+              type: AlertType.Success,
+              message: "Новость успешно добавлена"
+            })
             this.ngOnInit();
           }
           
         })
       }else{
         this.ls.showLoad = false;
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Новость успешно добавлена"
+        })
         this.ngOnInit();
       }
       
