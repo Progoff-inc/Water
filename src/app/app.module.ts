@@ -64,6 +64,8 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
 import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
 import { ProgAlertComponent } from './prog-alert/prog-alert.component';
 
+import { AlertModule } from 'ngx-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +119,8 @@ import { ProgAlertComponent } from './prog-alert/prog-alert.component';
     FormsModule,
     CKEditorModule,
     CalendarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AlertModule.forRoot()
   ],
   providers: [FormBuilder, 
     HttpClient, 

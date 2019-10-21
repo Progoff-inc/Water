@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { LoadService } from '../services/load.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
+import { AlertType } from '../prog-alert/prog-alert.component';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-admin-news',
@@ -27,7 +29,9 @@ export class AdminNewsComponent implements OnInit {
     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
   };
 
-  constructor(private ws:WaterService, private router:Router, private ls:LoadService) { }
+  constructor(
+    private _as:AlertService,
+     private ws:WaterService, private router:Router, private ls:LoadService) { }
 
   ngOnInit() {
     this.submitted = false;
@@ -65,12 +69,20 @@ export class AdminNewsComponent implements OnInit {
           }
           else if(event.type == HttpEventType.Response){
             this.ls.showLoad = false;
+            this._as.alert.showAlert({
+              type: AlertType.Success,
+              message: "Новость успешно обновлена"
+            })
             this.ngOnInit();
           }
           
         })
       }else{
         this.ls.showLoad = false;
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Новость успешно обновлена"
+        })
         this.ngOnInit();
       }
       
@@ -80,6 +92,10 @@ export class AdminNewsComponent implements OnInit {
   remove(id){
     this.ws.removeNews(id).subscribe(x => {
       this.news = this.news.filter(x=>x.Id!=id);
+      this._as.alert.showAlert({
+        type: AlertType.Success,
+        message: "Новость успешно удалена"
+      })
     })
   }
 

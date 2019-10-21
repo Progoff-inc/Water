@@ -3,6 +3,8 @@ import { Rate, Price } from '../services/models';
 import { AddService } from '../services/add.service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { WaterService } from '../services/water.service';
+import { AlertType } from '../prog-alert/prog-alert.component';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'admin-rate-form',
@@ -33,7 +35,8 @@ export class AdminRateFormComponent extends AddService implements OnInit {
 
   public choosedPriceId: number;
 
-  constructor(private _fb: FormBuilder, private _ws:WaterService) {
+  constructor( private _as:AlertService,
+     private _fb: FormBuilder, private _ws:WaterService) {
     super();
    }
 
@@ -105,6 +108,10 @@ export class AdminRateFormComponent extends AddService implements OnInit {
         let price = this.rate.Prices.find(p => p.Id==this.choosedPriceId);
         Object.assign(price, this.v);
         this.update = {};
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Тариф успешно обновлен"
+        })
       })
     }
     else{
@@ -116,6 +123,10 @@ export class AdminRateFormComponent extends AddService implements OnInit {
         });
         this.addForm.reset();
         this.setPrices(this.yearControl.value);
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Тариф успешно добавлен"
+        })
       })
     }
   }
@@ -126,6 +137,10 @@ export class AdminRateFormComponent extends AddService implements OnInit {
         this.rate.Prices.splice(this.rate.Prices.findIndex(p => p.Id == id), 1);
         this.clearForm();
         this.setPrices(this.yearControl.value);
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Тариф успешно удален"
+        })
       }
     })
   }

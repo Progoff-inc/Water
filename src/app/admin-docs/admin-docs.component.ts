@@ -9,6 +9,8 @@ import { WaterValidators } from '../services/water.validators';
 import { Subscription, forkJoin } from 'rxjs';
 import { LoadService } from '../services/load.service';
 import { HttpEventType } from '@angular/common/http';
+import { AlertService } from '../services/alert.service';
+import { AlertType } from '../prog-alert/prog-alert.component';
 
 @Component({
   selector: 'app-admin-docs',
@@ -32,7 +34,8 @@ export class AdminDocsComponent extends AddService implements OnInit {
   public model = {
     editorData: this.description
   };
-  constructor(private _ws: WaterService, private _fb: FormBuilder, private _ls:LoadService) {
+  constructor(
+    private _as:AlertService, private _ws: WaterService, private _fb: FormBuilder, private _ls:LoadService) {
     super();
    }
 
@@ -97,6 +100,10 @@ export class AdminDocsComponent extends AddService implements OnInit {
           this._ls.showLoad = false;
           this.submitted = false;
           this.addForm.reset();
+          this._as.alert.showAlert({
+            type: AlertType.Success,
+            message: "Документ успешно добавлен"
+          })
         }
         
       })
@@ -109,7 +116,10 @@ export class AdminDocsComponent extends AddService implements OnInit {
       this._ws.updateDoc({Id: this.item.Id, ...update.data}).subscribe(()=>{
         this.item = Object.assign(this.item, update.data);
         this.addForm.patchValue(this.item);
-        
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Данные документа успешно обновлены"
+        })
       })
     }
     
@@ -120,9 +130,12 @@ export class AdminDocsComponent extends AddService implements OnInit {
           
         }
         else if(event.type == HttpEventType.Response){
-          console.log(event.body);
           this.item = Object.assign(this.item, event.body[0]);
           this.addForm.patchValue(this.item);
+          this._as.alert.showAlert({
+            type: AlertType.Success,
+            message: "Файлы успешно загружены"
+          })
         }
         
       })
@@ -139,6 +152,10 @@ export class AdminDocsComponent extends AddService implements OnInit {
         this.submitted = false;
         this.addForm.reset();
         this.item = null;
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Документ успешно удален"
+        })
       }
     })
   }
