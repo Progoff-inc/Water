@@ -65,7 +65,8 @@ export enum DocTypes{
   Allowing = "allowing",
   Evaluation = "evaluation",
   Important = 'important',
-  Single = 'single'
+  Single = 'single',
+  VZU = "vzu"
 }
 
 export enum UploadTypes{

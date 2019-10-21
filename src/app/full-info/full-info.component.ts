@@ -19,12 +19,13 @@ export class FullInfoComponent implements OnInit {
     this.types[DocTypes.Bookkeeping] = "Бухгалтерская отчетность";
     this.types[DocTypes.Allowing] = "Разрешительная документация";
     this.types[DocTypes.Evaluation] = "Специальная оценка условий труда";
+    this.types[DocTypes.VZU] = "Свободные мощности ВЗУ";
    }
 
   ngOnInit() {
     
     this.ls.showLoad = true;
-    this.ws.getTypeDocs([DocTypes.Allowing, DocTypes.Bookkeeping, DocTypes.Constituent, DocTypes.Evaluation, DocTypes.Props]).subscribe(docs => {
+    this.ws.getTypeDocs([DocTypes.Allowing, DocTypes.Bookkeeping, DocTypes.Constituent, DocTypes.Evaluation, DocTypes.Props, DocTypes.VZU]).subscribe(docs => {
       this.docs = docs;
       this.ls.showLoad = false;
     })
