@@ -65,6 +65,7 @@ import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.compo
 import { ProgAlertComponent } from './prog-alert/prog-alert.component';
 
 import { AlertModule } from 'ngx-bootstrap';
+import { DocPipe } from './services/pipes/doc.pipe';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { AlertModule } from 'ngx-bootstrap';
     AdminRatesComponent,
     AdminRateFormComponent,
     RatePipe,
+    DocPipe,
     VacanciesComponent,
     AdminVacanciesComponent,
     ProgAlertComponent

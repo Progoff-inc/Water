@@ -1,6 +1,6 @@
-<div class="alert alert-danger" role="alert" (click)="alert()">
+<!-- <div class="alert alert-danger" role="alert">
   Функция на стадии тестирования. Использование не рекомендуется.
-</div>
+</div> -->
 <div class="container" *ngIf="docs">
   <h4 class="page-min-head">Добавление и редактирование документов</h4>
   <div class="form-group">
@@ -31,6 +31,10 @@
     <div class="form-group">
       <label>Тип документа</label>
       <prog-select formControlName="Type" [items]="docTypes" [search]="false"></prog-select>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" formControlName="IsImportant" id="importantCheck">
+      <label class="form-check-label" for="importantCheck">Отображать на главной странице?</label>
     </div>
     <div class="form-group">
         <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
