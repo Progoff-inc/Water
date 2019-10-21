@@ -12,6 +12,7 @@ import { WaterService } from '../services/water.service';
 export class AdminRateFormComponent extends AddService implements OnInit {
   @Input() rate: Rate;
 
+  formError:boolean = false;
   prices:Price[];
 
   years:number[] = [];
@@ -78,6 +79,7 @@ export class AdminRateFormComponent extends AddService implements OnInit {
 
   clearForm(){
     this.choosedPriceId = null;
+    this.formError = false;
     this.addForm.reset();
   }
 
@@ -86,6 +88,12 @@ export class AdminRateFormComponent extends AddService implements OnInit {
       return;
     }
 
+    if (this.addForm.value.DateStart>this.addForm.value.DateFinish) {
+      this.formError = true;
+      return;
+    }
+    
+    this.formError = false;
     if(this.choosedPriceId){
       if(this.update['DateStart']){
         this.update['DateStart'] = this._formatDate(this.update['DateStart']);
@@ -98,8 +106,8 @@ export class AdminRateFormComponent extends AddService implements OnInit {
         Object.assign(price, this.v);
         this.update = {};
       })
-      
-    }else{
+    }
+    else{
       this._ws.addPrice({PriceTypeId: this.rate.Id, ...this.v}).subscribe(id => {
         this.rate.Prices.push({
           Id: id,
@@ -109,8 +117,6 @@ export class AdminRateFormComponent extends AddService implements OnInit {
         this.addForm.reset();
         this.setPrices(this.yearControl.value);
       })
-      
-      
     }
   }
 
