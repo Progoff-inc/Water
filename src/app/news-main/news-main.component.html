@@ -2,16 +2,16 @@
   <div class="slider">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" *ngFor="let new of news; let i = index;" [attr.data-slide-to]="i" [ngClass]="{'active':i==0}"></li>
+        <li data-target="#carouselExampleIndicators" *ngFor="let image of imageAr; let i = index;" [attr.data-slide-to]="i" [ngClass]="{'active':i==0}"></li>
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item" [ngClass]="{'active':i==0}" *ngFor="let new of news; let i = index">
-          <div class="img" [ngStyle]="{'background-image':'url('+ (new.Image?new.Image:defaultLogo) +')'}"></div>
+        <div class="carousel-item" [ngClass]="{'active':i==0}" *ngFor="let image of imageAr; let i = index">
+          <div class="img" [ngStyle]="{'background-image':'url('+image+')'}"></div>
         </div>
       </div>
     </div>
   </div>
   <div class="news-titles d-flex flex-column ">
-    <div *ngFor="let new of news; let i = index">{{new.CreateDate | date: 'dd.MM'}}<a routerLink="/news/{{new.Id}}">{{new.Name}}</a></div>
+    <div *ngFor="let new of news; let i = index">{{new.CreateDate | date: 'dd.MM'}}<a routerLink="/news/{{new.Id}}"  class="text-overflow">{{new.Name}}</a></div>
   </div>
 </div>
