@@ -103,7 +103,7 @@ export class ProgSelectComponent implements ControlValueAccessor, OnInit, OnChan
 
   get Value() { 
     let res = this.items.find(x => x[this.out]==this.value);
-    return res?res[this.view]:''
+    return res?res[this.view]:'';
   };
 
 }

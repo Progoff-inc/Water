@@ -64,7 +64,6 @@ export enum DocTypes{
   Bookkeeping = "bookkeping",
   Allowing = "allowing",
   Evaluation = "evaluation",
-  Important = 'important',
   Single = 'single',
   VZU = "vzu"
 }

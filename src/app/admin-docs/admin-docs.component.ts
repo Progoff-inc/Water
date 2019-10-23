@@ -23,7 +23,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls|\.zip|\.7z|\.rar)$/i;
   ipattern=/(\.png|\.jpg)$/i;
   docTypes = Object.keys(DocTypes).map(t => {
-    return {Id: DocTypes[t], Name: t.toLowerCase()}
+    return {Id: DocTypes[t], Name: DocTypes[t].toLowerCase()}
   });
   public Editor = ClassicEditor;
   
@@ -48,6 +48,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
     this.addForm = this._fb.group({
       Name:[null, Validators.required],
       Type:[null, Validators.required],
+      IsImportant:[null, Validators.required],
       Description: [null],
       Image:[null, [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
       Document:[null, [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
@@ -61,7 +62,8 @@ export class AdminDocsComponent extends AddService implements OnInit {
     );
   }
   public setForm(id){
-    this.item = this.docs.find(x => x.Id == id)
+    this.item = this.docs.find(x => x.Id == id);
+    this.item.IsImportant = this.item.IsImportant === '1';
     this.addForm.patchValue(this.item);
   }
 
@@ -79,7 +81,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
 
   private _add(): void{
     this._ls.showLoad = true;
-    this._ws.addDoc({Name: this.v.Name, Type: this.v.Type, Description: this.v.Description}).subscribe(docId => {
+    this._ws.addDoc({Name: this.v.Name, Type: this.v.Type, IsImportant: this.v.IsImportant, Description: this.v.Description}).subscribe(docId => {
       const formData = new FormData();
       formData.append('Image', this.v.Image);
       formData.append('Document', this.v.Document);
@@ -95,6 +97,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
             Document: event.body.Document, 
             Name: this.v.Name, 
             Type: this.v.Type, 
+            IsImportant: this.v.IsImportant,
             Description: this.v.Description
           });
           this._ls.showLoad = false;
