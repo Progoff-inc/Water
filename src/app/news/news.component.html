@@ -3,7 +3,11 @@
   <div class="item" *ngFor="let n of news" >
     <h3 id="{{'new'+n.Id}}" class="page-min-head">{{n.Name}}</h3>
     <span class="d-block mb-3" style="color:rgb(156, 156, 156)"><i class="far fa-clock"></i> {{n.CreateDate | date:"dd.MM.yyyy"}}</span>
-    <img src="{{n.Image}}" class="w-75" alt="">
+    <div class="d-flex flex-wrap justify-content-center" *ngIf="n.Image">
+      <div class="w-25 m-2" *ngFor='let img of n.Image'>
+        <img class="w-100" src="{{img}}" alt="">
+      </div>
+    </div>
     <div [innerHTML]="n.Description"></div>
   </div>
 </div>

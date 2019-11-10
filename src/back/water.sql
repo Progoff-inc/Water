@@ -26,9 +26,15 @@ CREATE TABLE IF NOT EXISTS contactvalues (
 CREATE TABLE IF NOT EXISTS news (
 	Id int(20) PRIMARY KEY AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
-    Image varchar(255) NULL,
     Description text NOT NULL,
     CreateDate datetime DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS newsimages (
+    Id int (20) PRIMARY KEY AUTO_INCREMENT,
+    NewId int (20) NOT Null,
+    Image varchar (255) NOT Null,
+    CONSTRAINT ni_fk FOREIGN KEY(NewId) REFERENCES news(Id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS docs (

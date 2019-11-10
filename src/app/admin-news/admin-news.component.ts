@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 import { UploadTypes, BaseEntity, News } from '../services/models';
 import { WaterService } from '../services/water.service';
@@ -8,40 +8,76 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { AlertType } from '../prog-alert/prog-alert.component';
 import { AlertService } from '../services/alert.service';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { WaterValidators } from '../services/water.validators';
+import { AddService } from '../services/add.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-admin-news',
   templateUrl: './admin-news.component.html',
   styleUrls: ['./admin-news.component.less']
 })
-export class AdminNewsComponent implements OnInit {
+export class AdminNewsComponent extends AddService implements OnInit {
+  @Input() news:News[] = [];
 
-  shows:any = {};
-  news:News[];
+  addForm:FormGroup;
   submitted = false;
-  image = null;
+  images = [];
+  ipattern=/(\.png|\.jpg)$/i;
   invalidImage = false;
-  showBtn = false;
+  description = '';
   public Editor = ClassicEditor;
   
   public config = {
     language: 'ru',
     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
   };
-
-  constructor(
-    private _as:AlertService,
-     private ws:WaterService, private router:Router, private ls:LoadService) { }
+  public model = {
+    editorData: this.description
+  };
+  constructor(private _as:AlertService,
+     private fb:FormBuilder, private ls:LoadService, private ws:WaterService) {
+       super();
+     }
 
   ngOnInit() {
-    this.submitted = false;
-    this.image = null;
-    this.invalidImage = false;
-    this.showBtn = false;
     this.ws.getNews().subscribe(news => {
-      this.news=news;
+      this.news = news;
+      this.items = news;
     })
+    this.submitted = false;
 
+    this._initForm();
+  }
+
+  private _initForm(){
+    this.addForm = this.fb.group({
+      Name:[null,Validators.required],
+      Image: this.fb.array([]),
+      Description:[null, Validators.required]
+    })
+  }
+
+  public setForm(id){
+    this.item = this.news.find(x => x.Id == id);
+
+    this.submitted = true;
+    
+    this.addForm = this.fb.group({
+      Name: this.item.Name,
+      Image: new FormArray([]),
+      Description: this.item.Description,
+    });
+
+    const images = (<FormArray>this.addForm.get('Image'));
+    this.item.Image.forEach(t => {
+      images.push(new FormControl(t))
+    })
+    this.update = {};
+  }
+
+  setImages(){
     
   }
 
@@ -52,90 +88,108 @@ export class AdminNewsComponent implements OnInit {
       );
   }
 
-  save(news){
-    if(!this.checkNew(news)){
+  addImage(value = null){
+    const img = (<FormArray>this.addForm.get('Image'));
+    img.push(new FormControl(value, [Validators.required]));
+  }
+
+  save(){
+    this.submitted=true;
+    if(this.addForm.invalid){
       return;
     }
+    if (this.item) {
+      this._update();
+    }
+    else{
+      this.add();
+    }
+  }
+
+  add(){
     this.ls.showLoad = true;
     this.ls.load = 0;
-    this.ws.updateNews(news).subscribe(id => {
-      if(this.image){
+    this.ws.addNews(this.addForm.value).subscribe(news => {
+      let item = Object.assign({},this.addForm.value, {Id:news[0]});
+      item.Image = [];
+      this.items.unshift(item);
+      const v = this.addForm.value.Image;
+      for (let i = 0; i < v.length; i++) {
+        const el = v[i];
         var formData = new FormData();
-        formData.append('Data', this.image);
-        this.ws.UploadFile(news.Id, UploadTypes.News, formData).subscribe(event=>{
+        formData.append('Image', el, el.name.replace(' ','_'));
+        const id = news[1][i];
+        this.ws.UploadFile(id, UploadTypes.NewImage, formData).subscribe(event=>{
           if(event.type == HttpEventType.UploadProgress){
             this.ls.load = Math.round(event.loaded/event.total * 100);
-            
           }
           else if(event.type == HttpEventType.Response){
-            this.ls.showLoad = false;
-            this._as.alert.showAlert({
-              type: AlertType.Success,
-              message: "Новость успешно обновлена"
-            })
-            this.ngOnInit();
+            item.Image.push(event.body[0].Image);
           }
-          
         })
-      }else{
-        this.ls.showLoad = false;
+      };
+      this.ls.showLoad = false;
+      this._as.alert.showAlert({
+        type: AlertType.Success,
+        message: "Новость успешно добавлена"
+      })
+      this.ngOnInit();
+    })
+  }
+
+  remove(){
+    this.ws.removeNews(this.item.Id, this.item.Image).subscribe(x=>{
+      if(x){
         this._as.alert.showAlert({
-          type: AlertType.Success,
-          message: "Новость успешно обновлена"
+          type: AlertType.Danger,
+          message: "Новость успешно удалена"
         })
         this.ngOnInit();
       }
-      
-    })
+    });
   }
 
-  remove(id){
-    this.ws.removeNews(id).subscribe(x => {
-      this.news = this.news.filter(x=>x.Id!=id);
-      this._as.alert.showAlert({
-        type: AlertType.Success,
-        message: "Новость успешно удалена"
-      })
-    })
-  }
-
-  checkChange(){
-    this.showBtn = true;
-  }
-  
-  checkNew(nw:News){
-    return nw.Name!='' && nw.Description!='' && !this.invalidImage;
-  }
-  show(s){
-    this.submitted = false;
-    this.image = null;
-    this.invalidImage = false;
-    this.showBtn = false;
-    if(this.shows[s]){
-      this.shows = {};
-      return;
+  private _update(){
+    this.ls.showLoad = true;
+    const update = this.generateUpdateRequest();
+    if(update.data){
+      this.ws.updateNews({Id: this.item.Id, ...update.data}).subscribe(news=>{
+        this.item = Object.assign(this.item, update.data);
+        this.item.Image = this.item.Image.filter(i => !(i instanceof File));
+        if (news!=null) {
+          for (let i = 0; i < this.addForm.value.Image.length; i++) {
+            const el = this.addForm.value.Image[i];
+            const id = news[i];
+            if (el instanceof File) {
+              var formData = new FormData();
+              formData.append('Image', el, el.name.replace(' ','_'));
+              this.ws.UploadFile(id, UploadTypes.NewImage, formData).subscribe(event=>{
+                if(event.type == HttpEventType.UploadProgress){
+                  this.ls.load = Math.round(event.loaded/event.total * 100);
+                }
+                else if(event.type == HttpEventType.Response){
+                  (<FormArray>this.addForm.get('Image')).controls[i].setValue(event.body[0].Image);
+                  this.item.Image.push(event.body[0].Image);
+                }
+              })
+            }
+            else {
+              this.ws.updateUrl({Id:id, Image:el}).subscribe(()=>{});
+            }
+          } 
+        }
+        this.ls.showLoad = false;
+        this._as.alert.showAlert({
+          type: AlertType.Success,
+          message: "Данные документа успешно обновлены"
+        })
+      });
     }
-    this.shows = {};
-    this.shows[s] = true;
   }
 
-  putFile(event){
-    if(event.target.files[0].type=='image/jpeg' || event.target.files[0].type=='image/png'){
-      this.image = <File>event.target.files[0];
-      this.checkChange();
-      this.invalidImage = false;
-    }else{
-      this.invalidImage = true;
-    }
-
-    
-  }
-  unload(){
-    this.image = null;
-  }
-  unloadLink(s){
-    s.Image = null;
-    return true;
+  removeImg(i){
+    (<FormArray>this.addForm.get('Image')).removeAt(i);
   }
 
+  get f() { return this.addForm.controls; };
 }

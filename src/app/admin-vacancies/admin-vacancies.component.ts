@@ -22,9 +22,7 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
     this._ws.getVacancies().subscribe(v => {
       this.items = v;
     })
-    this._initForm(); 
-
-    console.log(this.addForm)
+    this._initForm();
   }
 
   private _initForm(){
@@ -49,6 +47,8 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
           Name: [null, Validators.required]
         })
       ]),
+      Country:[null, Validators.required],
+      Salary: [null]
     })
     this.update = {};
   }
@@ -64,6 +64,8 @@ export class AdminVacanciesComponent extends AddService implements OnInit {
       Duties: new FormArray([]),
       Requirements: new FormArray([]),
       Conditions: new FormArray([]),
+      Country:[this.item.Country, Validators.required],
+      Salary: [this.item.Salary, Validators.required]
     });
     
 

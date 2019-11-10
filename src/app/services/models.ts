@@ -12,7 +12,7 @@ export class App extends BaseEntity{
 }
     
 export class News extends BaseEntity{
-    Image:string;
+    Image:string[];
     Name: string;
     CreateDate:Date;
 }
@@ -70,6 +70,7 @@ export enum DocTypes{
 
 export enum UploadTypes{
     News = "new",
+    NewImage = "newsimage",
     Docs = "doc"
 }
 
@@ -104,6 +105,7 @@ export interface Vacancy{
     Duties: VacancyItem[];
     Requirements: VacancyItem[];
     Conditions: VacancyItem[];
+    Country: string;
 }
 
 export interface VacancyItem{

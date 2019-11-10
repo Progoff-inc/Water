@@ -1,5 +1,5 @@
 <div *ngIf="type=='img'" class="cont img">
-  <img *ngIf="showImage; else showName" src="{{href}}">
+  <img *ngIf="showImage; else showName" src="{{href}}" (click) = remove()>
   <ng-template #showName>
     <p>{{href}}</p>
   </ng-template>

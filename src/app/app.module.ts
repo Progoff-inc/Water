@@ -39,7 +39,6 @@ import { UserService } from './services/user.service';
 import { AdminComponent } from './admin/admin.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { NewsMainComponent } from './news-main/news-main.component';
-import { AddNewsComponent } from './add-news/add-news.component';
 import { DocsMainComponent } from './docs-main/docs-main.component';
 import { FooterComponent } from './footer/footer.component';
 import { FeedbackComponent } from './feedback/feedback.component';
@@ -90,7 +89,6 @@ import { DocPipe } from './services/pipes/doc.pipe';
     AdminComponent,
     MainHeaderComponent,
     NewsMainComponent,
-    AddNewsComponent,
     DocsMainComponent,
     FooterComponent,
     FeedbackComponent,

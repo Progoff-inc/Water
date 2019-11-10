@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'document',
@@ -10,6 +10,7 @@ export class DocumentComponent implements OnInit {
   @Input() href:string;
   @Input() text:string;
   @Input() showImage:boolean = true;
+  @Output() removeImg: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {
@@ -21,6 +22,10 @@ export class DocumentComponent implements OnInit {
       let vs = v.split('/');
         return vs[vs.length-1];
     }
+  }
+
+  remove(){
+    this.removeImg.emit(true);
   }
 
 }
