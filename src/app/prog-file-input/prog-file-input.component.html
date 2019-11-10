@@ -1,2 +1,2 @@
 <button class="btn btn-link" (click)="file.click()">{{this.value?'Изменить' : 'Загрузить'}}</button>
-<input class="d-none" type="file" (change)="updateValue($event)" #file>
+<input class="d-none" type="file" entype="multipart/form-data"  (change)="updateValue($event)" #file>

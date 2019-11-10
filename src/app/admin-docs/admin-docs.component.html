@@ -1,6 +1,3 @@
-<!-- <div class="alert alert-danger" role="alert">
-  Функция на стадии тестирования. Использование не рекомендуется.
-</div> -->
 <div class="container" *ngIf="docs">
   <h4 class="page-min-head">Добавление и редактирование документов</h4>
   <div class="form-group">
@@ -15,8 +12,6 @@
     <div class="form-group d-flex flex-column align-items-start">
       <label [ngClass]="{'text-danger':(submitted && f.Image.errors)}">Фотография</label>
       <document *ngIf="v.Image" [showImage]="!v.Image.name" [type]="'img'" [href]="v.Image.name || v.Image"></document>
-      <!-- <span>{{v.photo==''?'':getValue(v.photo)}}<button class="btn btn-link" (click)="photo.click()">{{!item && v.Image=='' || item && item.Image==''?'Загрузить':'Изменить'}} фотографию</button></span>
-      <input class="d-none" id='Image' type="file" (change)="setFile($event)" formControlName="Image" #Image> -->
       <prog-file-input formControlName="Image"></prog-file-input>
       <small  class="form-text text-danger" *ngIf="submitted && f.Document.errors && f.Document.errors.required">Загрузите изображение</small>
       <small  class="form-text text-danger" *ngIf="submitted && f.Image.errors && f.Image.errors.filename">Файл с расширением .png или .jpg</small>

@@ -44,9 +44,14 @@ export class ProgFileInputComponent implements ControlValueAccessor, OnInit {
   }
 
   updateValue(event){
-    console.log(event)
+    console.dir(event);
     this.file = this.singleFile? event.target.files[0]: event.target.files;
-    this.value = this.singleFile? this.file.name : this.file.map(x => x.name);
+    if (this.file) {
+      this.value = this.singleFile? this.file.name : this.file.map(x => x.name);
+    }
+    else{
+      this.value = null;
+    }
     this.onChange(this.file);
     this.onTouched();
     this.change.emit(this.file);
