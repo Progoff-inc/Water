@@ -6,25 +6,30 @@ class DataBase {
     public function __construct()
     {
         //$this->db = new PDO('mysql:host=localhost;dbname=myblog;charset=UTF8','nlc','12345');
-        $this->db = new PDO('mysql:host=localhost;dbname=nomokoiw_water;charset=UTF8','nomokoiw_water','rvUjM8c%');
+        $this->db = new PDO('mysql:host=localhost;dbname=ih654686_water;charset=UTF8','ih654686_ivan','M*WRpDl1');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
     public function uploadFile($l, $p, $pid, $files, $t){
         if($this->checkAdmin($l, $p)){
+            //return $files;
             $img=$this->getImage($pid, $t);
             if($img){
                 $this->removeFile($img);
             }
-            $url = "http://client.nomokoiw.beget.tech/water/";
+            $url = "http://vdknf.ru/water/";
             $n = basename($t."_".$pid);
+            $column = 'Image';
             //$tid=ucfirst($t)."Id";
             $tid="Id";
+            /*if($t='newsimage'){
+                $tid="NewId";
+            };*/
             $t .="s";
             
             if(file_exists("Files")){
                 if($files['Data'] != null){
-                    $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
+                    $n = basename($t."_".$pid."_".$collumn."_".$files['Data']['name']);
                     $d = "Files/$n";
                     if(move_uploaded_file($files['Data']['tmp_name'], $d)){
                         $s = $this->db->prepare("UPDATE $t SET Image=? WHERE $tid=?");
@@ -36,8 +41,6 @@ class DataBase {
                 }else{
                     $result = array();
                     for ($i = 0; $i < count(array_keys($files)); $i++) {
-                        
-                        
                         $collumn = array_keys($files)[$i];
                         $n = basename($t."_".$pid."_".$collumn."_".$files[$collumn]['name']);
                         $d = "Files/$n";
@@ -85,6 +88,19 @@ class DataBase {
         }
     }
 
+    public function updUrl($l, $p, $url){
+        if($this->checkAdmin($l, $p)){
+            $id = $url['Id'];
+            unset($url['Id']);
+            $a = $this->genUpdateQuery(array_keys($url), array_values($url), "newsimages", $id);
+            $s = $this->db->prepare($a[0]);
+            $s->execute($a[1]);
+            return $a;
+        }else{
+            return null;
+        }
+    }
+    
     public function getImage($id, $t){
         // $tid=ucfirst($t)."Id";
         $tid="Id";
@@ -145,7 +161,13 @@ class DataBase {
         
         $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");
         $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
-        return $sth->fetchAll();
+        /*return $sth->fetchAll();*/
+        $news =  [];
+        while($r = $sth->fetch()){
+            $r->Image = $this->getNewImage($r->Id);
+            $news[] = $r;
+        }
+        return $news;
     }
     
     public function getQuestions($l){
@@ -261,6 +283,17 @@ class DataBase {
         return $contacts;
     }
     
+    private function getNewImage($id){
+        $sth = $this->db->prepare("SELECT * FROM newsimages WHERE NewId=?");
+        $sth->execute(array($id));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'NewsImage');
+        $images = [];
+        while($r = $sth->fetch()){
+            $images[] = $r[2];
+        }
+        return $images;
+    }
+    
     private function getVacancy($id, $type){
         $sth = $this->db->prepare("SELECT * FROM vacancyvalues WHERE VacancyId=? and Type=?");
         $sth->execute(array($id, $type));
@@ -296,7 +329,7 @@ class DataBase {
             if($app['Phone']!=null){
                 $tel=$app['Phone'];
             }
-            $to = "nomokonov.vana@yandex.ru";
+            $to = "marija.ilyinskaia@yandex.ru, lawyer2@vdknf.ru, volik9925@yandex.ru";
             $subject = $app['Topic'];
             $str = file_get_contents("appsMess.html");
             $str = str_replace ( '#name#' , $app['Name'], $str);
@@ -311,15 +344,37 @@ class DataBase {
 
     public function addNews($l, $p, $new){
         if($this->checkAdmin($l, $p)){
+            $images = $new['Image'];
+            unset($new['Image']);
             $res = $this->genInsertQuery($new,"news");
             $s = $this->db->prepare($res[0]);
             if($res[1][0]!=null){
                 $s->execute($res[1]);
             }
-            return $this->getNewsById($this->db->lastInsertId());
+            $newId = $this->db->lastInsertId();
+            $imgIds = $this->addImages($newId, $images);
+            return array($newId, $imgIds);
         }else{
             return null;
         }
+    }
+    
+    private function addImages($id, $images, $rm = false){
+        if($rm and $images!=null){
+            $this->removeNewImage($id);
+        };
+        for($i = 0; $i < count($images); $i++){
+            $c = array(
+            'NewId'=> $id
+            );
+            $res = $this->genInsertQuery($c,"newsimages");
+            $s = $this->db->prepare($res[0]);
+            if($res[1][0]!=null){
+                $s->execute($res[1]);
+            }
+            $idses[] = $this->db->lastInsertId();
+        }
+        return $idses;
     }
     
     public function addQuestion($l, $p, $new){
@@ -443,6 +498,11 @@ class DataBase {
     private function removeContacts($id, $types = array('phone', 'email', 'address')){
         $types = "('".implode("','",$types)."')";
         $s = $this->db->prepare("DELETE FROM contactvalues WHERE ContactId=? AND Type IN ".$types);
+        $s->execute(array($id));
+    }
+    
+    private function removeNewImage($id){
+        $s = $this->db->prepare("DELETE FROM newsimages WHERE NewId=?");
         $s->execute(array($id));
     }
     
@@ -576,10 +636,12 @@ class DataBase {
         if($this->checkAdmin($l, $p)){
             $id = $new['Id'];
             unset($new['Id']);
+            $idses = $this->addImages($id, $new['Image'], true);
+            unset($new['Image']);
             $a = $this->genUpdateQuery(array_keys($new), array_values($new), "news", $id);
             $s = $this->db->prepare($a[0]);
             $s->execute($a[1]);
-            return $a;
+            return $idses;
         }else{
             return false;
         }
@@ -598,10 +660,14 @@ class DataBase {
         }
     }
     
-    public function removeNew($l, $p, $id){
+    public function removeNew($l, $p, $id, $images){
         if($this->checkAdmin($l, $p)){
             $s = $this->db->prepare('DELETE FROM news WHERE Id=?');
             $s->execute(array($id));
+            $this->removeNewImage($id);
+            for($i=0; $i<count($images); $i++){
+                $this->removeFile($images[$i]);
+            }
             return true;
         }else{
             return null;

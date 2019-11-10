@@ -45,7 +45,6 @@ if(isset($_GET['Key']))
             echo json_encode($ctxt->getProps());
             break;
         case 'search':
-            
             echo json_encode($ctxt->search($_GET['SearchString']));
             break;
         case 'add-app':
@@ -55,6 +54,10 @@ if(isset($_GET['Key']))
         case 'add-news':
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->addNews($_GET['Login'], $_GET['Password'], $b));
+            break;
+        case 'update-url':
+            $b = json_decode(file_get_contents('php://input'), true);
+            echo json_encode($ctxt->updUrl($_GET['Login'], $_GET['Password'], $b));
             break;
         case 'add-doc':
             $b = json_decode(file_get_contents('php://input'), true);
@@ -81,9 +84,12 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->updateQuestion($_GET['Login'], $_GET['Password'], $b));
             break;
-            
         case 'remove-item': 
             echo json_encode($ctxt->removeItem($_GET['Login'], $_GET['Password'], $_GET['Id'], $_GET['Table']));
+            break;
+        
+        case 'remove-new': 
+            echo json_encode($ctxt->removeNew($_GET['Login'], $_GET['Password'], $_GET['Id'], $_GET['Images']));
             break;
             
         case 'add-contact':
