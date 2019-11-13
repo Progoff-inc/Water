@@ -34,6 +34,9 @@ export class DocPipe implements PipeTransform{
             case DocTypes.Evaluation:{
                 return 'Специальная оценка условий труда';
             }
+            case DocTypes.Orders:{
+                return 'Распоряжения';
+            }
             case DocTypes.VZU:{
                 return 'Свободные мощности ВЗУ';
             }

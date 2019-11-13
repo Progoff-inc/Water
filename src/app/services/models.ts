@@ -60,6 +60,7 @@ export enum DocTypes{
   RatesPay = "rates-pay",
   RatesConnect = "rates-connect",
   Props = "props",
+  Orders = "orders",
   Constituent = "constituent",
   Bookkeeping = "bookkeping",
   Allowing = "allowing",

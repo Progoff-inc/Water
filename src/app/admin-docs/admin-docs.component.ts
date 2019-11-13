@@ -48,7 +48,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
     this.addForm = this._fb.group({
       Name:[null, Validators.required],
       Type:[null, Validators.required],
-      IsImportant:[null, Validators.required],
+      IsImportant:[0],
       Description: [null],
       Image:[null, [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
       Document:[null, [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
