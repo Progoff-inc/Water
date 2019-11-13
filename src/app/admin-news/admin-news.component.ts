@@ -141,7 +141,7 @@ export class AdminNewsComponent extends AddService implements OnInit {
     this.ws.removeNews(this.item.Id, this.item.Image).subscribe(x=>{
       if(x){
         this._as.alert.showAlert({
-          type: AlertType.Danger,
+          type: AlertType.Success,
           message: "Новость успешно удалена"
         })
         this.ngOnInit();
