@@ -32,8 +32,8 @@ export class AddQuestionComponent implements OnInit {
       Name:['',Validators.required],
       Description:['',Validators.required]
     })
-    this.ws.getQuestions(1000).subscribe(faq =>{
-      this.faqs = faq;
+    this.ws.getQuestions().subscribe(faq =>{
+      this.faqs = faq.Questions;
     })
   }
 

@@ -24,8 +24,8 @@ export class WaterService{
       return this.http.get<Vacancy[]>(this.baseUrl + 'Key=get-vacancies');
     }
 
-    getQuestions(lim:number){
-      return this.http.get<BaseEntity[]>(this.baseUrl + 'Key=get-questions&Limit='+lim);
+    getQuestions(lim:number = null){
+      return this.http.get<{Count:number, Questions:BaseEntity[]}>(this.baseUrl + 'Key=get-questions&Limit='+lim);
     }
 
     search(str){

@@ -15,8 +15,8 @@ export class FaqComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ws.getQuestions(1000).subscribe(q => {
-      this.faq = q;
+    this.ws.getQuestions().subscribe(q => {
+      this.faq = q.Questions;
     })
   }
 
