@@ -156,10 +156,11 @@ class DataBase {
     
     public function getNews($l){
         if($l == null){
-            $l = 10;
+            $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC");
         }
-        
-        $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");
+        else{
+            $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");   
+        }
         $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
         /*return $sth->fetchAll();*/
         $news =  [];
@@ -171,13 +172,15 @@ class DataBase {
     }
     
     public function getQuestions($l){
-        if($l == null){
-            $l = 10;
+        $i = $this->db->query("SELECT count(*) as Count FROM questions")->fetch()['Count'];
+        if($l == null || $l == 'null'){
+            $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC");
         }
-        
-        $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC LIMIT $l");
+        else{
+            $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC LIMIT $l");   
+        }
         $sth->setFetchMode(PDO::FETCH_CLASS, 'BaseEntity');
-        return $sth->fetchAll();
+        return array(Count => $i, Questions => $sth->fetchAll());
     }
 
     public function getApps($l, $p){
