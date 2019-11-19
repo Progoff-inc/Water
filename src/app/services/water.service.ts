@@ -1,4 +1,4 @@
-import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact, BaseEntity, Vacancy } from './models';
+import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact, BaseEntity, Vacancy, DocType } from './models';
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoadService } from './load.service';
@@ -40,8 +40,16 @@ export class WaterService{
       return this.http.get<Prop[]>(this.baseUrl + 'Key=get-props');
     }
 
-    getTypeDocs(types:DocTypes[]){
+    getDocs(types){
+      return this.http.post<any>(this.baseUrl + 'Key=get-docs', types);
+    }
+
+    getTypeDocs(types){
       return this.http.post<Doc[]>(this.baseUrl + 'Key=get-type-docs',types);
+    }
+
+    getDocTypes(info = null){
+      return this.http.get<any>(this.baseUrl + 'Key=get-doc-types&Info='+info);
     }
 
     getRates(type:ClientTypes){

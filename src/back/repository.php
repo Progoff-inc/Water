@@ -207,9 +207,17 @@ class DataBase {
 
     public function getTypeDocs($types){
         $types = "('".implode("','",$types)."')";
-        $sth = $this->db->prepare("SELECT * FROM docs WHERE Type IN ".$types);
+        $sth = $this->db->prepare("SELECT * FROM docs WHERE TypeId IN ".$types);
         $sth->execute(array($type));
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
+        return $sth->fetchAll();
+    }
+    
+    public function getDocTypes($info){
+        $info = ($info === 'true' OR $info === true);
+        $sth = $this->db->prepare("SELECT * FROM doctypes WHERE Info=?");
+        $sth->execute(array((bool)$info));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'DocType');
         return $sth->fetchAll();
     }
     

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WaterService } from '../services/water.service';
-import { RateTypes, DocTypes, Doc, ClientTypes } from '../services/models';
+import { RateTypes, DocTypes, Doc, ClientTypes, Rate } from '../services/models';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -11,129 +11,36 @@ import { forkJoin } from 'rxjs';
 export class BuisenessRatesComponent implements OnInit {
   docs:Doc[];
   shows = {};
-  years = [2018, 2019, 2020];
+  years = [];
   curYears = {};
   rateTypes = {};
+  rates:Rate[] = [];
+  arOfTypes = [];
 
-  rates:any = [
-    {
-      Name:RateTypes.GetWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    },
-    {
-      Name:RateTypes.GiveWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    },
-    {
-      Name:RateTypes.DrinkWater,
-      Prices: [
-        {
-          DateStart: new Date(2018, 0),
-          DateFinish: new Date(2018, 5, 30),
-          Price: 26.46
-        },
-        {
-          DateStart: new Date(2018, 6),
-          DateFinish: new Date(2018, 11, 31),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 0),
-          DateFinish: new Date(2019, 5, 30),
-          Price: 27.34
-        },
-        {
-          DateStart: new Date(2019, 6),
-          DateFinish: new Date(2019, 11, 31),
-          Price: 28.77
-        },
-        {
-          DateStart: new Date(2020, 0),
-          DateFinish: new Date(2020, 5, 30),
-          Price: 28.01
-        },
-        {
-          DateStart: new Date(2020, 6),
-          DateFinish: new Date(2020, 11, 31),
-          Price: 28.96
-        }
-      ]
-    }
-  ]
   constructor( public ws:WaterService) { }
 
   ngOnInit() {
+    let year = new Date().getFullYear();
+    for (let i = -10; i < 10; i++) {
+      if ((year+i)>=2018) {
+        this.years.push(year+i);
+      };
+    }
     this.rateTypes[RateTypes.GetWater] = "Водоснабжение",
     this.rateTypes[RateTypes.GiveWater] = "Водоотведение",
     this.rateTypes[RateTypes.DrinkWater] = "Питьевая вода",
-    forkJoin(this.ws.getTypeDocs([DocTypes.RatesPay, DocTypes.RatesConnect]),this.ws.getRates(ClientTypes.Client))
-    .subscribe(([docs, rates]) => {
-      this.docs = docs;
-      if(rates.length<0){
-        this.rates = rates;
-      }
+    this.ws.getDocTypes(false).subscribe(types => {
+      types.forEach(el => {
+        if (el.Name == 'Тарифы' || el.Name == 'Тарифы на подключение') {
+          this.arOfTypes.push(el.Id);
+        }
+      });
+      forkJoin(this.ws.getTypeDocs(this.arOfTypes),this.ws.getRates(ClientTypes.Business)).subscribe(([docs, rates]) => {
+        this.docs = docs;
+        if(rates.length>0){
+          this.rates = rates;
+        }
+      })
     })
   }
   show(s){
@@ -146,7 +53,7 @@ export class BuisenessRatesComponent implements OnInit {
   }
 
   getRate(r){
-    return r.Prices.filter(x => x.DateStart.getFullYear()==Number(this.curYears[r.Name]));
+    return r.Prices.filter(x => new Date(x.DateStart).getFullYear()==Number(this.curYears[r.Name]));
   }
 
 }

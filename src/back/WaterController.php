@@ -35,6 +35,9 @@ if(isset($_GET['Key']))
             $b = json_decode(file_get_contents('php://input'), true);
             echo json_encode($ctxt->getTypeDocs($b));
             break;
+        case 'get-doc-types':
+            echo json_encode($ctxt->getDocTypes($_GET['Info']));
+            break;
         case 'get-prop':
             echo json_encode($ctxt->getProp($_GET['Name']));
             break;
