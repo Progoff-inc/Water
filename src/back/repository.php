@@ -156,10 +156,11 @@ class DataBase {
     
     public function getNews($l){
         if($l == null){
-            $l = 10;
+            $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC");
         }
-        
-        $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");
+        else{
+            $sth = $this->db->query("SELECT * FROM news ORDER BY CreateDate DESC LIMIT $l");   
+        }
         $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
         /*return $sth->fetchAll();*/
         $news =  [];
@@ -171,13 +172,15 @@ class DataBase {
     }
     
     public function getQuestions($l){
-        if($l == null){
-            $l = 10;
+        $i = $this->db->query("SELECT count(*) as Count FROM questions")->fetch()['Count'];
+        if($l == null || $l == 'null'){
+            $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC");
         }
-        
-        $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC LIMIT $l");
+        else{
+            $sth = $this->db->query("SELECT * FROM questions ORDER BY Id DESC LIMIT $l");   
+        }
         $sth->setFetchMode(PDO::FETCH_CLASS, 'BaseEntity');
-        return $sth->fetchAll();
+        return array(Count => $i, Questions => $sth->fetchAll());
     }
 
     public function getApps($l, $p){
@@ -204,9 +207,17 @@ class DataBase {
 
     public function getTypeDocs($types){
         $types = "('".implode("','",$types)."')";
-        $sth = $this->db->prepare("SELECT * FROM docs WHERE Type IN ".$types);
+        $sth = $this->db->prepare("SELECT * FROM docs WHERE TypeId IN ".$types);
         $sth->execute(array($type));
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Doc');
+        return $sth->fetchAll();
+    }
+    
+    public function getDocTypes($info){
+        $info = ($info === 'true' OR $info === true);
+        $sth = $this->db->prepare("SELECT * FROM doctypes WHERE Info=?");
+        $sth->execute(array((bool)$info));
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'DocType');
         return $sth->fetchAll();
     }
     

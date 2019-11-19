@@ -18,7 +18,6 @@ import { AlertType } from '../prog-alert/prog-alert.component';
   styleUrls: ['./admin-docs.component.less']
 })
 export class AdminDocsComponent extends AddService implements OnInit {
-  docs: Doc[];
   description = '';
   tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls|\.zip|\.7z|\.rar)$/i;
   ipattern=/(\.png|\.jpg)$/i;
@@ -41,29 +40,28 @@ export class AdminDocsComponent extends AddService implements OnInit {
 
   ngOnInit() {
     this._ws.getTypeDocs(<DocTypes[]>Object.values(DocTypes)).subscribe(docs => {
-      this.docs = docs;
       this.items = docs;
     })
 
     this.addForm = this._fb.group({
       Name:[null, Validators.required],
       Type:[null, Validators.required],
-      IsImportant:[0],
+      IsImportant:[false],
       Description: [null],
       Image:[null, [Validators.required, WaterValidators.FileNameValidator(this.ipattern)]],
       Document:[null, [Validators.required, WaterValidators.FileNameValidator(this.tpattern)]]
     })
   }
 
-  public onReady( editor ) {
+  public onReady(editor) {
     editor.ui.getEditableElement().parentElement.insertBefore(
-        editor.ui.view.toolbar.element,
-        editor.ui.getEditableElement()
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
     );
   }
   public setForm(id){
-    this.item = this.docs.find(x => x.Id == id);
-    this.item.IsImportant = this.item.IsImportant === '1';
+    this.item = this.items.find(x => x.Id == id);
+    //this.item.IsImportant = this.item.IsImportant === '1';
     this.addForm.patchValue(this.item);
   }
 
@@ -81,6 +79,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
 
   private _add(): void{
     this._ls.showLoad = true;
+    console.log(this.v);
     this._ws.addDoc({Name: this.v.Name, Type: this.v.Type, IsImportant: this.v.IsImportant, Description: this.v.Description}).subscribe(docId => {
       const formData = new FormData();
       formData.append('Image', this.v.Image);
@@ -88,13 +87,13 @@ export class AdminDocsComponent extends AddService implements OnInit {
       this._ws.UploadFile(docId, UploadTypes.Docs, formData).subscribe(event=>{
         if(event.type == HttpEventType.UploadProgress){
           this._ls.load = Math.round(event.loaded/event.total * 100);
-          
         }
         else if(event.type == HttpEventType.Response){
+          console.log(event.body);
           this.items.unshift({
             Id: docId, 
-            Image: event.body.Image, 
-            Document: event.body.Document, 
+            Image: event.body[0].Image, 
+            Document: event.body[0].Document, 
             Name: this.v.Name, 
             Type: this.v.Type, 
             IsImportant: this.v.IsImportant,
@@ -108,7 +107,6 @@ export class AdminDocsComponent extends AddService implements OnInit {
             message: "Документ успешно добавлен"
           })
         }
-        
       })
     })
   }
@@ -130,7 +128,6 @@ export class AdminDocsComponent extends AddService implements OnInit {
       this._ws.UploadFile(this.item.Id, UploadTypes.Docs,update.files).subscribe(event=>{
         if(event.type == HttpEventType.UploadProgress){
           this._ls.load = Math.round(event.loaded/event.total * 100);
-          
         }
         else if(event.type == HttpEventType.Response){
           this.item = Object.assign(this.item, event.body[0]);

@@ -47,8 +47,14 @@ class Doc{
     public $Id;
     public $Name;
     public $Image;
-    public $Type;
+    public $TypeId;
     public $Document;
+}
+
+class DocType{
+    public $Id;
+    public $Name;
+    public $Info;
 }
 
 class Prop{

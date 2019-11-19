@@ -22,7 +22,7 @@ export class Doc{
     Name:string;
     Image:string;
     Description?:string;
-    Type?:DocTypes;
+    TypeId:number;
     Document?:string;
 }
 
@@ -53,6 +53,12 @@ export class Price{
     DateStart:Date;
     DateFinish:Date;
     Price:number;
+}
+
+export class DocType{
+    Id:number;
+    Name:string;
+    Info?:number;
 }
 
 export enum DocTypes{

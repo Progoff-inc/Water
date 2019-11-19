@@ -19,8 +19,6 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./admin-news.component.less']
 })
 export class AdminNewsComponent extends AddService implements OnInit {
-  @Input() news:News[] = [];
-
   addForm:FormGroup;
   submitted = false;
   images = [];
@@ -43,7 +41,6 @@ export class AdminNewsComponent extends AddService implements OnInit {
 
   ngOnInit() {
     this.ws.getNews().subscribe(news => {
-      this.news = news;
       this.items = news;
     })
     this.submitted = false;
@@ -60,7 +57,7 @@ export class AdminNewsComponent extends AddService implements OnInit {
   }
 
   public setForm(id){
-    this.item = this.news.find(x => x.Id == id);
+    this.item = this.items.find(x => x.Id == id);
 
     this.submitted = true;
     

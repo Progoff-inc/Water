@@ -9,33 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./reference-book.component.less']
 })
 export class ReferenceBookComponent implements OnInit {
-  docs:Doc[] = [
-    {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png"
-    },
-    {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png"
-    },
-    {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png"
-    },
-    {
-      Id:1,
-      Name:"ПРИКАЗ №157 ОБ УТВЕРЖДЕНИИ СБРОСА ПО СОСТАВУ СТОЧНЫХ ВОД",
-      Image:"../../assets/images/doc.png"
-    }
-  ]
+  docs:Doc[] = [];
+  arOfTypes = [];
   constructor(private ws:WaterService, private router:Router) { }
 
   ngOnInit() {
-    this.ws.getTypeDocs([DocTypes.RefBook]).subscribe(docs => {
-      this.docs = docs;
+    this.ws.getDocTypes(false).subscribe(types => {
+      types.forEach(el => {
+        if (el.Name == 'Справочник абонента') {
+          this.arOfTypes.push(el.Id);
+        }
+      });
+      this.ws.getTypeDocs(this.arOfTypes).subscribe(docs => {
+        this.docs = docs;
+      })
     })
   }
 
