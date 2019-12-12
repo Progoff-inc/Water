@@ -1,5 +1,4 @@
 <h4 class="page-min-head">Услуги для организаций</h4>
-
 <div class="section">
   <div class="section-header" (click)="show('first')"><span>Подготовка технических условий и разрешений</span><i class="fas fa-caret-down"></i></div>
   <div class="section-body" *ngIf="this.shows.first">
@@ -25,7 +24,6 @@
 <div class="section" >
   <div class="section-header" (click)="show('second')"><span>Отключение/подключение холодной воды при выполнении ремонтных работ</span><i class="fas fa-caret-down"></i></div>
   <div class="section-body" *ngIf="this.shows.second">
-    <p><i>Вам необходимо обратиться в <b class="text-primary" style="font-style: normal;"><a routerLink="/contacts">ПТО</a></b>(производственно-технический отдел) МУП «Водоканал»</i></p>
     <p>Для отключения/подключения холодной воды при выполнении ремонтных работ Вам необходимо:</p>
     <ul class="image-list-num" >
       <div><i></i><span>Заключить договор и оплатить услугу по отключению/подключению к сетям водоснабжения (обратиться в <b class="text-danger"><a routerLink="/contacts">Диспетчерскую службу</a></b> МУП «Водоканал»)</span></div>
@@ -37,7 +35,6 @@
 <div class="section">
   <div class="section-header" (click)="show('fourth')"><span>Для исследования питьевой воды:</span><i class="fas fa-caret-down"></i></div>
   <div class="section-body" *ngIf="this.shows.fourth">
-    <p><i>Вам необходимо обратиться в <b class="text-primary" style="font-style: normal;"><a routerLink="/contacts">ПТО</a></b>(производственно-технический отдел) МУП «Водоканал»</i></p>
     <h5 class="my-2">Вам необходимо выполнить следующие шаги:</h5>
     <ol class="counter-list">
       <li>Обратиться в МУП «Водоканал»  по адресу:
@@ -72,7 +69,6 @@
 <div class="section">
   <div class="section-header" (click)="show('third')"><span>Для согласования проектно-технической документации и топографических съемок Вам необходимо:  </span><i class="fas fa-caret-down"></i></div>
   <div class="section-body" *ngIf="this.shows.third">
-    <p><i>Вам необходимо обратиться в <b class="text-primary" style="font-style: normal;"><a routerLink="/contacts">ПТО</a></b>(производственно-технический отдел) МУП «Водоканал»</i></p>
     <ul class="image-list-num" >
       <div><i></i><span>Подать заявление на согласование (см. <a href="http://vdknf.ru/water/Docs/services/SOGLASOVANO.rar" target="_blank">Заявление</a>) в МУП «Водоканал» по адресу: г. Наро-Фоминск, ул. Московская, д.11-206 (второй этаж, приемная) с приложением карточки предприятия – для юридических лиц; паспорта – для физических лиц;</span></div>
       <div><i></i><span>После рассмотрения заявки с Вами свяжется специалист производственно-технического отдела, Вам необходимо будет получить договор на оказание услуг по согласованию и оплатить счет;</span></div>
@@ -110,7 +106,24 @@
 <div class="section">
   <div class="section-header" (click)="show('nineth')"><span>Подготовка справок / информации:</span><i class="fas fa-caret-down"></i></div>
   <div class="section-body" *ngIf="this.shows.nineth">
-    <p><i>Для заключения договора Вам необходимо обратиться в <b class="text-primary-dark"><a routerLink="/contacts">АО</a></b>(абонентский отдел) МУП «Водоканал»</i></p>
+    <p><i>Для заключения договора Вам необходимо обратиться в <b class="text-primary-dark"><a routerLink="/contacts">АО</a></b> (абонентский отдел) МУП «Водоканал»</i></p>
   </div>
 </div>
-
+<div class="section">
+  <div class="section-header" (click)="show('tenth')"><span>Установка станций водоподготовки для дополнительной очистки воды</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows.tenth">
+    <p><i>Для установки станций водоподготовки для дополнительной очистки воды Вам необходимо обратиться в <b class="text-primary-dark"><a routerLink="/contacts">ПТО</a></b> (производственно-технический отдел) МУП «Водоканал»</i></p>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header" (click)="show('eleventh')"><span>Обслуживание локальных очистных сооружений  ("Танк", "Топаз" и т.д.)</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows.eleventh">
+    <p><i>Для обслуживания локальных очистных сооружений Вам необходимо обратиться в <b class="text-primary-dark"><a routerLink="/contacts">ПТО</a></b> (производственно-технический отдел) МУП «Водоканал»</i></p>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header" (click)="show('twelveth')"><span>Осуществление ремонта насосного оборудования водозаборных узлов КНС</span><i class="fas fa-caret-down"></i></div>
+  <div class="section-body" *ngIf="this.shows.twelveth">
+    <p><i>Для осуществления ремонта насосного оборудования водозаборных узлов КНС Вам необходимо обратиться в <b class="text-primary-dark"><a routerLink="/contacts">ПТО</a></b> (производственно-технический отдел) МУП «Водоканал»</i></p>
+  </div>
+</div>
