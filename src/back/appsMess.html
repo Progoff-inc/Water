@@ -6,28 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div style="width: 100%">
+    <div style="width: 70%;
+                margin: auto;
+                background-image: url(back.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                padding: 20px;">
+        
         <div style="display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     color: red;
                     font-size: 16pt;
-                    margin: 10px;">
+                    margin: 10px">
             <div>Это письмо отправлено с помощью формы на сайте vdknf.ru!</div>
             <div>Пожалуйста, занесите ответ на него в F.A.Q., если это необходимо!</div>
         </div>
-        <div>
-            <div style="font: bold; font-size: 16pt">Имя отправителя</div>
-            <div style="margin: 10px">#name#</div>
-        </div>
-        <div>
-            <div style="font: bold; font-size: 16pt">Телефон отправителя</div>
-            <div style="margin: 10px">#tel#</div>
-        </div>
-        <div>
-            <div style="font: bold; font-size: 16pt">Текст сообщения</div>
-            <div style="margin: 10px">#text#</div>
+        <div style="color: whitesmoke;
+                    border: 3px solid white;
+                    border-radius: 10px;
+                    padding: 5px;">
+
+            <div style="display: flex;
+                        flex-direction: row;
+                        justify-content: space-around;">
+                
+                <div style="display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;">
+                    
+                    <div style="display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;">
+                        <div style="font: bold; font-size: 16pt">Имя отправителя</div>
+                        <div style="margin: 10px">#name#</div>
+                    </div>
+                    
+                    <div style="display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;">
+                        <div style="font: bold; font-size: 16pt">Телефон отправителя</div>
+                        <div style="margin: 10px">#tel#</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                    
+                    <div style="display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;">
+                        <div style="font: bold; font-size: 16pt">Почта отправителя</div>
+                        <div style="margin: 10px">#email#</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;">
+                <div style="font: bold; font-size: 16pt">Текст сообщения</div>
+                <div style="margin: 10px">#text#</div>
+            </div>
         </div>
     </div>
 </body>
