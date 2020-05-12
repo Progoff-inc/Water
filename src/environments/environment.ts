@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: "http://client.nomokoiw.beget.tech/water/"
+  // base_url: "http://client.nomokoiw.beget.tech/water/"
+  base_url: "http://vdknf.ru/water/"
 };
 
 /*

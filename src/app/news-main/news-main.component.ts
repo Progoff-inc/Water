@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadService } from '../services/load.service';
 import { WaterService } from '../services/water.service';
-import { News } from '../services/models';
+import { News, Image } from '../services/models';
 
 @Component({
   selector: 'news-main',
@@ -11,7 +11,7 @@ import { News } from '../services/models';
 export class NewsMainComponent implements OnInit {
   news:News[];
   newsMain:News[];
-  imageAr:string[];
+  imageAr = [];
   //private readonly defaultLogo = "http://vdknf.ru/water/Files/logo_vdknf.png";
   constructor(private ls:LoadService, private ws: WaterService) { }
 
@@ -24,10 +24,11 @@ export class NewsMainComponent implements OnInit {
           el.Name = el.Name.substr(0,30)+'...'; 
         }
       });
-      this.imageAr = [
-        'http://vdknf.ru/water/Files/new_1_narofominsk2.jpg',
-        'http://vdknf.ru/water/Files/logo_vdknf.png',
-      ]
+      this.ws.getImages().subscribe(images => {
+        images.forEach(el => {
+          this.imageAr.push(el.Image)
+        });
+      })
       this.ls.showLoad = false;
     })
   }

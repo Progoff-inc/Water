@@ -26,6 +26,12 @@ export class Doc{
     Document?:string;
 }
 
+export class Image{
+    Id:number;
+    Image:string;
+    Name:string;
+}
+
 export class Prop{
     Id:number;
     Name:string;
@@ -78,7 +84,8 @@ export enum DocTypes{
 export enum UploadTypes{
     News = "new",
     NewImage = "newsimage",
-    Docs = "doc"
+    Docs = "doc",
+    MainImage = "mainimage"
 }
 
 export enum RateTypes{

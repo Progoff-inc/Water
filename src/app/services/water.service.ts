@@ -1,4 +1,4 @@
-import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact, BaseEntity, Vacancy, DocType } from './models';
+import { News, Doc, Prop, UploadTypes, DocTypes, Rate, ClientTypes, Contact, BaseEntity, Vacancy, DocType, Image } from './models';
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoadService } from './load.service';
@@ -64,8 +64,16 @@ export class WaterService{
       return this.http.get<Doc[]>(this.baseUrl + 'Key=get-important-docs');
     }
 
+    getImages(){
+      return this.http.get<Image[]>(this.baseUrl + 'Key=get-mainimages');
+    }
+
     getProp(name:string){
       return this.http.get<Prop>(this.baseUrl + 'Key=get-prop&Name='+name);
+    }
+
+    addImage(desc){
+      return this.http.post(this.baseUrl + 'Key=add-mainimage&Login='+encodeURIComponent(this.us.user.Login)+'&Password='+encodeURIComponent(this.us.user.Password), desc);
     }
 
     addApp(app){

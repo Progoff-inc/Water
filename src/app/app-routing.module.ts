@@ -26,6 +26,7 @@ import { AdminContactsComponent } from './admin-contacts/admin-contacts.componen
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
 import { AdminInfoComponent } from './admin-info/admin-info.component';
+import { AdminImagesComponent } from './admin-images/admin-images.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -34,7 +35,8 @@ const clientsRoutes: Routes = [
 ];
 
 const adminRoutes: Routes = [
-  {path:'', redirectTo:'admin-news', pathMatch:'full'},
+  {path:'', redirectTo:'admin-images', pathMatch:'full'},
+  {path:'admin-images', component:AdminImagesComponent},
   {path:'admin-faq', component:AddQuestionComponent},
   {path:'admin-news', component:AdminNewsComponent},
   {path:'admin-docs', component: AdminDocsComponent},

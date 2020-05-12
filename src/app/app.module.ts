@@ -66,6 +66,7 @@ import { ProgAlertComponent } from './prog-alert/prog-alert.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { DocPipe } from './services/pipes/doc.pipe';
 import { AdminInfoComponent } from './admin-info/admin-info.component';
+import { AdminImagesComponent } from './admin-images/admin-images.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { AdminInfoComponent } from './admin-info/admin-info.component';
     VacanciesComponent,
     AdminVacanciesComponent,
     ProgAlertComponent,
-    AdminInfoComponent
+    AdminInfoComponent,
+    AdminImagesComponent
   ],
   imports: [
     BrowserModule,
