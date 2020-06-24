@@ -38,7 +38,12 @@ export class BuisenessRatesComponent implements OnInit {
       forkJoin(this.ws.getTypeDocs(this.arOfTypes),this.ws.getRates(ClientTypes.Business)).subscribe(([docs, rates]) => {
         this.docs = docs;
         if(rates.length>0){
-          this.rates = rates;
+          //this.rates = rates;
+          rates.forEach(rate => {
+            if (rate.Name != RateTypes.GetWater) {
+              this.rates.push(rate);
+            }
+          });
         }
       })
     })
