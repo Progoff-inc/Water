@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
-        <ckeditor [editor]="Editor" [formControl]="addForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor>
+        <!-- <ckeditor [editor]="Editor" [formControl]="addForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor> -->
         <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
     </div>
     <button [disabled]="addForm.invalid" class="btn btn-primary" *ngIf="!item || upd_length" (click)="save()">Сохранить</button>

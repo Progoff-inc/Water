@@ -21,13 +21,13 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
-    "@ckeditor/ckeditor5-angular": "^1.2.3",
-    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
     "ngx-bootstrap": "^4.3.0",
     "primeicons": "^2.0.0",
     "primeng": "^8.0.4",
     "rxjs": "~6.3.3",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

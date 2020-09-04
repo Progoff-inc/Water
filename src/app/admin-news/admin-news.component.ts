@@ -4,8 +4,8 @@ import { UploadTypes, BaseEntity, News } from '../services/models';
 import { WaterService } from '../services/water.service';
 import { Router } from '@angular/router';
 import { LoadService } from '../services/load.service';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { AlertType } from '../prog-alert/prog-alert.component';
 import { AlertService } from '../services/alert.service';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
@@ -25,7 +25,7 @@ export class AdminNewsComponent extends AddService implements OnInit {
   ipattern=/(\.png|\.jpg)$/i;
   invalidImage = false;
   description = '';
-  public Editor = ClassicEditor;
+  //public Editor = ClassicEditor;
   
   public config = {
     language: 'ru',
