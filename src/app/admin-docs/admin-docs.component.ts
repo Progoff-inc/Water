@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WaterService } from '../services/water.service';
 import { DocTypes, Doc, UploadTypes, DocType } from '../services/models';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddService } from '../services/add.service';
 import { WaterValidators } from '../services/water.validators';
@@ -22,7 +22,7 @@ export class AdminDocsComponent extends AddService implements OnInit {
   tpattern=/(\.docx|\.pdf|\.txt|\.doc|\.xlsx|\.xls|\.zip|\.7z|\.rar)$/i;
   ipattern=/(\.png|\.jpg)$/i;
   docTypes: DocType;
-  //public Editor = ClassicEditor;
+  public Editor = ClassicEditor;
   
   public config = {
     language: 'ru',

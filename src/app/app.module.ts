@@ -44,7 +44,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NewsComponent } from './news/news.component';
 import { SearchComponent } from './search/search.component';
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { FaqComponent } from './faq/faq.component';
@@ -121,7 +121,7 @@ import { AdminImagesComponent } from './admin-images/admin-images.component';
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    // CKEditorModule,
+    CKEditorModule,
     CalendarModule,
     BrowserAnimationsModule,
     AlertModule.forRoot()

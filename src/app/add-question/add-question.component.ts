@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import { LoadService } from '../services/load.service';
 import { WaterService } from '../services/water.service';
 import { HttpEventType } from '@angular/common/http';
@@ -16,14 +16,14 @@ export class AddQuestionComponent implements OnInit {
   newForm:FormGroup;
   faqs:BaseEntity[];
   submitted = false;
-  //public Editor = ClassicEditor;
+  public Editor = ClassicEditor;
   showBtn = false;
   shows:any = {};
   
-  // public config = {
-  //   language: 'ru',
-  //   toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
-  // };
+  public config = {
+    language: 'ru',
+    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
+  };
   constructor(private fb:FormBuilder, private ls:LoadService, private ws:WaterService) { }
 
   ngOnInit() {

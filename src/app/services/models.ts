@@ -3,18 +3,16 @@ export class BaseEntity{
     Id:number;
     Name:string;
     Description:string;
+    CreateDate?:Date;
 }
 
 export class App extends BaseEntity{
     Phone:string;
     Email:string;
-    CreateDate:Date;
 }
     
 export class News extends BaseEntity{
     Image:string[];
-    Name: string;
-    CreateDate:Date;
 }
     
 export class Doc{

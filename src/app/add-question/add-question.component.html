@@ -11,15 +11,15 @@
             <input [ngClass]="{'border-danger':(submitted && f.Name.errors)}" formControlName="Name" class="form-control"  placeholder="Вопрос">
             <small  class="form-text text-danger" *ngIf="submitted && f.Name.errors && f.Name.errors.required">Введите вопрос</small>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Описание</label>
             <textarea formControlName="Description" [ngClass]="{'border-danger':(submitted && f.Description.errors)}" class="form-control"  placeholder="Описание" rows="3"></textarea>
             <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите описание</small>
-        </div> -->
+        </div>
         <div class="form-group">
             <label  [ngClass]="{'text-danger':(submitted && f.Description.errors)}">Ответ</label>
             <div simditor ng-model="xxx"></div>
-            <!-- <ckeditor [editor]="Editor" [formControl]="newForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor> -->
+            <ckeditor [editor]="Editor" [formControl]="newForm.controls['Description']" [config]="config"  (ready)="onReady($event)"></ckeditor>
             <small  class="form-text text-danger" *ngIf="submitted && f.Description.errors">Введите ответ</small>
         </div>
         <button type="submit" class="btn btn-primary" (click)="add()">Добавить</button>
@@ -41,8 +41,8 @@
               </div>
               <div class="form-group">
                   <label for="head" [ngClass]="{'text-danger':new.Description == ''}">Описание</label>
-                  <!-- <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea> -->
-                  <!-- <ckeditor (keydown)="checkChange()" [editor]="Editor" [(ngModel)]="new.Description" [config]="config"  (ready)="onReady($event)"></ckeditor> -->
+                  <textarea [ngClass]="{'border-danger':new.Description == ''}" class="form-control" [(ngModel)]="new.Description" rows="5" (keydown)="checkChange()"></textarea>
+                  <ckeditor (keydown)="checkChange()" [editor]="Editor" [(ngModel)]="new.Description" [config]="config"  (ready)="onReady($event)"></ckeditor>
                   <small class="text-danger" *ngIf="new.Description == ''">Введите описание</small>
               </div>
               
