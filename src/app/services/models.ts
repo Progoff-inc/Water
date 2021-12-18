@@ -3,18 +3,16 @@ export class BaseEntity{
     Id:number;
     Name:string;
     Description:string;
+    CreateDate?:Date;
 }
 
 export class App extends BaseEntity{
     Phone:string;
     Email:string;
-    CreateDate:Date;
 }
     
 export class News extends BaseEntity{
     Image:string[];
-    Name: string;
-    CreateDate:Date;
 }
     
 export class Doc{
@@ -24,6 +22,12 @@ export class Doc{
     Description?:string;
     TypeId:number;
     Document?:string;
+}
+
+export class Image{
+    Id:number;
+    Image:string;
+    Name:string;
 }
 
 export class Prop{
@@ -78,7 +82,8 @@ export enum DocTypes{
 export enum UploadTypes{
     News = "new",
     NewImage = "newsimage",
-    Docs = "doc"
+    Docs = "doc",
+    MainImage = "mainimage"
 }
 
 export enum RateTypes{

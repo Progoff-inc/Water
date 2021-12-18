@@ -25,6 +25,8 @@ import { AdminRatesComponent } from './admin-rates/admin-rates.component';
 import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
+import { AdminInfoComponent } from './admin-info/admin-info.component';
+import { AdminImagesComponent } from './admin-images/admin-images.component';
 
 const clientsRoutes: Routes = [
   {path:'', component:ClientsServicesComponent},
@@ -33,13 +35,15 @@ const clientsRoutes: Routes = [
 ];
 
 const adminRoutes: Routes = [
-  {path:'', redirectTo:'admin-news', pathMatch:'full'},
+  {path:'', redirectTo:'admin-images', pathMatch:'full'},
+  {path:'admin-images', component:AdminImagesComponent},
   {path:'admin-faq', component:AddQuestionComponent},
   {path:'admin-news', component:AdminNewsComponent},
   {path:'admin-docs', component: AdminDocsComponent},
   {path:'admin-rates', component: AdminRatesComponent},
   {path:'admin-contacts', component: AdminContactsComponent},
-  {path:'admin-vacancies', component: AdminVacanciesComponent}
+  {path:'admin-vacancies', component: AdminVacanciesComponent},
+  {path:'admin-info', component: AdminInfoComponent}
 ];
 
 const servicesRoutes: Routes = [
@@ -73,7 +77,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash:true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

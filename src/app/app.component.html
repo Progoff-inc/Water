@@ -1,11 +1,9 @@
 <div class="d-flex flex-column" style="min-height: 100vh">
     <main-header *ngIf="router.url!='/sign-in'"></main-header>
-    <div [ngClass]="{'mb-5':router.url!='/contacts'}" style="flex: 1;">
+    <div [ngClass]="{'mb-5':router.url!='/contacts'}">
         <router-outlet></router-outlet>
     </div>
     <footer></footer>
 </div>
-
-
 <app-modal></app-modal>
 <app-load></app-load>

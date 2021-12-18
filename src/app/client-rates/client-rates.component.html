@@ -1,5 +1,4 @@
 <h4 class="page-min-head">Тарифы для частных лиц</h4>
-<h5 class="page-min-head">Абонентская плата</h5>
 <div class="section" *ngFor="let rate of rates">
   <div class="section-header" (click)="show(rate.Name)"><span>{{rateTypes[rate.Name]}}</span><i class="fas " [ngClass]="{'fa-caret-down':!shows[rate.Name], 'fa-caret-up':shows[rate.Name]}"></i></div>
   <div class="section-body" *ngIf="shows[rate.Name]">

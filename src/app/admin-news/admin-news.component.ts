@@ -19,7 +19,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./admin-news.component.less']
 })
 export class AdminNewsComponent extends AddService implements OnInit {
-  addForm:FormGroup;
+  adminForm:FormGroup;
   submitted = false;
   images = [];
   ipattern=/(\.png|\.jpg)$/i;
@@ -182,6 +182,13 @@ export class AdminNewsComponent extends AddService implements OnInit {
         })
       });
     }
+  }
+
+  clear(){
+    this.submitted = false;
+    this._initForm();
+    this.item = null;
+    document.getElementsByTagName('prog-select')[0].getElementsByTagName("input")[0].value = '';
   }
 
   removeImg(i){
